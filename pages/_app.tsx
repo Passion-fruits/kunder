@@ -1,6 +1,7 @@
 import { AppProps } from "next/app";
 import Head from "next/head";
 import Header from "../components/header";
+import PlayBar from "../components/playbar";
 import "../styles/globals.css";
 import { HEADER_HEIGHT } from "./../styles/index";
 
@@ -25,6 +26,7 @@ function App({ Component, pageProps }: AppProps) {
         <link rel="icon" href="/logo.ico" />
       </Head>
       <Header />
+      <PlayBar/>
       <div style={{ paddingTop: `${HEADER_HEIGHT}px` }} />
       <Component {...pageProps} />
     </>

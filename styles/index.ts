@@ -12,7 +12,9 @@ export const CONTAINER = styled.div`
 
 export const COLOR = {
   black: "#343434",
-  main: "#343434",
+  main: "#00d541",
   text: "#848484",
   red: "#ff2d2d",
 };
+
+export const IMG_SIZE = 200;

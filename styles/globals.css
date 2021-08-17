@@ -2,7 +2,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: 나눔스퀘어;
+  font-family: 'NanumSquare', sans-serif;
 }
 
 header{
@@ -13,6 +13,10 @@ h1,h2,h3,h4,h5,h6{
   margin: 0;
 }
 
+div{
+  box-sizing: border-box;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -20,14 +24,14 @@ a {
 
 * {
   box-sizing: border-box;
-  font-family: 나눔스퀘어;
+  font-family: 'NanumSquare', sans-serif;
 }
 
 button,input{
   outline: none;
   box-sizing: border-box;
   border:none;
-  font-family: 나눔스퀘어;
+  font-family: 'NanumSquare', sans-serif;
 }
 
 button{

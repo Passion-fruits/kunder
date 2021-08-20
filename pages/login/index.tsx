@@ -1,16 +1,31 @@
 import FacebookIcon from "../../assets/facebook";
-import GoolgleIcon from "../../assets/google";
 import * as S from "../../styles/loginStyles";
+import auth from "../../api/auth";
+import GoogleBtn from "./googleBtn";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function LoginPage() {
+  const [email, setEmail] = useState<string>("");
+  const googleAuth = (event): void => {
+    const token = event.tokenId;
+    auth
+      .googleLogin(token)
+      .then((res) => {
+        const email: string = res.data.email;
+        setEmail(email);
+        toast.success(`환영합니다 ${email.split("@", 1)}님`);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <S.Wrapper>
       <S.Container>
         <h1>LOGIN</h1>
         <p>간편 로그인으로 쿤더를 만나보세요</p>
-        <div>
-          <GoolgleIcon /> 구글로 로그인
-        </div>
+        <GoogleBtn googleAuth={googleAuth} />
         <div>
           <FacebookIcon />
           페이스북으로 로그인

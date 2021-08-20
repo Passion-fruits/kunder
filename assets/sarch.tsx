@@ -18,9 +18,9 @@ export default function SearchIcon() {
           transform="translate(-4.5 -4.5)"
           fill="none"
           stroke="#848484"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <path
           id="패스_22"
@@ -29,9 +29,9 @@ export default function SearchIcon() {
           transform="translate(-11.325 -11.325)"
           fill="none"
           stroke="#848484"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>

@@ -2,7 +2,13 @@ import styled from "@emotion/styled";
 import { COLOR, CONTAINER, WRAPPER } from "./index";
 
 export const Wrapper = styled(WRAPPER)`
-  padding-top: 100px;
+  padding-top: 80px;
+  & h1 {
+    color: ${COLOR.black};
+    font-size: 30px;
+    font-family: "Agency FB";
+    font-weight: bold;
+  }
 `;
 
 export const Container = styled(CONTAINER)`
@@ -10,12 +16,6 @@ export const Container = styled(CONTAINER)`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  & h1 {
-    color: ${COLOR.black};
-    font-size: 30px;
-    font-family: "Agency FB";
-    font-weight: bold;
-  }
   & div {
     cursor: pointer;
     border: 1px solid ${COLOR.black};
@@ -27,8 +27,8 @@ export const Container = styled(CONTAINER)`
     display: flex;
     justify-content: center;
     align-items: center;
-    & svg{
-        margin-right:10px;
+    & svg {
+      margin-right: 10px;
     }
     &:first-of-type {
       margin-top: 30px;
@@ -54,6 +54,56 @@ export const Container = styled(CONTAINER)`
       margin-top: 60px;
       text-align: center;
       line-height: 20px;
+    }
+  }
+`;
+
+export const SignUpContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  & p {
+    margin: 0;
+    margin-top: 20px;
+    color: ${COLOR.text};
+    font-size: 16px;
+  }
+  & input[type="text"],
+  button {
+    width: 100%;
+    height: 50px;
+    border: 1px solid ${COLOR.black};
+  }
+  & input {
+    color: ${COLOR.black};
+    font-size: 16px;
+    padding: 0 20px;
+    margin-top: 30px;
+    &::placeholder {
+      color: ${COLOR.text};
+    }
+  }
+  & button {
+    background-color: ${COLOR.black};
+    color: white;
+    font-weight:bold;
+    font-size:18px;
+    margin-top:35px;
+  }
+`;
+
+export const GridContainer = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 35px;
+  & div {
+    & label {
+      margin-left: 5px;
+      cursor: pointer;
+    }
+    & input[type="checkbox"] {
+      cursor: pointer;
     }
   }
 `;

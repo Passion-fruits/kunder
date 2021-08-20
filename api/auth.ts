@@ -13,4 +13,18 @@ export default {
       },
     });
   },
+  signUp({ name, email, genreArr }) {
+    return request({
+      url: "/auth",
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+      },
+      data: {
+        name: name,
+        email: email,
+        user_genre: genreArr,
+      },
+    });
+  },
 };

@@ -4,9 +4,12 @@ import auth from "../../api/auth";
 import GoogleBtn from "./googleBtn";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { genreList } from "./../../lib/export/genre";
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
+  const [name, setName] = useState<string | string[]>("");
+  const [genreArr, setGenreArr] = useState<any[]>([]);
   const googleAuth = (event): void => {
     const token = event.tokenId;
     auth
@@ -20,23 +23,91 @@ export default function LoginPage() {
         console.log(err);
       });
   };
+  const handleInput = (event): void => {
+    setName(event.target.value);
+  };
+  const getCheckboxValue = (): void => {
+    const query = 'input[name="genre"]:checked';
+    const selectedEls = document.querySelectorAll(query);
+    const arr = [];
+    selectedEls.forEach((res) => {
+      arr.push(res.id);
+    });
+    setGenreArr(arr);
+  };
+  const subData = (): void => {
+    if (!name) {
+      toast.error("아티스트명을 적어주세요.");
+      return;
+    }
+    if (genreArr.length === 0) {
+      toast.error("선호 장르를 하나 이상 선택해주세요.");
+      return;
+    }
+    if (genreArr.length > 3) {
+      toast.info("장르는 최대 3개 선택 가능합니다.");
+      return;
+    }
+    auth
+      .signUp({ name: name, email: email, genreArr: genreArr })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <S.Wrapper>
-      <S.Container>
-        <h1>LOGIN</h1>
-        <p>간편 로그인으로 쿤더를 만나보세요</p>
-        <GoogleBtn googleAuth={googleAuth} />
-        <div>
-          <FacebookIcon />
-          페이스북으로 로그인
-        </div>
-        <span style={{ textDecoration: "underline" }}>개인정보 정책 확인</span>
-        <p>
-          이전 로그인 내역이 있으면 자동 로그인됩니다.
-          <br />
-          그렇지 않은 경우 회원가입 페이지로 넘어갑니다.
-        </p>
-      </S.Container>
+      {!email ? (
+        <>
+          <S.Container>
+            <h1>LOGIN</h1>
+            <p>간편 로그인으로 쿤더를 만나보세요</p>
+            <GoogleBtn googleAuth={googleAuth} />
+            <div>
+              <FacebookIcon />
+              페이스북으로 로그인
+            </div>
+            <span style={{ textDecoration: "underline" }}>
+              개인정보 정책 확인
+            </span>
+            <p>
+              이전 로그인 내역이 있으면 자동 로그인됩니다.
+              <br />
+              그렇지 않은 경우 회원가입 페이지로 넘어갑니다.
+            </p>
+          </S.Container>
+        </>
+      ) : (
+        <>
+          <S.SignUpContainer>
+            <h1>SIGN UP</h1>
+            <p>{email.split("@", 1)}님의 가입을 환영합니다.</p>
+            <input
+              type="text"
+              placeholder="사용할 아티스트명을 입력해주세요."
+              value={name}
+              onChange={handleInput}
+            />
+            <p>선호하는 장르를 선택해주세요. (최대 3개)</p>
+            <S.GridContainer>
+              {genreList.map((genre, index) => (
+                <div key={index}>
+                  <input
+                    type="checkbox"
+                    id={genre}
+                    name="genre"
+                    onClick={getCheckboxValue}
+                  />
+                  <label htmlFor={genre}>{genre}</label>
+                </div>
+              ))}
+            </S.GridContainer>
+            <button onClick={subData}>가입하기</button>
+          </S.SignUpContainer>
+        </>
+      )}
     </S.Wrapper>
   );
 }

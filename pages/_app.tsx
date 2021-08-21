@@ -32,6 +32,7 @@ function App({ Component, pageProps }: AppProps) {
       <div style={{ paddingTop: `${HEADER_HEIGHT}px` }} />
       <ToastContainer position="top-right" autoClose={2000} />
       <Component {...pageProps} />
+      <div style={{paddingBottom:"200px"}}></div>
     </>
   );
 }

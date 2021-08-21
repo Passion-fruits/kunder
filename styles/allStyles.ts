@@ -30,4 +30,5 @@ export const SortList = styled.div`
   margin-top: 25px;
   font-size: 17px;
   color: ${COLOR.text};
+  margin-bottom:40px;   
 `;

@@ -14,7 +14,7 @@ export default function Header() {
           <S.LEFT_SIDE>
             <h1 onClick={() => routing("")}>KUNDER</h1>
             <span onClick={() => routing("")}>메인</span>
-            <span onClick={() => routing("all")}>전체보기</span>
+            <span onClick={() => routing("all?genre=1&sort=1")}>전체보기</span>
             <span onClick={() => routing("feed")}>피드</span>
             <span onClick={() => routing("upload")}>음악업로드</span>
           </S.LEFT_SIDE>

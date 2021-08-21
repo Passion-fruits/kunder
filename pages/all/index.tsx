@@ -3,6 +3,7 @@ import * as S from "../../styles/allStyles";
 import { useState } from "react";
 import { COLOR } from "./../../styles/index";
 import { sortList } from "./../../lib/export/sort";
+import List from "./list";
 
 export default function AllPage() {
   const [nowGenre, setNowGenre] = useState<string>(genreList[0]);
@@ -19,35 +20,24 @@ export default function AllPage() {
       <S.Container>
         <>
           <S.GerneList>
-            {genreList.map((genre, index) => (
-              <label
-                key={index}
-                style={genre === nowGenre ? genreCheckStyle : {}}
-              >
-                <input
-                  type="radio"
-                  name="genre"
-                  value={genre}
-                  onClick={() => setNowGenre(genre)}
-                />
-                {genre}
-              </label>
-            ))}
+            <List
+              list={genreList}
+              checkStyle={genreCheckStyle}
+              name="genre"
+              now={nowGenre}
+              callback={setNowGenre}
+            />
           </S.GerneList>
         </>
         <>
           <S.SortList>
-            {sortList.map((sort, index) => (
-              <label key={index} style={sort === nowSort ? sortCheckStyle : {}}>
-                <input
-                  type="radio"
-                  name="sort"
-                  value={sort}
-                  onClick={() => setNowSort(sort)}
-                />
-                {sort}
-              </label>
-            ))}
+            <List
+              list={sortList}
+              checkStyle={sortCheckStyle}
+              name="sort"
+              now={nowSort}
+              callback={setNowSort}
+            />
           </S.SortList>
         </>
       </S.Container>

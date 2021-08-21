@@ -1,9 +1,10 @@
-export default function PlayIcon({ size }) {
+export default function PlayIcon({ size,callback }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={(size * 9) / 7}
+      onClick={callback}
       viewBox="0 0 77.592 98.754"
     >
       <path

@@ -20,7 +20,7 @@ export default function MusicCard({
     <S.Wrapper>
       <S.Cover>
         <button>
-          <PlayIcon size={20}/>
+          <PlayIcon callback={()=>{}} size={20}/>
         </button>
       </S.Cover>
       <img src={src} />

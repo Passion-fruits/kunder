@@ -10,14 +10,14 @@ export const Wrapper = styled.div`
     border-radius: 5px;
   }
   & h3 {
-    font-size: 17px;
+    font-size: 18px;
     font-weight: bold;
     margin-top: 14px;
     color: ${COLOR.black};
     margin-bottom: 5px;
   }
   & span {
-    font-size: 16px;
+    font-size: 14px;
     color: ${COLOR.text};
   }
   & h5{

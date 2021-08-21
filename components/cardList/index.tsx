@@ -11,7 +11,7 @@ export default function CardList({ data }: props) {
       {data.map((obj, index) => (
         <MusicCard
           key={index}
-          writerName={obj.name}
+          writerName={obj.artist}
           src={obj.cover_url}
           genre={obj.genre}
           id={obj.song_id}

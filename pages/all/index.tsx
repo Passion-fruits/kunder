@@ -7,12 +7,14 @@ import List from "./list";
 import music from "../../api/music";
 import CardList from "../../components/cardList";
 import { useRouter } from "next/dist/client/router";
+import { CheckScroll } from "./../../lib/util/checkScroll";
 
 export default function AllPage() {
   const router = useRouter();
   const [nowGenre, setNowGenre] = useState<string>(genreList[0]);
   const [nowSort, setNowSort] = useState<string>(sortList[0]);
   const [data, setData] = useState<any[]>([]);
+  const [page, setPage] = useState<number>(1);
   const genreCheckStyle = {
     borderBottom: `2px solid ${COLOR.main}`,
     color: COLOR.main,
@@ -21,13 +23,15 @@ export default function AllPage() {
     color: COLOR.main,
   };
   useEffect(() => {
+    setData([]);
     const query = router.query;
-    query.genre && 
-    music
-      .getStreaming({ genre: query.genre, page: 1, sort: query.sort })
-      .then((res) => {
-        setData(res.data);
-      });
+    query.genre &&
+      music
+        .getStreaming({ genre: query.genre, page: 1, sort: query.sort })
+        .then((res) => {
+          setPage(1);
+          setData(res.data);
+        });
   }, [router]);
   useEffect(() => {
     router.push(
@@ -36,6 +40,27 @@ export default function AllPage() {
       }`
     );
   }, [nowGenre, nowSort]);
+  useEffect(() => {
+    window.onscroll = () => {
+      if (CheckScroll()) {
+        const query = router.query;
+        query.genre &&
+          music
+            .getStreaming({
+              genre: query.genre,
+              page: page + 1,
+              sort: query.sort,
+            })
+            .then((res) => {
+              setData(data.concat(res.data));
+              setPage(page + 1);
+            })
+            .catch(() => {
+              return;
+            });
+      }
+    };
+  });
   return (
     <S.Wrapper>
       <S.Container>

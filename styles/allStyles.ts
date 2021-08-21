@@ -27,7 +27,7 @@ export const GerneList = styled.div`
 export const SortList = styled.div`
   display: flex;
   gap: 40px;
-  margin-top: 25px;
+  margin-top: 20px;
   font-size: 17px;
   color: ${COLOR.text};
   margin-bottom:40px;   

@@ -8,10 +8,12 @@ import { toast } from "react-toastify";
 
 export default function Header() {
   const router = useRouter();
-  const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [isLogin, setIsLogin] = useState<boolean>();
   useEffect(() => {
     if (localStorage.getItem(ACCESS_TOKEN)) {
       setIsLogin(true);
+    } else {
+      setIsLogin(false);
     }
   }, [router]);
   const routing = (path): void => {

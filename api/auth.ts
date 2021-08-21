@@ -13,7 +13,7 @@ export default {
       },
     });
   },
-  signUp({ name, email, genreArr }) {
+  signUp({ name, email, genreArr, img }) {
     return request({
       url: "/auth",
       method: "post",
@@ -24,6 +24,7 @@ export default {
         name: name,
         email: email,
         user_genre: genreArr,
+        image_path: img,
       },
     });
   },

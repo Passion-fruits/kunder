@@ -5,18 +5,30 @@ import GoogleBtn from "./googleBtn";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { genreList } from "./../../lib/export/genre";
+import { useRouter } from "next/dist/client/router";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string | string[]>("");
   const [genreArr, setGenreArr] = useState<any[]>([]);
   const [googleName, setGoogleName] = useState<string>("");
+  const [img, setImg] = useState<string>("");
   const googleAuth = (event): void => {
+    setImg(event.Ts.hJ);
     setGoogleName(event.Ts.Me);
     const token = event.tokenId;
     auth
       .googleLogin(token)
       .then((res) => {
+        const data = res.data;
+        if (!res.data.isFresh) {
+          localStorage.setItem("kunder-access-token", data.access_token);
+          localStorage.setItem("kunder-refresh-token", data.refresh_token);
+          toast.success("로그인 되었습니다.");
+          router.push("/");
+          return;
+        }
         const email: string = res.data.email;
         setEmail(email);
         toast.success(`환영합니다 ${email.split("@", 1)}님`);
@@ -51,7 +63,7 @@ export default function LoginPage() {
       return;
     }
     auth
-      .signUp({ name: name, email: email, genreArr: genreArr })
+      .signUp({ name: name, email: email, genreArr: genreArr, img: img })
       .then((res) => {
         console.log(res);
       })

@@ -6,6 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import { genreList } from "./../../lib/export/genre";
 import { useRouter } from "next/dist/client/router";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from './../../lib/export/localstorage';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -23,8 +24,8 @@ export default function LoginPage() {
       .then((res) => {
         const data = res.data;
         if (!res.data.isFresh) {
-          localStorage.setItem("kunder-access-token", data.access_token);
-          localStorage.setItem("kunder-refresh-token", data.refresh_token);
+          localStorage.setItem(ACCESS_TOKEN, data.access_token);
+          localStorage.setItem(REFRESH_TOKEN, data.refresh_token);
           toast.success("로그인 되었습니다.");
           router.push("/");
           return;

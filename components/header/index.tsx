@@ -1,11 +1,27 @@
 import { useRouter } from "next/dist/client/router";
 import SearchIcon from "../../assets/sarch";
 import * as S from "./styled";
+import { useState } from "react";
+import { useEffect } from "react";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "./../../lib/export/localstorage";
+import { toast } from "react-toastify";
 
 export default function Header() {
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState<boolean>(false);
+  useEffect(() => {
+    if (localStorage.getItem(ACCESS_TOKEN)) {
+      setIsLogin(true);
+    }
+  }, [router]);
   const routing = (path): void => {
     router.push(`/${path}`);
+  };
+  const logout = (): void => {
+    localStorage.setItem(ACCESS_TOKEN, "");
+    localStorage.setItem(REFRESH_TOKEN, "");
+    setIsLogin(false);
+    toast.success("로그아웃 되었습니다.");
   };
   return (
     <S.Wrapper>
@@ -25,7 +41,19 @@ export default function Header() {
               <SearchIcon />
               <input type="text" placeholder="검색어를 입력하세요." />
             </div>
-            <button onClick={() => routing("login")}>로그인</button>
+            {isLogin ? (
+              <>
+                <button onClick={logout}>로그아웃</button>
+                <button onClick={() => routing("mypage")}>마이페이지</button>
+              </>
+            ) : (
+              <button
+                style={{ padding: "8px 24px" }}
+                onClick={() => routing("login")}
+              >
+                로그인
+              </button>
+            )}
           </S.RIGHT_SIDE>
         </>
       </S.Cotainer>

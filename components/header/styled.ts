@@ -36,7 +36,7 @@ export const LEFT_SIDE = styled.div`
 
 export const RIGHT_SIDE = styled.div`
   display: flex;
-  gap: 30px;
+  gap: 10px;
   align-items: center;
   & div,
   button {
@@ -60,7 +60,10 @@ export const RIGHT_SIDE = styled.div`
   }
   & button {
     font-size: 16px;
-    padding: 8px 24px;
+    padding: 8px 15px;
     color: ${COLOR.text};
+    &:first-of-type{
+      margin-left:10px;
+    }
   }
 `;

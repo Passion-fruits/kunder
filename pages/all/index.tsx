@@ -1,9 +1,11 @@
 import { genreList } from "../../lib/export/genre";
 import * as S from "../../styles/allStyles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { COLOR } from "./../../styles/index";
 import { sortList } from "./../../lib/export/sort";
 import List from "./list";
+import music from "../../api/music";
+import CardList from "../../components/cardList";
 
 export default function AllPage() {
   const [nowGenre, setNowGenre] = useState<string>(genreList[0]);
@@ -15,6 +17,11 @@ export default function AllPage() {
   const sortCheckStyle = {
     color: COLOR.main,
   };
+  useEffect(() => {
+    music.getStreaming({ genre: 1, page: 1, sort: 1 }).then((res) => {
+      console.log(res.data);
+    });
+  }, []);
   return (
     <S.Wrapper>
       <S.Container>
@@ -40,6 +47,7 @@ export default function AllPage() {
             />
           </S.SortList>
         </>
+        <></>
       </S.Container>
     </S.Wrapper>
   );

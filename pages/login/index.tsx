@@ -55,6 +55,7 @@ export default function LoginPage() {
       })
       .catch((err) => {
         console.log(err);
+        toast.error("에러가 발생하였습니다.");
       });
   };
   return (

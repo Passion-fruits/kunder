@@ -18,7 +18,7 @@ export const GerneList = styled.div`
   gap: 38px;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 20px;
+  margin-top: 0px;
   & label {
     padding-bottom: 7px;
   }

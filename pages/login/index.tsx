@@ -10,7 +10,9 @@ export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [name, setName] = useState<string | string[]>("");
   const [genreArr, setGenreArr] = useState<any[]>([]);
+  const [googleName, setGoogleName] = useState<string>("");
   const googleAuth = (event): void => {
+    setGoogleName(event.Ts.Me);
     const token = event.tokenId;
     auth
       .googleLogin(token)
@@ -84,7 +86,7 @@ export default function LoginPage() {
         <>
           <S.SignUpContainer>
             <h1>SIGN UP</h1>
-            <p>{email.split("@", 1)}님의 가입을 환영합니다.</p>
+            <p>{googleName}님의 가입을 환영합니다.</p>
             <input
               type="text"
               placeholder="사용할 아티스트명을 입력해주세요."

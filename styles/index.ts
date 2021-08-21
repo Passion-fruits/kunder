@@ -20,4 +20,4 @@ export const COLOR = {
 
 export const IMG_SIZE = 200;
 
-export const HEADER_HEIGHT = 100;
+export const HEADER_HEIGHT = 90;

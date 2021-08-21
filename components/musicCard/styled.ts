@@ -4,6 +4,7 @@ import { COLOR } from "./../../styles/index";
 
 export const Wrapper = styled.div`
   width: ${`${IMG_SIZE}px`};
+  cursor: pointer;
   & img {
     width: ${`${IMG_SIZE}px`};
     height: ${`${IMG_SIZE}px`};
@@ -20,10 +21,37 @@ export const Wrapper = styled.div`
     font-size: 14px;
     color: ${COLOR.text};
   }
-  & h5{
-      font-size:15px;
-      color:${COLOR.main};
-      margin-top:10px;
-      font-weight:500;
+  & h5 {
+    font-size: 15px;
+    color: ${COLOR.main};
+    margin-top: 10px;
+    font-weight: 500;
+  }
+  &:hover div {
+    display: flex;
+  }
+`;
+
+export const Cover = styled.div`
+  width: ${`${IMG_SIZE}px`};
+  height: ${`${IMG_SIZE}px`};
+  position: absolute;
+  background: linear-gradient(rgb(0, 0, 0, 0), rgb(0, 0, 0, 0.5));
+  display: none;
+  justify-content: center;
+  align-items: center;
+  & button {
+    background-color: rgb(0, 0, 0, 0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 80%;
+    border: 2px solid white;
+    &:hover {
+      width: 55px;
+      height: 55px;
+    }
+    & svg {
+      margin-left: 5px;
+    }
   }
 `;

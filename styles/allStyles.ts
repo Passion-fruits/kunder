@@ -18,7 +18,7 @@ export const GerneList = styled.div`
   gap: 38px;
   font-size: 18px;
   font-weight: bold;
-  margin-top: 0px;
+  margin-top:10px;
   & label {
     padding-bottom: 7px;
   }
@@ -30,5 +30,5 @@ export const SortList = styled.div`
   margin-top: 20px;
   font-size: 17px;
   color: ${COLOR.text};
-  margin-bottom:40px;   
+  margin-bottom: 40px;
 `;

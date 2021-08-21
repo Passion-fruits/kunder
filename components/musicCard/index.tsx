@@ -1,3 +1,4 @@
+import PlayIcon from "../../assets/play";
 import * as S from "./styled";
 
 interface props {
@@ -17,6 +18,11 @@ export default function MusicCard({
 }: props) {
   return (
     <S.Wrapper>
+      <S.Cover>
+        <button>
+          <PlayIcon size={20}/>
+        </button>
+      </S.Cover>
       <img src={src} />
       <h3>{title}</h3>
       <span>{writerName}</span>

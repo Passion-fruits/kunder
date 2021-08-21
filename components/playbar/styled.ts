@@ -9,6 +9,7 @@ export const Wrapper = styled(WRAPPER)`
   bottom: 0;
   box-shadow: 0px -3px 10px rgb(0, 0, 0, 0.1);
   position:fixed;
+  z-index:3;
 `;
 
 export const Container = styled(CONTAINER)`

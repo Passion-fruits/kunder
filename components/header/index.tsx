@@ -46,7 +46,7 @@ export default function Header() {
             {isLogin ? (
               <>
                 <button onClick={logout}>로그아웃</button>
-                <button onClick={() => routing("mypage")}>마이페이지</button>
+                <button onClick={() => routing(`profile?id=0&isMine=mypage`)}>마이페이지</button>
               </>
             ) : (
               <button

@@ -13,7 +13,6 @@ export default function DetailPage() {
     const id = router.query.id;
     id &&
       music.getMusicDetail(router.query.id).then((res) => {
-        console.log(res.data);
         setData(res.data);
       });
   }, [router]);

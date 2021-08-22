@@ -25,11 +25,11 @@ export default function AllPage() {
   useEffect(() => {
     setData([]);
     const query = router.query;
+    setPage(1);
     query.genre &&
       music
         .getStreaming({ genre: query.genre, page: 1, sort: query.sort })
         .then((res) => {
-          setPage(1);
           setData(res.data);
         });
   }, [router]);
@@ -56,7 +56,7 @@ export default function AllPage() {
               setPage(page + 1);
             })
             .catch(() => {
-              return;
+              return () => {};
             });
       }
     };

@@ -9,6 +9,7 @@ import MenuList from "./menu/menuList";
 import profile from "../../api/profile";
 import CardList from "../../components/cardList";
 import { CheckScroll } from "./../../lib/util/checkScroll";
+import { toast } from "react-toastify";
 
 export default function ProfilePage() {
   const [menu, setMenu] =
@@ -23,10 +24,16 @@ export default function ProfilePage() {
     setMenu(menu);
   };
   const getData = (user_id) => {
-    profile.getUserProfile(user_id).then((res) => {
-      setIsMyPage(res.data.is_mine);
-      setData(res.data);
-    });
+    profile
+      .getUserProfile(user_id)
+      .then((res) => {
+        setIsMyPage(res.data.is_mine);
+        setData(res.data);
+      })
+      .catch(() => {
+        toast.error("에러가 발생하였습니다.");
+        router.push("/");
+      });
   };
   useEffect(() => {
     id && getData(id);

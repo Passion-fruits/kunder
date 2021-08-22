@@ -20,6 +20,15 @@ export default function ProfilePage() {
   const [musicList, setMusicList] = useState<any[]>([]);
   const [page, setPage] = useState<number>(1);
   const [isMyPage, setIsMyPage] = useState<boolean>(false);
+  const [update, setUpdate] = useState<boolean>(false);
+  const [userData, setUserData] = useState<any>({
+    name: "",
+    bio: "",
+    insta: "",
+    facebook: "",
+    soundcloud: "",
+    youtube: "",
+  });
   const changeMenu = (menu) => {
     setMenu(menu);
   };
@@ -35,6 +44,13 @@ export default function ProfilePage() {
         router.push("/");
       });
   };
+  const handleData = (event) => {
+    const { name, value } = event.target;
+    setUserData({
+      ...userData,
+      [name]: value,
+    });
+  };
   useEffect(() => {
     id && getData(id);
   }, [router]);
@@ -49,6 +65,19 @@ export default function ProfilePage() {
           return;
         });
     }
+  };
+  const updateProfile = () => {
+    profile
+      .updateProfile(userData)
+      .then((res) => {
+        console.log(res.data);
+        toast.success("정보가 수정되었습니다.");
+      })
+      .catch((err) => {
+        console.log(err)
+        toast.error("정보 수정에 실패하였습니다.");
+      });
+    setUpdate(false);
   };
   useEffect(() => {
     id && getDetailData();
@@ -89,7 +118,63 @@ export default function ProfilePage() {
                 </section>
               </>
               <>
-                {isMyPage ? <button>정보수정</button> : <button>팔로우</button>}
+                {update ? (
+                  <S.UpdateContainer>
+                    <input
+                      type="text"
+                      name="name"
+                      placeholder="아티스트명을 입력해주세요"
+                      onChange={handleData}
+                      defaultValue={data.name}
+                    />
+                    <input
+                      type="text"
+                      name="bio"
+                      placeholder="자기소개를 입력해주세요"
+                      onChange={handleData}
+                    />
+                    <input
+                      type="text"
+                      name="insta"
+                      placeholder="인스타그램 링크를 입력해주세요"
+                      onChange={handleData}
+                      defaultValue={data.insta}
+                    />
+                    <input
+                      type="text"
+                      name="facebook"
+                      placeholder="페이스북 링크를 입력해주세요"
+                      onChange={handleData}
+                      defaultValue={data.facebook}
+                    />
+                    <input
+                      type="text"
+                      name="soundcloud"
+                      placeholder="사운드클라우드 링크를 입력해주세요"
+                      onChange={handleData}
+                      defaultValue={data.soundclound}
+                    />
+                    <input
+                      type="text"
+                      name="youtube"
+                      placeholder="유튜브 링크를 입력해주세요"
+                      defaultValue={data.youtube}
+                      onChange={handleData}
+                    />
+                    <div />
+                    <button onClick={updateProfile}>정보수정</button>
+                  </S.UpdateContainer>
+                ) : (
+                  <>
+                    {isMyPage ? (
+                      <S.CallbackBtn onClick={() => setUpdate(true)}>
+                        정보수정
+                      </S.CallbackBtn>
+                    ) : (
+                      <S.CallbackBtn>팔로우</S.CallbackBtn>
+                    )}
+                  </>
+                )}
               </>
             </S.Info>
           </>

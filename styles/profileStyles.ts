@@ -45,15 +45,18 @@ export const Info = styled.div`
     }
   }
   & button {
-    padding: 7px 20px;
-    font-size: 15px;
     background-color: #0099ff;
-    color: white;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    border-radius: 3px;
   }
+`;
+
+export const CallbackBtn = styled.button`
+  padding: 7px 20px;
+  font-size: 15px;
+  color: white;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 3px;
 `;
 
 export const Menu = styled.div`
@@ -61,7 +64,7 @@ export const Menu = styled.div`
   display: flex;
   justify-content: center;
   gap: 70px;
-  margin-bottom:30px;
+  margin-bottom: 30px;
 `;
 
 interface Selection {
@@ -75,4 +78,29 @@ export const Selection = styled.span<Selection>`
   color: ${(res) => (res.check ? COLOR.main : COLOR.text)};
   padding-bottom: 15px;
   border-bottom: 3px solid ${(res) => (res.check ? COLOR.main : "#fff")};
+`;
+
+export const UpdateContainer = styled.div`
+  position: absolute;
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 230px);
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  padding-top: 30px;
+  & input,button{
+    border-radius: 3px;
+    font-size:13px;
+  }
+  & input {
+    width: 100%;
+    height: 25px;
+    padding: 0 10px;
+    border: 1px solid ${COLOR.black};
+  }
+  & button {
+    width: 100%;
+    height: 25px;
+    color: white;
+  }
 `;

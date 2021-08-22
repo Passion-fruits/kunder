@@ -57,6 +57,9 @@ export default function ProfilePage() {
       }
     };
   }, []);
+  useEffect(() => {
+    setMusicList([]);
+  }, [router]);
   return (
     <S.Wrapper>
       {data && (

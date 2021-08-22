@@ -3,7 +3,7 @@ import SearchIcon from "../../assets/sarch";
 import * as S from "./styled";
 import { useState } from "react";
 import { useEffect } from "react";
-import { ACCESS_TOKEN, REFRESH_TOKEN } from "./../../lib/export/localstorage";
+import { ACCESS_TOKEN, REFRESH_TOKEN, USER_ID } from "./../../lib/export/localstorage";
 import { toast } from "react-toastify";
 
 export default function Header() {
@@ -46,7 +46,7 @@ export default function Header() {
             {isLogin ? (
               <>
                 <button onClick={logout}>로그아웃</button>
-                <button onClick={() => routing(`profile?id=0`)}>마이페이지</button>
+                <button onClick={() => routing(`profile?id=${localStorage.getItem(USER_ID)}`)}>마이페이지</button>
               </>
             ) : (
               <button

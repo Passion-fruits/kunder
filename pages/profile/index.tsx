@@ -16,21 +16,17 @@ export default function ProfilePage() {
   const changeMenu = (menu) => {
     setMenu(menu);
   };
+  const getData = (user_id) => {
+    profile.getUserProfile(user_id).then((res) => {
+      setData(res.data);
+    });
+  };
   useEffect(() => {
     if (id) {
       if (isMine === "mypage") {
-        profile
-          .getMyProfile()
-          .then((res) => {
-            console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        getData(id);
       } else {
-        profile.getUserProfile(id).then((res) => {
-          setData(res.data);
-        });
+        getData(id);
       }
     }
   }, [router]);

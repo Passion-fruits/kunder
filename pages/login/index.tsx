@@ -26,6 +26,7 @@ export default function LoginPage() {
         if (!res.data.isFresh) {
           localStorage.setItem(ACCESS_TOKEN, data.access_token);
           localStorage.setItem(REFRESH_TOKEN, data.refresh_token);
+          console.log(data)
           toast.success("로그인 되었습니다.");
           router.push("/");
           return;

@@ -11,7 +11,7 @@ export const MusicInfo = styled.div`
   width: 100%;
   position: relative;
   display: flex;
-  gap: 38px;
+  gap: 30px;
   & img {
     width: 200px;
     height: 200px;
@@ -22,7 +22,7 @@ export const MusicInfo = styled.div`
     flex-direction: column;
     padding-top: 20px;
     & h1 {
-      font-size: 25px;
+      font-size: 28px;
       font-weight: bold;
       color: ${COLOR.black};
     }
@@ -42,6 +42,8 @@ export const MusicInfo = styled.div`
     }
   }
   .artist {
+    color:${COLOR.text};
+    font-size:16px;
     cursor: pointer;
     &:hover {
       opacity: 0.7;

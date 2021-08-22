@@ -18,17 +18,20 @@ export default function ProfilePage() {
   const [data, setData] = useState<any>();
   const [musicList, setMusicList] = useState<any[]>([]);
   const [page, setPage] = useState<number>(1);
+  const [isMyPage, setIsMyPage] = useState<boolean>(false);
   const changeMenu = (menu) => {
     setMenu(menu);
   };
   const getData = (user_id) => {
     profile.getUserProfile(user_id).then((res) => {
+      setIsMyPage(res.data.is_mine);
       setData(res.data);
     });
   };
   useEffect(() => {
     if (id) {
       if (isMine === "mypage") {
+        setIsMyPage(true);
         getData(id);
       } else {
         getData(id);
@@ -36,7 +39,6 @@ export default function ProfilePage() {
     }
   }, [router]);
   const getDetailData = () => {
-    console.log(page);
     if (menu === "song") {
       profile
         .getUserMusic(id, page)
@@ -84,11 +86,7 @@ export default function ProfilePage() {
                 </section>
               </>
               <>
-                {isMine && isMine === "mypage" ? (
-                  <button>정보수정</button>
-                ) : (
-                  <button>팔로우</button>
-                )}
+                {isMyPage ? <button>정보수정</button> : <button>팔로우</button>}
               </>
             </S.Info>
           </>

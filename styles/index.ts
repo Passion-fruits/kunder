@@ -16,6 +16,7 @@ export const COLOR = {
   text: "#848484",
   red: "#ff2d2d",
   background: "#F3F3F3",
+  iconNone: "#CFCFCF",
 };
 
 export const IMG_SIZE = 200;

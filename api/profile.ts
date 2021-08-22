@@ -12,4 +12,10 @@ export default {
       },
     });
   },
+  getUserProfile(user_id) {
+    return request({
+      url: `/profile/${user_id}`,
+      method:"get"
+    });
+  },
 };

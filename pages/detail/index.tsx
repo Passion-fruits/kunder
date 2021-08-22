@@ -28,7 +28,14 @@ export default function DetailPage() {
               <>
                 <div>
                   <h1>{data.title}</h1>
-                  <span>{data.artist}</span>
+                  <span
+                    className="artist"
+                    onClick={() =>
+                      router.push(`/profile?id=${data.user_id}&isMine=none`)
+                    }
+                  >
+                    {data.artist}
+                  </span>
                   <aside>
                     <span>{getDate(data.created_at)}</span>
                     <S.Line />

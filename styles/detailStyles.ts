@@ -41,6 +41,12 @@ export const MusicInfo = styled.div`
       }
     }
   }
+  .artist {
+    cursor: pointer;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
 `;
 
 export const Line = styled.div`
@@ -71,18 +77,18 @@ export const Description = styled.div`
   color: ${COLOR.text};
   font-size: 16px;
   margin-top: 30px;
-  font-weight:500;
+  font-weight: 500;
 `;
 
 export const Comment = styled.input`
-width:100%;
-padding:22px;
-background-color:#F3F3F3;
-font-size:16px;
-color:${COLOR.black};
-border-radius:5px;
-margin-top:20px;
-&::placeholder{
-    color:${COLOR.text};
-}
-`
+  width: 100%;
+  padding: 22px;
+  background-color: #f3f3f3;
+  font-size: 16px;
+  color: ${COLOR.black};
+  border-radius: 5px;
+  margin-top: 20px;
+  &::placeholder {
+    color: ${COLOR.text};
+  }
+`;

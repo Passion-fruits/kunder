@@ -19,9 +19,9 @@ export default function CommmentIcon({callback}) {
           transform="translate(0)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="1.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1.5"
         />
         <path
           id="패스_13"
@@ -30,9 +30,9 @@ export default function CommmentIcon({callback}) {
           transform="translate(0.013 0.003)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>

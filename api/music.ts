@@ -10,4 +10,13 @@ export default {
       },
     });
   },
+  getMusicDetail(id) {
+    return request({
+      url: `/song/${id}`,
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };

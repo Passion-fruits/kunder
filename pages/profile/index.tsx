@@ -14,7 +14,7 @@ export default function ProfilePage() {
   const [menu, setMenu] =
     useState<"song" | "playlist" | "follower" | "following">("song");
   const router = useRouter();
-  const { id, isMine } = router.query;
+  const { id } = router.query;
   const [data, setData] = useState<any>();
   const [musicList, setMusicList] = useState<any[]>([]);
   const [page, setPage] = useState<number>(1);
@@ -29,14 +29,7 @@ export default function ProfilePage() {
     });
   };
   useEffect(() => {
-    if (id) {
-      if (isMine === "mypage") {
-        setIsMyPage(true);
-        getData(id);
-      } else {
-        getData(id);
-      }
-    }
+    id && getData(id);
   }, [router]);
   const getDetailData = () => {
     if (menu === "song") {

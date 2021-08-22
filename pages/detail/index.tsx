@@ -31,7 +31,7 @@ export default function DetailPage() {
                   <span
                     className="artist"
                     onClick={() =>
-                      router.push(`/profile?id=${data.user_id}&isMine=none`)
+                      router.push(`/profile?id=${data.user_id}`)
                     }
                   >
                     {data.artist}

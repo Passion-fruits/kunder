@@ -61,6 +61,7 @@ export const Menu = styled.div`
   display: flex;
   justify-content: center;
   gap: 70px;
+  margin-bottom:30px;
 `;
 
 interface Selection {

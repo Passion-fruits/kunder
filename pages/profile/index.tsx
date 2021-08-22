@@ -7,12 +7,17 @@ import YoutubeIcon from "../../assets/youtube";
 import CircleFacebookIcon from "../../assets/circleFacebook";
 import MenuList from "./menu/menuList";
 import profile from "../../api/profile";
+import CardList from "../../components/cardList";
+import { CheckScroll } from "./../../lib/util/checkScroll";
 
 export default function ProfilePage() {
-  const [menu, setMenu] = useState<string>("song");
+  const [menu, setMenu] =
+    useState<"song" | "playlist" | "follower" | "following">("song");
   const router = useRouter();
   const { id, isMine } = router.query;
   const [data, setData] = useState<any>();
+  const [musicList, setMusicList] = useState<any[]>([]);
+  const [page, setPage] = useState<number>(1);
   const changeMenu = (menu) => {
     setMenu(menu);
   };
@@ -30,6 +35,33 @@ export default function ProfilePage() {
       }
     }
   }, [router]);
+  const getDetailData = () => {
+    console.log(page);
+    if (menu === "song") {
+      profile
+        .getUserMusic(id, page)
+        .then((res) => {
+          setMusicList(musicList.concat(res.data.songs));
+        })
+        .catch(() => {
+          return;
+        });
+    }
+  };
+  useEffect(() => {
+    id && getDetailData();
+  }, [router, menu, page]);
+  useEffect(() => {
+    setMusicList([]);
+    setPage(1);
+  }, [menu]);
+  useEffect(() => {
+    window.onscroll = () => {
+      if (CheckScroll()) {
+        setPage((page) => page + 1);
+      }
+    };
+  }, []);
   return (
     <S.Wrapper>
       {data && (
@@ -63,6 +95,7 @@ export default function ProfilePage() {
           <>
             <MenuList menu={menu} callback={changeMenu} />
           </>
+          {menu === "song" && <CardList data={musicList} />}
         </S.Container>
       )}
     </S.Wrapper>

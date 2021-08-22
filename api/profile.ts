@@ -12,4 +12,10 @@ export default {
       },
     });
   },
+  getUserMusic(user_id,page){
+    return request({
+      url : `/song/profile/${user_id}?page=${page}`,
+      method:'get',
+    })
+  }
 };

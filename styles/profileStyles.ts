@@ -13,8 +13,8 @@ export const Info = styled.div`
   gap: 38px;
   position: relative;
   & img {
-    width: 190px;
-    height: 190px;
+    width:100%;
+    height:100%;
     border-radius: 80%;
     box-shadow: 0px 3px 10px rgb(0, 0, 0, 0.2);
   }
@@ -48,6 +48,24 @@ export const Info = styled.div`
     background-color: #0099ff;
   }
 `;
+
+export const ProfileImgWrapper = styled.div`
+width:190px;
+height:190px;
+position: relative;
+button{
+  z-index:2;
+  width:45px;
+  height:45px;
+  color:white;
+  border-radius:80%;
+  position:absolute;
+  font-size:30px;
+  right:0;
+  bottom:0;
+  box-shadow:0px 0px 5px rgb(0,0,0,0.1);
+}
+`
 
 export const CallbackBtn = styled.button`
   padding: 7px 20px;

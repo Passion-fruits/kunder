@@ -19,7 +19,7 @@ export default {
     });
   },
   updateProfile(userData) {
-    console.log(userData)
+    console.log(userData);
     return request({
       url: `/profile`,
       method: "put",
@@ -35,6 +35,20 @@ export default {
         soundcloud: userData.soundclound,
         youtube: userData.youtube,
       },
+    });
+  },
+  updateProfileImg(img) {
+    const fd = new FormData();
+    fd.append("image_path", img);
+    console.log(fd)
+    return request({
+      url: `/profile/image`,
+      method: "put",
+      headers: {
+        "Content-type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+      data: fd,
     });
   },
 };

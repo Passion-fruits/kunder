@@ -10,6 +10,7 @@ import profile from "../../api/profile";
 import CardList from "../../components/cardList";
 import { CheckScroll } from "./../../lib/util/checkScroll";
 import { toast } from "react-toastify";
+import FileInput from "./fileInput/fileinput";
 
 export default function ProfilePage() {
   const [menu, setMenu] =
@@ -32,9 +33,9 @@ export default function ProfilePage() {
   const changeMenu = (menu) => {
     setMenu(menu);
   };
-  const getData = (user_id) => {
+  const getData = () => {
     profile
-      .getUserProfile(user_id)
+      .getUserProfile(id)
       .then((res) => {
         console.log(res.data);
         setUserData({
@@ -57,7 +58,7 @@ export default function ProfilePage() {
     });
   };
   useEffect(() => {
-    id && getData(id);
+    id && getData();
   }, [router]);
   const getDetailData = () => {
     if (menu === "song") {
@@ -77,10 +78,27 @@ export default function ProfilePage() {
       .then((res) => {
         console.log(res.data);
         toast.success("정보가 수정되었습니다.");
+        setUpdate(false);
       })
       .catch((err) => {
         console.log(err);
         toast.error("정보 수정에 실패하였습니다.");
+        setUpdate(false);
+      });
+  };
+  const fileUpload = () => {
+    document.getElementById("profileImgInput").click();
+  };
+  const getSrc = (target: HTMLInputElement) => {
+    profile
+      .updateProfileImg(target.files[0])
+      .then((res) => {
+        console.log(res.data);
+        toast.success("프로필 사진이 수정되었습니다.");
+        getData();
+      })
+      .catch((err) => {
+        toast.error("에러가 발생하였습니다.");
       });
     setUpdate(false);
   };
@@ -103,12 +121,16 @@ export default function ProfilePage() {
   }, [router]);
   return (
     <S.Wrapper>
+      <FileInput event={getSrc} />
       {data && (
         <S.Container>
           <>
             <S.Info>
               <>
-                <img src={data.profile} alt="" />
+                <S.ProfileImgWrapper>
+                  {update && <button onClick={fileUpload}>+</button>}
+                  <img src={data.profile} alt="" />
+                </S.ProfileImgWrapper>
               </>
               <>
                 <section>
@@ -184,7 +206,12 @@ export default function ProfilePage() {
             </S.Info>
           </>
           <>
-            <MenuList follower={data.follower} following={data.following} menu={menu} callback={changeMenu} />
+            <MenuList
+              follower={data.follower}
+              following={data.following}
+              menu={menu}
+              callback={changeMenu}
+            />
           </>
           {menu === "song" && <CardList data={musicList} />}
         </S.Container>

@@ -1,7 +1,7 @@
 import * as S from "../../../styles/profileStyles";
 import Menu from "./menu";
 
-export default function MenuList({ menu, callback }) {
+export default function MenuList({ menu, callback, follower,following }) {
   return (
     <S.Menu>
       <Menu
@@ -13,14 +13,14 @@ export default function MenuList({ menu, callback }) {
       />
       <Menu
         contents="팔로워"
-        cnt="10"
+        cnt={follower}
         nowMenu={menu}
         menu="follower"
         callback={callback}
       />
       <Menu
         contents="팔로잉"
-        cnt="20"
+        cnt={following}
         nowMenu={menu}
         menu="following"
         callback={callback}

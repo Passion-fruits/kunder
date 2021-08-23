@@ -36,7 +36,11 @@ export default function ProfilePage() {
     profile
       .getUserProfile(user_id)
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
+        setUserData({
+          ...userData,
+          name: res.data.name,
+        });
         setIsMyPage(res.data.is_mine);
         setData(res.data);
       })
@@ -75,7 +79,7 @@ export default function ProfilePage() {
         toast.success("정보가 수정되었습니다.");
       })
       .catch((err) => {
-        console.log(err)
+        console.log(err);
         toast.error("정보 수정에 실패하였습니다.");
       });
     setUpdate(false);
@@ -180,7 +184,7 @@ export default function ProfilePage() {
             </S.Info>
           </>
           <>
-            <MenuList menu={menu} callback={changeMenu} />
+            <MenuList follower={data.follower} following={data.following} menu={menu} callback={changeMenu} />
           </>
           {menu === "song" && <CardList data={musicList} />}
         </S.Container>

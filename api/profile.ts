@@ -38,9 +38,8 @@ export default {
     });
   },
   updateProfileImg(img) {
-    const fd = new FormData();
+    var fd = new FormData();
     fd.append("image_path", img);
-    console.log(fd)
     return request({
       url: `/profile/image`,
       method: "put",

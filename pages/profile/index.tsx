@@ -79,18 +79,17 @@ export default function ProfilePage() {
       .then((res) => {
         console.log(res.data);
         toast.success("정보가 수정되었습니다.");
-        setUpdate(false);
       })
       .catch((err) => {
         console.log(err);
         toast.error("정보 수정에 실패하였습니다.");
-        setUpdate(false);
       });
+    setUpdate(false);
   };
   const fileUpload = () => {
     document.getElementById("profileImgInput").click();
   };
-  const getSrc = (target: HTMLInputElement) => {
+  const updateProfileImg = (target: HTMLInputElement) => {
     profile
       .updateProfileImg(target.files[0])
       .then((res) => {
@@ -122,7 +121,7 @@ export default function ProfilePage() {
   }, [router]);
   return (
     <S.Wrapper>
-      <FileInput event={getSrc} />
+      <FileInput event={updateProfileImg} />
       {data && (
         <S.Container>
           <>

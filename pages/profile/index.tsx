@@ -119,6 +119,9 @@ export default function ProfilePage() {
   useEffect(() => {
     setMusicList([]);
   }, [router]);
+  const snsRouting = (url) => {
+    window.open(url);
+  };
   return (
     <S.Wrapper>
       <FileInput event={updateProfileImg} />
@@ -137,10 +140,16 @@ export default function ProfilePage() {
                   <h1>{data.name}</h1>
                   <span>{data.email}</span>
                   <article>
-                    <CircleFacebookIcon url={data.facebook} />
-                    <InstaIcon url={data.insta} />
-                    <SoundCloudIcon url={data.soundcloud} />
-                    <YoutubeIcon url={data.youtube} />
+                    <CircleFacebookIcon
+                      callback={snsRouting}
+                      url={data.facebook}
+                    />
+                    <InstaIcon callback={snsRouting} url={data.insta} />
+                    <SoundCloudIcon
+                      callback={snsRouting}
+                      url={data.soundcloud}
+                    />
+                    <YoutubeIcon callback={snsRouting} url={data.youtube} />
                   </article>
                 </section>
               </>

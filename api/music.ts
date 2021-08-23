@@ -19,4 +19,13 @@ export default {
       },
     });
   },
+  getMusicComment(id) {
+    return request({
+      url: `/comment/${id}`,
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+  },
 };

@@ -42,8 +42,8 @@ export const MusicInfo = styled.div`
     }
   }
   .artist {
-    color:${COLOR.text};
-    font-size:16px;
+    color: ${COLOR.text};
+    font-size: 16px;
     cursor: pointer;
     &:hover {
       opacity: 0.7;
@@ -92,5 +92,40 @@ export const Comment = styled.input`
   margin-top: 20px;
   &::placeholder {
     color: ${COLOR.text};
+  }
+`;
+
+export const CommentContainer = styled.section`
+  width: 100%;
+  display:flex;
+  margin-top: 50px;
+  flex-direction:column;
+  gap:20px;
+  & article {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    & img {
+      width: 60px;
+      height: 60px;
+      border-radius: 80%;
+    }
+  }
+  .commentWrapper {
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .commentInfo {
+    display: flex;
+    align-items: center;
+    font-size: 17px;
+    color: ${COLOR.black};
+    & span {
+      font-size: 14px;
+      font-weight: 500;
+      margin-left: 8px;
+      color: ${COLOR.text};
+    }
   }
 `;

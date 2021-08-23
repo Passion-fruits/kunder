@@ -36,6 +36,7 @@ export default function ProfilePage() {
     profile
       .getUserProfile(user_id)
       .then((res) => {
+        console.log(res.data)
         setIsMyPage(res.data.is_mine);
         setData(res.data);
       })

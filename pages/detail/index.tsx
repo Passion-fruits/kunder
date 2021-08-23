@@ -6,19 +6,19 @@ import music from "../../api/music";
 import { useEffect, useState } from "react";
 import { getDate } from "./../../lib/util/getDate";
 import CommentView from "./comment";
+import { toast } from "react-toastify";
+import { CheckToken } from "./../../lib/util/checkToken";
 
 export default function DetailPage() {
   const router = useRouter();
-  const [data, setData] = useState<any>();
   const id = router.query.id;
+  const [data, setData] = useState<any>();
   const [commentData, setCommentData] = useState<any[]>([]);
-  useEffect(() => {
-    id &&
-      music.getMusicDetail(router.query.id).then((res) => {
-        setData(res.data);
-      });
-  }, [router]);
-  useEffect(() => {
+  const [comment, setComment] = useState<string>("");
+  const handleComment = (event) => {
+    setComment(event.target.value);
+  };
+  const getComment = () => {
     id &&
       music
         .getMusicComment(id)
@@ -28,7 +28,43 @@ export default function DetailPage() {
         .catch((err) => {
           return;
         });
+  };
+  useEffect(() => {
+    id &&
+      music.getMusicDetail(router.query.id).then((res) => {
+        setData(res.data);
+      });
   }, [router]);
+  useEffect(() => {
+    getComment();
+  }, [router]);
+  const sendComment = (event) => {
+    if (event.keyCode === 13) {
+      if (!comment) {
+        toast.info("작성 후 등록해주세요.");
+        return;
+      }
+      music
+        .sendComment(id, comment)
+        .then(() => {
+          toast.success("댓글이 등록되었습니다");
+          getComment();
+          setComment("");
+        })
+        .catch((err) => {
+          if (err.response.status === 400) {
+            toast.info("이미 댓글을 작성하셨습니다.");
+            return;
+          }
+          if (err.response.status === 401) {
+            if (CheckToken()) getComment();
+            else toast.info("로그인 후 이용해주세요");
+            return;
+          }
+          toast.error("에러가 발생하였습니다.");
+        });
+    }
+  };
   return (
     <S.Wrapper>
       {data && (
@@ -64,7 +100,12 @@ export default function DetailPage() {
             <S.Description>{data.description}</S.Description>
           </>
           <>
-            <S.Comment placeholder="댓글을 입력하세요. (엔터를 누르면 등록됩니다.)" />
+            <S.Comment
+              onChange={handleComment}
+              onKeyDown={sendComment}
+              value={comment}
+              placeholder="댓글을 입력하세요. (엔터를 누르면 등록됩니다.)"
+            />
             <S.CommentContainer>
               {commentData.map((obj, index) => (
                 <CommentView

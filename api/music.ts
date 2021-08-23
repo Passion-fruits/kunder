@@ -1,4 +1,5 @@
 import request from "./axios";
+import { ACCESS_TOKEN } from "./../lib/export/localstorage";
 
 export default {
   getStreaming({ genre, page, sort }) {
@@ -25,6 +26,20 @@ export default {
       method: "get",
       headers: {
         "Content-type": "application/json",
+      },
+    });
+  },
+  sendComment(id, content) {
+    return request({
+      url: `/comment`,
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+      data: {
+        song_id: parseInt(id),
+        content: content,
       },
     });
   },

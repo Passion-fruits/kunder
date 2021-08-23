@@ -97,10 +97,10 @@ export const Comment = styled.input`
 
 export const CommentContainer = styled.section`
   width: 100%;
-  display:flex;
+  display: flex;
   margin-top: 50px;
-  flex-direction:column;
-  gap:20px;
+  flex-direction: column;
+  gap: 20px;
   & article {
     width: 100%;
     display: flex;
@@ -109,6 +109,10 @@ export const CommentContainer = styled.section`
       width: 60px;
       height: 60px;
       border-radius: 80%;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.9;
+      }
     }
   }
   .commentWrapper {

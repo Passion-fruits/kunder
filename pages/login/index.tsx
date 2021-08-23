@@ -68,6 +68,7 @@ export default function LoginPage() {
       toast.info("장르는 최대 3개 선택 가능합니다.");
       return;
     }
+    console.log(img,genreArr,email,name)
     auth
       .signUp({ name: name, email: email, genreArr: genreArr, img: img })
       .then((res) => {

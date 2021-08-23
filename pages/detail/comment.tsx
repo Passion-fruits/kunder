@@ -1,9 +1,15 @@
+import { useRouter } from "next/dist/client/router";
 import { getDate } from "./../../lib/util/getDate";
 
 export default function CommentView({ user_id, src, name, date, contents }) {
+  const router = useRouter();
   return (
     <article>
-      <img src={src} alt="" />
+      <img
+        onClick={() => router.push(`/profile?id=${user_id}`)}
+        src={src}
+        alt=""
+      />
       <div className="commentWrapper">
         <div className="commentInfo">
           {name} <span>{getDate(date)}</span>

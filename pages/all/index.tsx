@@ -31,6 +31,9 @@ export default function AllPage() {
         .getStreaming({ genre: query.genre, page: 1, sort: query.sort })
         .then((res) => {
           setData(res.data);
+        })
+        .catch(() => {
+          return () => {};
         });
   }, [router]);
   useEffect(() => {

@@ -22,6 +22,7 @@ export default function Header() {
   const logout = (): void => {
     localStorage.setItem(ACCESS_TOKEN, "");
     localStorage.setItem(REFRESH_TOKEN, "");
+    localStorage.setItem(USER_ID,"");
     setIsLogin(false);
     toast.success("로그아웃 되었습니다.");
   };

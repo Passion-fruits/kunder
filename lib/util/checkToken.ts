@@ -1,4 +1,4 @@
-import { REFRESH_TOKEN } from "../export/localstorage";
+import { REFRESH_TOKEN, USER_ID } from "../export/localstorage";
 import { ACCESS_TOKEN } from "./../export/localstorage";
 
 export const CheckToken = () => {
@@ -10,6 +10,7 @@ export const CheckToken = () => {
   } else {
     localStorage.setItem(ACCESS_TOKEN, "");
     localStorage.setItem(REFRESH_TOKEN, "");
+    localStorage.setItem(USER_ID, "");
     return false;
   }
 };

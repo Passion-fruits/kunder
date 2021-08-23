@@ -68,11 +68,16 @@ export default function LoginPage() {
       toast.info("장르는 최대 3개 선택 가능합니다.");
       return;
     }
-    console.log(img,genreArr,email,name)
+    console.log(img, genreArr, email, name);
     auth
       .signUp({ name: name, email: email, genreArr: genreArr, img: img })
       .then((res) => {
-        console.log(res);
+        const data = res.data;
+        localStorage.setItem(ACCESS_TOKEN, data.access_token);
+        localStorage.setItem(REFRESH_TOKEN, data.refresh_token);
+        localStorage.setItem(USER_ID, data.user_id);
+        router.push("/");
+        toast.success("축하합니다 회원가입 되었습니다!");
       })
       .catch((err) => {
         console.log(err);

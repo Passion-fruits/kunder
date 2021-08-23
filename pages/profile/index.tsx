@@ -76,8 +76,8 @@ export default function ProfilePage() {
   const updateProfile = () => {
     profile
       .updateProfile(userData)
-      .then((res) => {
-        console.log(res.data);
+      .then(() => {
+        getData();
         toast.success("정보가 수정되었습니다.");
       })
       .catch((err) => {

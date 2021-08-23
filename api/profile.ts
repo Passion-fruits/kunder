@@ -32,14 +32,14 @@ export default {
         bio: userData.bio,
         insta: userData.insta,
         facebook: userData.facebook,
-        soundcloud: userData.soundclound,
+        soundcloud: userData.soundcloud,
         youtube: userData.youtube,
       },
     });
   },
   updateProfileImg(img) {
-    var fd = new FormData();
-    fd.append("image_path", img);
+    const fd = new FormData();
+    fd.append("image", img);
     return request({
       url: `/profile/image`,
       method: "put",

@@ -10,7 +10,9 @@ import profile from "../../api/profile";
 import CardList from "../../components/cardList";
 import { CheckScroll } from "./../../lib/util/checkScroll";
 import { toast } from "react-toastify";
-import FileInput from "./fileInput/fileinput";
+import FileInput from "./input/fileinput";
+import { ProfileInputArr } from "./../../lib/export/profileInputArr";
+import InforInput from "./input/inforInfo";
 
 export default function ProfilePage() {
   const [menu, setMenu] =
@@ -37,7 +39,6 @@ export default function ProfilePage() {
     profile
       .getUserProfile(id)
       .then((res) => {
-        console.log(res.data);
         setUserData({
           ...userData,
           name: res.data.name,
@@ -147,47 +148,15 @@ export default function ProfilePage() {
               <>
                 {update ? (
                   <S.UpdateContainer>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="아티스트명을 입력해주세요"
-                      onChange={handleData}
-                      defaultValue={data.name}
-                    />
-                    <input
-                      type="text"
-                      name="bio"
-                      placeholder="자기소개를 입력해주세요"
-                      onChange={handleData}
-                    />
-                    <input
-                      type="text"
-                      name="insta"
-                      placeholder="인스타그램 링크를 입력해주세요"
-                      onChange={handleData}
-                      defaultValue={data.insta}
-                    />
-                    <input
-                      type="text"
-                      name="facebook"
-                      placeholder="페이스북 링크를 입력해주세요"
-                      onChange={handleData}
-                      defaultValue={data.facebook}
-                    />
-                    <input
-                      type="text"
-                      name="soundcloud"
-                      placeholder="사운드클라우드 링크를 입력해주세요"
-                      onChange={handleData}
-                      defaultValue={data.soundclound}
-                    />
-                    <input
-                      type="text"
-                      name="youtube"
-                      placeholder="유튜브 링크를 입력해주세요"
-                      defaultValue={data.youtube}
-                      onChange={handleData}
-                    />
+                    {ProfileInputArr.map((obj, index) => (
+                      <InforInput
+                        callback={handleData}
+                        data={data}
+                        name={obj.name}
+                        placeholder={obj.placeholder}
+                        key={index}
+                      />
+                    ))}
                     <div />
                     <button onClick={updateProfile}>정보수정</button>
                   </S.UpdateContainer>

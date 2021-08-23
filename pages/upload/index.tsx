@@ -1,3 +1,4 @@
+import { genreList, moodList } from "../../lib/export/genre";
 import * as S from "../../styles/uploadStyles";
 
 export default function UploadPage() {
@@ -16,17 +17,55 @@ export default function UploadPage() {
           <S.UploadContainer>
             <S.UploadBtn />
             <S.FlexContainer>
-              <S.InpContainer>
+              <>
+                <S.InpContainer>
                   <span>제목 (title)</span>
-                  <input type="text" name="" id="" placeholder="제목을 입력해주세요." />
-              </S.InpContainer>
-              <S.InpContainer>
+                  <input
+                    type="text"
+                    name=""
+                    id=""
+                    placeholder="제목을 입력해주세요."
+                  />
+                </S.InpContainer>
+              </>
+              <>
+                <S.InpContainer>
                   <span>설명 (description)</span>
                   <textarea name="" id="" placeholder="제목을 입력해주세요." />
-              </S.InpContainer>
-              <S.SelectContainer>
+                </S.InpContainer>
+              </>
+              <>
+                <S.SelectContainer>
+                  <S.InpContainer>
+                    <span>장르 (genre)</span>
+                    <select name="genre">
+                      {genreList.map((genre, index) => (
+                        <option
+                          key={index}
+                          value={genreList.indexOf(genre) + 1}
+                        >
+                          {genre}
+                        </option>
+                      ))}
+                    </select>
+                  </S.InpContainer>
+                  <S.InpContainer>
+                    <span>분위기 (mood)</span>
+                    <select name="mood">
+                      {moodList.map((mood, index) => (
+                        <option key={index} value={moodList.indexOf(mood) + 1}>
+                          {mood}
+                        </option>
+                      ))}
+                    </select>
+                  </S.InpContainer>
+                </S.SelectContainer>
+              </>
+              <>
+              <S.ChooseMusic>
                   
-              </S.SelectContainer>
+              </S.ChooseMusic>
+              </>
             </S.FlexContainer>
           </S.UploadContainer>
         </>

@@ -69,7 +69,11 @@ export const InpContainer = styled.div`
     color: ${COLOR.black};
     border: 1px solid ${COLOR.black};
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 15px;
+    & option {
+      font-size: 15px;
+      color: ${COLOR.black};
+    }
     &::placeholder {
       color: ${COLOR.text};
     }
@@ -87,5 +91,22 @@ export const InpContainer = styled.div`
 export const SelectContainer = styled.div`
   display: grid;
   justify-content: space-between;
-  grid-template-columns: repeat(2, 260px);
+  grid-template-columns: repeat(2, 270px);
+  & select {
+    appearance: none;
+    outline: none;
+    background-image: ${`linear-gradient(45deg, transparent 50%,  ${COLOR.black} 50%),
+      linear-gradient(135deg,  ${COLOR.black} 50%, transparent 50%)`};
+    background-position: calc(100% - 20px) calc(1em + 2px),
+      calc(100% - 15px) calc(1em + 2px), calc(100% - 2.5em) 0.5em;
+    background-size: 5px 5px, 5px 5px, 1px 1.5em;
+    background-repeat: no-repeat;
+  }
 `;
+
+export const ChooseMusic = styled.div`
+width:100%;
+display:flex;
+align-items:center;
+gap:18px;
+`

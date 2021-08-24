@@ -109,13 +109,16 @@ export const IconWrapper = styled.div`
   & div {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     font-weight: bold;
     font-size: 17px;
     color: ${COLOR.black};
   }
   & svg {
     cursor: pointer;
+    &:last-of-type{
+        margin-left:13px;
+    }
   }
 `;
 

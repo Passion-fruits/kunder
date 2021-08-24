@@ -1,4 +1,4 @@
-import CommmentIcon from "../../assets/comment";
+import VolumeIcon from "../../assets/volume";
 import HeartIcon from "../../assets/heart";
 import PassIcon from "../../assets/pass";
 import PlayIcon from "../../assets/play";
@@ -31,7 +31,7 @@ export default function PlayBar() {
         </>
         <>
           <S.Control>
-            <CommmentIcon callback={() => {}} />
+            <VolumeIcon callback={() => {}} />
             <HeartIcon size={26} callback={() => {}} />
           </S.Control>
         </>

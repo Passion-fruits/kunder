@@ -1,7 +1,16 @@
 import * as S from "../../styles/feedStyles";
 import FeedCard from "./feedCard";
+import { useEffect, useState } from "react";
+import feed from "../../api/feed";
 
 export default function FeedPage() {
+  const [data, setData] = useState<any[]>([]);
+  useEffect(() => {
+    feed.getFeedList().then((res) => {
+      console.log(res.data);
+      setData(res.data);
+    });
+  }, []);
   return (
     <S.Wrapper>
       <S.Container>
@@ -20,11 +29,20 @@ export default function FeedPage() {
           </p>
         </S.LEFT_SIDE>
         <S.RIGHT_SIDE>
-            <FeedCard/>
-            <FeedCard/>
-            <FeedCard/>
-            <FeedCard/>
-            <FeedCard/>
+          {data.map((obj, index) => (
+            <FeedCard
+              name={obj.artist}
+              title={obj.title}
+              like="4"
+              date={obj.created_at}
+              src={obj.cover_url}
+              description={obj.description}
+              id={obj.song_id}
+              genre={obj.genre}
+              comment={obj.comment}
+              key={index}
+            />
+          ))}
         </S.RIGHT_SIDE>
       </S.Container>
     </S.Wrapper>

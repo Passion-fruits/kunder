@@ -6,6 +6,9 @@ export const Wrapper = styled(WRAPPER)``;
 export const Container = styled(CONTAINER)`
   padding-top: 30px;
   width: 800px;
+  & input[type="file"] {
+    display: none;
+  }
 `;
 
 export const Tip = styled.div`
@@ -47,6 +50,12 @@ export const UploadBtn = styled.button`
   &::after {
     content: "+";
   }
+`;
+
+export const ProfileImg = styled.img`
+  width: 190px;
+  height: 190px;
+  border-radius: 80%;
 `;
 
 export const FlexContainer = styled.div`
@@ -122,10 +131,10 @@ export const ChooseMusic = styled.div`
 `;
 
 export const SubBtn = styled.button`
-width:100%;
-padding:13px 0;
-font-size:18px;
-color:white;
-background-color:${COLOR.black};
-border-radius:3px;
-`
+  width: 100%;
+  padding: 13px 0;
+  font-size: 18px;
+  color: white;
+  background-color: ${COLOR.black};
+  border-radius: 3px;
+`;

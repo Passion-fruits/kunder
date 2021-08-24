@@ -4,9 +4,8 @@ import { COLOR, CONTAINER, WRAPPER } from "./index";
 export const Wrapper = styled(WRAPPER)``;
 
 export const Container = styled(CONTAINER)`
-  padding-top: 50px;
+  padding-top: 30px;
   width: 800px;
-  margin-bottom: 100px;
 `;
 
 export const Tip = styled.div`
@@ -105,8 +104,28 @@ export const SelectContainer = styled.div`
 `;
 
 export const ChooseMusic = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  & button {
+    font-size: 14px;
+    color: white;
+    padding: 8px 20px;
+    background-color: ${COLOR.black};
+    border-radius: 3px;
+  }
+  & div {
+    font-size: 13px;
+    color: ${COLOR.black};
+  }
+`;
+
+export const SubBtn = styled.button`
 width:100%;
-display:flex;
-align-items:center;
-gap:18px;
+padding:13px 0;
+font-size:18px;
+color:white;
+background-color:${COLOR.black};
+border-radius:3px;
 `

@@ -62,9 +62,13 @@ export default function UploadPage() {
                 </S.SelectContainer>
               </>
               <>
-              <S.ChooseMusic>
-                  
-              </S.ChooseMusic>
+                <S.ChooseMusic>
+                  <button>음악 선택</button>
+                  <div>profile.mp4</div>
+                </S.ChooseMusic>
+              </>
+              <>
+                <S.SubBtn>업로드</S.SubBtn>
               </>
             </S.FlexContainer>
           </S.UploadContainer>

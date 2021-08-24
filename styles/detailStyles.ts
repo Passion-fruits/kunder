@@ -100,7 +100,7 @@ export const CommentContainer = styled.section`
   display: flex;
   margin-top: 50px;
   flex-direction: column;
-  gap: 20px;
+  gap: 40px;
   & article {
     width: 100%;
     display: flex;
@@ -119,6 +119,11 @@ export const CommentContainer = styled.section`
     padding-top: 10px;
     display: flex;
     flex-direction: column;
+    & p{
+      font-size:16px;
+      color:${COLOR.black};
+      margin-top:10px;
+    }
   }
   .commentInfo {
     display: flex;

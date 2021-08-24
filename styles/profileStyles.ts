@@ -16,6 +16,7 @@ export const Info = styled.div`
     width: 100%;
     height: 100%;
     border-radius: 80%;
+    border:1px solid rgb(240,240,240);
   }
   & section {
     display: flex;
@@ -44,22 +45,22 @@ export const Info = styled.div`
     }
   }
   & button {
-    background-color: #0099ff;
+    background-color: #1E8FFF;
   }
 `;
 
 export const ProfileImgWrapper = styled.div`
-  width: 190px;
-  height: 190px;
+  width: 200px;
+  height: 200px;
   position: relative;
   button {
     z-index: 2;
-    width: 45px;
-    height: 45px;
+    width: 50px;
+    height: 50px;
     color: white;
     border-radius: 80%;
     position: absolute;
-    font-size: 30px;
+    font-size: 35px;
     right: 0;
     bottom: 0;
   }

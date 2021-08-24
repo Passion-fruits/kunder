@@ -43,4 +43,23 @@ export default {
       },
     });
   },
+  uploadMusic(obj) {
+    const fd = new FormData();
+    fd.append("song", obj.musicSrc);
+    fd.append("song", obj.imgSrc);
+    fd.append("title", obj.title);
+    fd.append("description", obj.description);
+    fd.append("genre", obj.genre);
+    fd.append("mood", obj.mood);
+    fd.append("duration", obj.duration);
+    return request({
+      url: `/song`,
+      method: "post",
+      headers: {
+        "Content-type": "multipart/form-data",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+      data:fd
+    });
+  },
 };

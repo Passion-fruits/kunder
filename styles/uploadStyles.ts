@@ -55,7 +55,8 @@ export const UploadBtn = styled.button`
 export const ProfileImg = styled.img`
   width: 190px;
   height: 190px;
-  border-radius: 80%;
+  border-radius:3px;
+  cursor: pointer;
 `;
 
 export const FlexContainer = styled.div`

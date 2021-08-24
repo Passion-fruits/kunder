@@ -1,8 +1,15 @@
+import { useEffect } from "react";
 import HeartIcon from "../../assets/heart";
 import PlayIcon from "../../assets/play";
 import * as S from "../../styles/feedStyles";
+import feed from '../../api/feed'
 
 export default function FeedCard() {
+/*     useEffect(()=>{
+        feed.getFeedList().then((res)=>{
+            console.log(res.data)
+        })
+    },[]) */
   return (
     <S.FeedCardWrapper>
       <S.ImgWrapper>

@@ -1,18 +1,27 @@
 import { genreList, moodList } from "../../lib/export/genre";
 import * as S from "../../styles/uploadStyles";
+import Tip from "./tip";
+import { useState } from "react";
 
 export default function UploadPage() {
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    genre: "",
+    mood: "",
+    duration: "",
+  });
+  const handleData = (evnet): void => {
+    const { name, value } = evnet.target;
+    setData({
+      ...data,
+      [name]: value,
+    });
+  };
   return (
     <S.Wrapper>
       <S.Container>
-        <>
-          <S.Tip>
-            <div>TIP</div>
-            <p>
-              저작권 위반 파일을 업로드할 경우 법적 제제를 받을 수 있습니다.
-            </p>
-          </S.Tip>
-        </>
+        <Tip />
         <>
           <S.UploadContainer>
             <S.UploadBtn />
@@ -22,16 +31,18 @@ export default function UploadPage() {
                   <span>제목 (title)</span>
                   <input
                     type="text"
-                    name=""
-                    id=""
+                    name="title"
                     placeholder="제목을 입력해주세요."
+                    onChange={handleData}
                   />
                 </S.InpContainer>
-              </>
-              <>
                 <S.InpContainer>
                   <span>설명 (description)</span>
-                  <textarea name="" id="" placeholder="제목을 입력해주세요." />
+                  <textarea
+                    name="description"
+                    placeholder="곡 설명을 입력해주세요."
+                    onChange={handleData}
+                  />
                 </S.InpContainer>
               </>
               <>

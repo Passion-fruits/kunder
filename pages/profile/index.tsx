@@ -81,7 +81,6 @@ export default function ProfilePage() {
         toast.success("정보가 수정되었습니다.");
       })
       .catch((err) => {
-        console.log(err);
         toast.error("정보 수정에 실패하였습니다.");
       });
     setUpdate(false);
@@ -93,7 +92,6 @@ export default function ProfilePage() {
     profile
       .updateProfileImg(target.files[0])
       .then((res) => {
-        console.log(res.data);
         toast.success("프로필 사진이 수정되었습니다.");
         getData();
       })

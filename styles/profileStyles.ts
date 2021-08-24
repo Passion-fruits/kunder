@@ -16,7 +16,6 @@ export const Info = styled.div`
     width:100%;
     height:100%;
     border-radius: 80%;
-    box-shadow: 0px 3px 10px rgb(0, 0, 0, 0.2);
   }
   & section {
     display: flex;

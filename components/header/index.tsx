@@ -25,6 +25,7 @@ export default function Header() {
     localStorage.setItem(USER_ID,""); 
     setIsLogin(false);
     toast.success("로그아웃 되었습니다.");
+    router.push('/');
   };
   return (
     <S.Wrapper>

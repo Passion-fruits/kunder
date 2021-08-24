@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import FileInput from "./input/fileinput";
 import { ProfileInputArr } from "./../../lib/export/profileInputArr";
 import InforInput from "./input/inforInfo";
+import LoadingPage from "../../components/loading";
 
 export default function ProfilePage() {
   const [menu, setMenu] =
@@ -24,6 +25,7 @@ export default function ProfilePage() {
   const [page, setPage] = useState<number>(1);
   const [isMyPage, setIsMyPage] = useState<boolean>(false);
   const [update, setUpdate] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [userData, setUserData] = useState<any>({
     name: "",
     bio: "",
@@ -42,6 +44,7 @@ export default function ProfilePage() {
         setUserData(res.data);
         setIsMyPage(res.data.is_mine);
         setData(res.data);
+        setLoading(false);
       })
       .catch(() => {
         toast.error("에러가 발생하였습니다.");
@@ -119,6 +122,7 @@ export default function ProfilePage() {
   };
   return (
     <S.Wrapper>
+      {loading && <LoadingPage />}
       <FileInput event={updateProfileImg} />
       {data && (
         <S.Container>

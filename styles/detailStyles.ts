@@ -16,6 +16,7 @@ export const MusicInfo = styled.div`
     width: 200px;
     height: 200px;
     border-radius: 5px;
+    border: 1px solid rgb(240, 240, 240);
   }
   & div {
     display: flex;
@@ -119,10 +120,10 @@ export const CommentContainer = styled.section`
     padding-top: 10px;
     display: flex;
     flex-direction: column;
-    & p{
-      font-size:16px;
-      color:${COLOR.black};
-      margin-top:10px;
+    & p {
+      font-size: 16px;
+      color: ${COLOR.black};
+      margin-top: 10px;
     }
   }
   .commentInfo {

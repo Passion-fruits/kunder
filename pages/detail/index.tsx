@@ -8,6 +8,7 @@ import { getDate } from "./../../lib/util/getDate";
 import CommentView from "./comment";
 import { toast } from "react-toastify";
 import { CheckToken } from "./../../lib/util/checkToken";
+import LoadingPage from "../../components/loading";
 
 export default function DetailPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function DetailPage() {
   const [data, setData] = useState<any>();
   const [commentData, setCommentData] = useState<any[]>([]);
   const [comment, setComment] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(true);
   const handleComment = (event) => {
     setComment(event.target.value);
   };
@@ -32,6 +34,7 @@ export default function DetailPage() {
   useEffect(() => {
     id &&
       music.getMusicDetail(router.query.id).then((res) => {
+        setLoading(false);
         setData(res.data);
       });
   }, [router]);
@@ -67,6 +70,7 @@ export default function DetailPage() {
   };
   return (
     <S.Wrapper>
+      {loading && <LoadingPage />}
       {data && (
         <S.Container>
           <>

@@ -1,6 +1,7 @@
 export function getDate(params: Date) {
   let date = new Date(params);
-  let diff = (new Date().getTime() - date.getTime()) / 1000,
+  const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+  let diff = (new Date().getTime() - date.getTime() + KR_TIME_DIFF) / 1000,
     day_diff = Math.floor(diff / 86400);
   if (isNaN(day_diff) || day_diff < 0 || day_diff >= 31)
     return `${date.getFullYear()}년 ${date.getDay()}월 ${date.getDate()}일`;

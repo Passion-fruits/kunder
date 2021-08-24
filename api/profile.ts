@@ -19,7 +19,6 @@ export default {
     });
   },
   updateProfile(userData) {
-    console.log(userData);
     return request({
       url: `/profile`,
       method: "put",

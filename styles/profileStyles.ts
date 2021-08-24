@@ -13,8 +13,8 @@ export const Info = styled.div`
   gap: 38px;
   position: relative;
   & img {
-    width:100%;
-    height:100%;
+    width: 100%;
+    height: 100%;
     border-radius: 80%;
   }
   & section {
@@ -49,22 +49,21 @@ export const Info = styled.div`
 `;
 
 export const ProfileImgWrapper = styled.div`
-width:190px;
-height:190px;
-position: relative;
-button{
-  z-index:2;
-  width:45px;
-  height:45px;
-  color:white;
-  border-radius:80%;
-  position:absolute;
-  font-size:30px;
-  right:0;
-  bottom:0;
-  box-shadow:0px 0px 5px rgb(0,0,0,0.1);
-}
-`
+  width: 190px;
+  height: 190px;
+  position: relative;
+  button {
+    z-index: 2;
+    width: 45px;
+    height: 45px;
+    color: white;
+    border-radius: 80%;
+    position: absolute;
+    font-size: 30px;
+    right: 0;
+    bottom: 0;
+  }
+`;
 
 export const CallbackBtn = styled.button`
   padding: 7px 20px;
@@ -105,9 +104,10 @@ export const UpdateContainer = styled.div`
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   padding-top: 30px;
-  & input,button{
+  & input,
+  button {
     border-radius: 3px;
-    font-size:13px;
+    font-size: 13px;
   }
   & input {
     width: 100%;

@@ -39,10 +39,7 @@ export default function ProfilePage() {
     profile
       .getUserProfile(id)
       .then((res) => {
-        setUserData({
-          ...userData,
-          name: res.data.name,
-        });
+        setUserData(res.data);
         setIsMyPage(res.data.is_mine);
         setData(res.data);
       })

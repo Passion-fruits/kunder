@@ -1,3 +1,4 @@
+import { useRouter } from "next/dist/client/router";
 import CommentIcon from "../../assets/comment";
 import HeartIcon from "../../assets/heart";
 import PlayIcon from "../../assets/play";
@@ -13,8 +14,9 @@ export default function FeedCard({
   date,
   id,
   description,
-  comment
+  comment,
 }) {
+  const router = useRouter();
   return (
     <S.FeedCardWrapper>
       <S.ImgWrapper>
@@ -22,17 +24,16 @@ export default function FeedCard({
           <mark>{title}</mark>
           <mark>{genre}</mark>
         </S.MusicInfo>
-        <img src={src} />
+        <img src={src} onClick={() => router.push(`/detail?id=${id}`)} />
       </S.ImgWrapper>
       <S.IconWrapper>
         <div>
           <HeartIcon size={23} color="black" callback={() => {}} />
           <span>{like}</span>
-          <CommentIcon/>
+          <CommentIcon />
           <span>{comment}</span>
         </div>
-        <div>
-        </div>
+        <div></div>
         <PlayIcon callback={() => {}} size={18} color={"black"} />
       </S.IconWrapper>
       <S.InfoContainer>

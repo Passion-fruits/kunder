@@ -3,11 +3,11 @@ import { COLOR, CONTAINER, WRAPPER } from "./index";
 
 export const Wrapper = styled(WRAPPER)``;
 
-const FEED_IMG_SIZE = "375px";
+const FEED_IMG_SIZE = "450px";
 
 export const Container = styled(CONTAINER)`
   padding-top: 30px;
-  width: 720px;
+  width: 820px;
   display: flex;
   justify-content: space-between;
   position: relative;
@@ -78,6 +78,7 @@ export const ImgWrapper = styled.div`
     border: 1px solid rgb(240, 240, 240);
     width: 100%;
     height: 100%;
+    cursor: pointer;
   }
 `;
 
@@ -93,9 +94,9 @@ export const MusicInfo = styled.div`
     padding: 8px 15px;
     background-color: ${COLOR.black};
     color: white;
-    font-size: 13px;
+    font-size: 15px;
     &:last-of-type {
-      margin-top: 35px;
+      margin-top: 40px;
     }
   }
 `;
@@ -116,8 +117,8 @@ export const IconWrapper = styled.div`
   }
   & svg {
     cursor: pointer;
-    &:last-of-type{
-        margin-left:13px;
+    &:last-of-type {
+      margin-left: 13px;
     }
   }
 `;
@@ -132,8 +133,13 @@ export const InfoContainer = styled.div`
     gap: 10px;
     align-items: center;
     & h3 {
+      cursor: pointer;
       font-size: 17px;
       color: ${COLOR.main};
+      font-weight:bold;
+      &:hover {
+        opacity: 0.5;
+      }
     }
     & span {
       color: ${COLOR.text};

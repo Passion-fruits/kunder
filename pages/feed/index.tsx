@@ -7,7 +7,6 @@ export default function FeedPage() {
   const [data, setData] = useState<any[]>([]);
   useEffect(() => {
     feed.getFeedList().then((res) => {
-      console.log(res.data);
       setData(res.data);
     });
   }, []);
@@ -33,7 +32,7 @@ export default function FeedPage() {
             <FeedCard
               name={obj.artist}
               title={obj.title}
-              like="4"
+              like={obj.like}
               date={obj.created_at}
               src={obj.cover_url}
               description={obj.description}

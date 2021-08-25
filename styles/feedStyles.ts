@@ -79,6 +79,10 @@ export const ImgWrapper = styled.div`
     width: 100%;
     height: 100%;
     cursor: pointer;
+    transition:0.5s;
+    &:hover{
+        opacity:0.7;
+    }
   }
 `;
 
@@ -89,6 +93,7 @@ export const MusicInfo = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 5px;
+  z-index:2;
   & mark {
     position: absolute;
     padding: 8px 15px;

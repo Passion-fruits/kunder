@@ -21,9 +21,13 @@ export default function FeedPage() {
         return;
       });
   };
+  const changeState = async () => {
+    data.length = 0;
+    await setPage(1);
+    page === 1 && data.length === 0 && getData();
+  };
   useEffect(() => {
-    setData([]);
-    setPage(1);
+    changeState();
   }, [sort, genre]);
   useEffect(() => {
     getData();
@@ -31,7 +35,7 @@ export default function FeedPage() {
   useEffect(() => {
     window.onscroll = () => {
       if (CheckScroll()) {
-        getData();
+        setPage((page) => page + 1);
       }
     };
   }, []);

@@ -4,6 +4,8 @@ import HeartIcon from "../../assets/heart";
 import PlayIcon from "../../assets/play";
 import * as S from "../../styles/feedStyles";
 import { getDate } from "./../../lib/util/getDate";
+import { useEffect } from "react";
+import { resizing } from "./../../lib/util/resizing";
 
 export default function FeedCard({
   title,
@@ -17,6 +19,9 @@ export default function FeedCard({
   comment,
 }) {
   const router = useRouter();
+  useEffect(() => {
+    resizing(id);
+  }, [description, router]);
   return (
     <S.FeedCardWrapper>
       <S.ImgWrapper>
@@ -41,7 +46,7 @@ export default function FeedCard({
           <h3>{name} 님</h3>
           <span>{getDate(date)}</span>
         </div>
-        <textarea defaultValue={description} readOnly />
+        <textarea id={id} value={description} readOnly />
       </S.InfoContainer>
     </S.FeedCardWrapper>
   );

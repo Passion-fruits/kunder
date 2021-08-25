@@ -153,7 +153,8 @@ export const InfoContainer = styled.div`
   }
   & textarea {
     padding: 0;
-    border: none;
+    border:none;
+    resize:vertical;
     font-size: 16px;
     color: ${COLOR.text};
     margin-top: 0px;

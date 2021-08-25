@@ -73,7 +73,8 @@ export const HeartContainer = styled.aside`
   }
 `;
 
-export const Description = styled.div`
+export const Description = styled.textarea`
+  border: none;
   width: 100%;
   padding: 10px 20px;
   border-left: 4px solid ${COLOR.main};

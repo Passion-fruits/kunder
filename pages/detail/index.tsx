@@ -9,6 +9,7 @@ import CommentView from "./comment";
 import { toast } from "react-toastify";
 import { CheckToken } from "./../../lib/util/checkToken";
 import LoadingPage from "../../components/loading";
+import { resizing } from "./../../lib/util/resizing";
 
 export default function DetailPage() {
   const router = useRouter();
@@ -68,6 +69,9 @@ export default function DetailPage() {
         });
     }
   };
+  useEffect(() => {
+    data && resizing(data.user_id);
+  }, [data]);
   return (
     <S.Wrapper>
       {loading && <LoadingPage />}
@@ -101,7 +105,7 @@ export default function DetailPage() {
                 </S.HeartContainer>
               </>
             </S.MusicInfo>
-            <S.Description>{data.description}</S.Description>
+            <S.Description id={data.user_id}>{data.description}</S.Description>
           </>
           <>
             <S.Comment

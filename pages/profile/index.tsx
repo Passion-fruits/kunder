@@ -101,10 +101,14 @@ export default function ProfilePage() {
     setUpdate(false);
   };
   useEffect(() => {
+    setPage(1);
+    musicList.length = 0;
+  }, [router]);
+  useEffect(() => {
     id && getDetailData();
   }, [router, menu, page]);
   useEffect(() => {
-    setMusicList([]);
+    musicList.length = 0;
     setPage(1);
   }, [menu]);
   useEffect(() => {
@@ -114,9 +118,6 @@ export default function ProfilePage() {
       }
     };
   }, []);
-  useEffect(() => {
-    setMusicList([]);
-  }, [router]);
   const snsRouting = (url) => {
     window.open(url);
   };

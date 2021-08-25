@@ -112,9 +112,12 @@ export const UpdateContainer = styled.div`
   }
   & input {
     width: 100%;
-    height: 25px;
+    height: 30px;
     padding: 0 10px;
-    border: 1px solid ${COLOR.black};
+    border: 1px solid ${COLOR.text};
+    &::placeholder{
+      color:${COLOR.text};
+    }
   }
   & button {
     width: 100%;

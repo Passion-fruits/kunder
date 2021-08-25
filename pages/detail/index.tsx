@@ -105,7 +105,11 @@ export default function DetailPage() {
                 </S.HeartContainer>
               </>
             </S.MusicInfo>
-            <S.Description id={data.user_id}>{data.description}</S.Description>
+            <S.Description
+              id={data.user_id}
+              defaultValue={data.description}
+              readOnly
+            />
           </>
           <>
             <S.Comment

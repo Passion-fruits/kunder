@@ -5,19 +5,23 @@ import feed from "../../api/feed";
 import { genreList } from "../../lib/export/genre";
 import { sortList } from "./../../lib/export/sort";
 import { CheckScroll } from "./../../lib/util/checkScroll";
+import LoadingPage from "../../components/loading";
 
 export default function FeedPage() {
   const [data, setData] = useState<any[]>([]);
   const [page, setPage] = useState<number>(1);
   const [genre, setGenre] = useState<number>(1);
   const [sort, setSort] = useState<number>(1);
+  const [loading, setLoading] = useState<boolean>(false);
   const getData = () => {
     feed
       .getFeedList(genre, page, sort)
       .then((res) => {
+        setLoading(false);
         setData(data.concat(res.data));
       })
       .catch((err) => {
+        setLoading(false);
         return;
       });
   };
@@ -27,6 +31,7 @@ export default function FeedPage() {
     page === 1 && data.length === 0 && getData();
   };
   useEffect(() => {
+    setLoading(true);
     changeState();
   }, [sort, genre]);
   useEffect(() => {
@@ -39,6 +44,9 @@ export default function FeedPage() {
       }
     };
   }, []);
+  useEffect(() => {
+    page === 1 && setLoading(true);
+  }, [page]);
   const chooseGenre = (event): void => {
     setGenre(event.target.value);
   };
@@ -47,6 +55,7 @@ export default function FeedPage() {
   };
   return (
     <S.Wrapper>
+      {loading && <LoadingPage />}
       <S.Container>
         <S.LEFT_SIDE>
           <h1>Your Feed</h1>

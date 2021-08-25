@@ -7,7 +7,7 @@ const FEED_IMG_SIZE = "450px";
 
 export const Container = styled(CONTAINER)`
   padding-top: 30px;
-  width: 820px;
+  width: 850px;
   display: flex;
   justify-content: space-between;
   position: relative;

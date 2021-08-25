@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import { CheckToken } from "./../../lib/util/checkToken";
 import LoadingPage from "../../components/loading";
 import { resizing } from "./../../lib/util/resizing";
+import PlayIcon from "../../assets/play";
+import CommentIcon from "../../assets/comment";
 
 export default function DetailPage() {
   const router = useRouter();
@@ -79,31 +81,38 @@ export default function DetailPage() {
         <S.Container>
           <>
             <S.MusicInfo>
-              <>
+              <S.ImgWrapper>
                 <img src={data.cover_url} alt="" />
-                <div>
-                  <h1>{data.title}</h1>
-                  <span
-                    className="artist"
-                    onClick={() => router.push(`/profile?id=${data.user_id}`)}
-                  >
-                    {data.artist}
-                  </span>
-                  <aside>
-                    <span>{getDate(data.created_at)}</span>
-                    <S.Line />
-                    <span>{data.genre}</span>
-                    <S.Line />
-                    <span>{data.mood}</span>
-                  </aside>
+              </S.ImgWrapper>
+              <S.InforContainer>
+                <h1>{data.title}</h1>
+                <span
+                  className="artist"
+                  onClick={() => router.push(`/profile?id=${data.user_id}`)}
+                >
+                  {data.artist}
+                </span>
+                <div className="genreWrap">
+                  <div>{data.genre}</div>
+                  <S.Line />
+                  <div>{data.mood}</div>
                 </div>
-              </>
-              <>
-                <S.HeartContainer>
-                  <HeartIcon size={22} callback={() => {}} color={COLOR.text} />
-                  {data.like}
-                </S.HeartContainer>
-              </>
+                <span className="date">{getDate(data.created_at)}</span>
+                <S.IconContainer>
+                  <div>
+                    <HeartIcon
+                      size={20}
+                      callback={() => {}}
+                      color={COLOR.black}
+                    />
+                    {data.like}
+                  </div>
+                  <div>
+                    <CommentIcon />
+                    {data.comment}
+                  </div>
+                </S.IconContainer>
+              </S.InforContainer>
             </S.MusicInfo>
             <S.Description
               id={data.user_id}

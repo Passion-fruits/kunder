@@ -7,69 +7,103 @@ export const Container = styled(CONTAINER)`
   padding-top: 25px;
 `;
 
+export const ImgWrapper = styled.div`
+  width: 230px;
+  height: 230px;
+  position: relative;
+  & svg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    cursor: pointer;
+  }
+  & img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(240, 240, 240);
+  }
+`;
+
 export const MusicInfo = styled.div`
   width: 100%;
   position: relative;
   display: flex;
   gap: 30px;
-  & img {
-    width: 200px;
-    height: 200px;
-    border-radius: 5px;
-    border: 1px solid rgb(240, 240, 240);
-  }
-  & div {
-    display: flex;
-    flex-direction: column;
-    padding-top: 20px;
-    & h1 {
-      font-size: 28px;
-      font-weight: bold;
-      color: ${COLOR.black};
-    }
-    & span {
-      color: ${COLOR.text};
-      margin-top: 8px;
-      font-size: 15px;
-    }
-    & aside {
-      margin-top: 30px;
-      display: flex;
-      align-items: center;
-      & span {
-        color: ${COLOR.text};
-        font-size: 15px;
-      }
-    }
-  }
   .artist {
-    color: ${COLOR.text};
-    font-size: 16px;
+    color: ${COLOR.black};
+    font-size: 18px;
     cursor: pointer;
     &:hover {
       opacity: 0.7;
+    }
+  }
+  .genreWrap {
+    margin-top: 30px;
+    appearance: none;
+    display: flex;
+    align-items: center;
+    & div {
+      color: ${COLOR.black};
+      font-size: 16px;
+    }
+  }
+  .date {
+    color: ${COLOR.text};
+    font-size: 14px;
+  }
+`;
+
+export const InforContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 10px;
+  & h1 {
+    font-size: 30px;
+    font-weight: bold;
+    color: ${COLOR.black};
+  }
+  & span {
+    color: ${COLOR.text};
+    margin-top: 8px;
+    font-size: 15px;
+  }
+  & aside {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    & span {
+      color: ${COLOR.black};
+      font-size: 16px;
     }
   }
 `;
 
 export const Line = styled.div`
   width: 1px;
-  height: 13px;
+  height: 10px;
   background-color: #d4d4d4;
   margin: 0 13px;
 `;
 
-export const HeartContainer = styled.aside`
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  color: ${COLOR.text};
-  font-size: 18px;
+export const IconContainer = styled.div`
   position: absolute;
-  right: 0;
   bottom: 0;
+  right: 0;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  color: ${COLOR.black};
+  font-size: 16px;
   & svg {
     cursor: pointer;
+  }
+  & div {
+    display: flex;
+    gap: 5px;
+    align-items: center;
   }
 `;
 

@@ -1,4 +1,4 @@
-import * as S from "../uploadStyles";
+import * as S from "../styles";
 
 export default function Input({ title, name, placeholder, callback, isText=false }) {
   return (

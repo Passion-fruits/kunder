@@ -1,17 +1,18 @@
 import styled from "@emotion/styled";
 import { COLOR, CONTAINER, WRAPPER } from "../../styles/index";
 
-export const Wrapper = styled(WRAPPER)``;
-
-export const Container = styled(CONTAINER)`
-  padding-top: 30px;
-  width: 800px;
+export const Wrapper = styled(WRAPPER)`
   & input[type="file"] {
     display: none;
   }
 `;
 
-export const Tip = styled.div`
+export const Container = styled(CONTAINER)`
+  padding-top: 30px;
+  width: 800px;
+`;
+
+export const TipForMusicUpload = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
@@ -31,14 +32,14 @@ export const Tip = styled.div`
   }
 `;
 
-export const UploadContainer = styled.div`
+export const GetMusicInformationContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-between;
   padding-top: 50px;
 `;
 
-export const UploadBtn = styled.button`
+export const UploadProfileBtn = styled.button`
   width: 190px;
   height: 190px;
   border-radius: 80%;
@@ -52,14 +53,14 @@ export const UploadBtn = styled.button`
   }
 `;
 
-export const ProfileImg = styled.img`
+export const MusicCoverImg = styled.img`
   width: 190px;
   height: 190px;
-  border-radius:3px;
+  border-radius: 3px;
   cursor: pointer;
 `;
 
-export const FlexContainer = styled.div`
+export const FormDataContainer = styled.div`
   width: 570px;
   display: flex;
   flex-direction: column;
@@ -131,11 +132,14 @@ export const ChooseMusic = styled.div`
   }
 `;
 
-export const SubBtn = styled.button`
+export const UploadMusicBtn = styled.button`
   width: 100%;
   padding: 13px 0;
   font-size: 18px;
   color: white;
   background-color: ${COLOR.black};
   border-radius: 3px;
+  &:after {
+    content: "업로드";
+  }
 `;

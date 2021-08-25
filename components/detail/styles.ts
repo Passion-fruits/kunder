@@ -13,8 +13,8 @@ export const MusicInformationWrapper = styled.div`
   display: flex;
   gap: 30px;
   .music-cover-img {
-    width: 230px;
-    height: 230px;
+    width: 220px;
+    height: 220px;
     border-radius: 5px;
     border: 1px solid rgb(240, 240, 240);
   }
@@ -23,24 +23,24 @@ export const MusicInformationWrapper = styled.div`
 export const MusicInformationTextCotainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 25px;
   .music-title {
-    font-size: 30px;
+    font-size: 28px;
     font-weight: bold;
     color: ${COLOR.black};
-    margin-bottom: 5px;
+    margin-bottom: 10px;
   }
   .artist-name {
-    color: ${COLOR.black};
-    font-size: 17px;
-    font-weight: bold;
+    color: ${COLOR.text};
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
     &:hover {
       opacity: 0.7;
     }
   }
   .genre-mood-wrap {
-    margin-top: 30px;
+    margin-top: 40px;
     appearance: none;
     display: flex;
     align-items: center;
@@ -65,8 +65,9 @@ export const Line = styled.div`
 `;
 
 export const IconContainer = styled.div`
-  margin-top: 40px;
-  display: flex;
+  position: absolute;
+  right: 0;
+  bottom: 0;
   display: flex;
   gap: 5px;
   align-items: center;
@@ -88,7 +89,7 @@ export const Description = styled.textarea`
   font-weight: 500;
 `;
 
-export const Comment = styled.input`
+export const CommentFormInput = styled.input`
   width: 100%;
   padding: 22px;
   background-color: #f3f3f3;

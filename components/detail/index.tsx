@@ -115,7 +115,7 @@ export default function DetailPage() {
             user_id={user_id}
             description={description}
           />
-          <S.Comment
+          <S.CommentFormInput
             onChange={handleWriteComment}
             onKeyDown={sendComment}
             value={userComment}

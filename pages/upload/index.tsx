@@ -9,10 +9,12 @@ import music from "../../api/music";
 import { toast } from "react-toastify";
 import { useRouter } from "next/dist/client/router";
 import { USER_ID } from "../../lib/export/localstorage";
+import LoadingPage from "../../components/loading";
 
 export default function UploadPage() {
   const [preview, setPreview] = useState<string>("");
   const router = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
   const [data, setData] = useState<any>({
     title: "",
     description: "",
@@ -56,7 +58,7 @@ export default function UploadPage() {
             duration: audio.duration.toString(),
           });
           if (audio.duration < 60 || audio.duration > 300) {
-            alert("1분 이상, 5분 이하의 곡을 업로드해주세요!");
+            toast.info("1분 이상, 5분 이하의 곡을 업로드해주세요!");
             setData({
               ...data,
               musicSrc: "",
@@ -68,6 +70,7 @@ export default function UploadPage() {
     }
   }, [data.musicSrc]);
   const subData = (): void => {
+    setLoading(true);
     const { title, description, musicSrc, genre, mood, imgSrc } = data;
     if (title && description && musicSrc && genre && mood && imgSrc) {
       music
@@ -78,6 +81,7 @@ export default function UploadPage() {
         })
         .catch((err) => {
           toast.error("에러가 발생하였습니다.");
+          setLoading(false);
         });
     } else {
       toast.info("모든 정보를 입력해주세요!");
@@ -86,6 +90,7 @@ export default function UploadPage() {
   };
   return (
     <S.Wrapper>
+      {loading && <LoadingPage />}
       <S.Container>
         <FileInput event={getSrc} />
         <Tip />
@@ -136,7 +141,12 @@ export default function UploadPage() {
                   : "업로드한 파일이 없습니다."}
               </div>
             </S.ChooseMusic>
-            <S.SubBtn onClick={subData}>업로드</S.SubBtn>
+            <S.SubBtn
+              style={loading ? { opacity: "0.8", pointerEvents: "none" } : {}}
+              onClick={subData}
+            >
+              업로드
+            </S.SubBtn>
           </S.FlexContainer>
         </S.UploadContainer>
       </S.Container>

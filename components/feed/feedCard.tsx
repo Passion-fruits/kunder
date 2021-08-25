@@ -2,7 +2,7 @@ import { useRouter } from "next/dist/client/router";
 import CommentIcon from "../../assets/comment";
 import HeartIcon from "../../assets/heart";
 import PlayIcon from "../../assets/play";
-import * as S from "../../styles/feedStyles";
+import * as S from "./feedStyles";
 import { getDate } from "./../../lib/util/getDate";
 import { useEffect } from "react";
 import { resizing } from "./../../lib/util/resizing";

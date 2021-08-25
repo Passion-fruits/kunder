@@ -1,4 +1,4 @@
-import * as S from "../../../styles/profileStyles";
+import * as S from "../profileStyles";
 import Menu from "./menu";
 
 export default function MenuList({ menu, callback, follower,following }) {

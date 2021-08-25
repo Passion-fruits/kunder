@@ -1,4 +1,4 @@
-import * as S from "../../../styles/uploadStyles";
+import * as S from "../uploadStyles";
 
 export default function Select({ title, name, list, callback }) {
   return (

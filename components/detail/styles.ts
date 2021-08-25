@@ -7,77 +7,53 @@ export const Container = styled(CONTAINER)`
   padding-top: 25px;
 `;
 
-export const ImgWrapper = styled.div`
-  width: 230px;
-  height: 230px;
+export const MusicInformationWrapper = styled.div`
+  width: 100%;
   position: relative;
-  & svg {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin: 20px;
-    cursor: pointer;
-  }
-  & img {
-    width: 100%;
-    height: 100%;
+  display: flex;
+  gap: 30px;
+  .music-cover-img {
+    width: 230px;
+    height: 230px;
     border-radius: 5px;
     border: 1px solid rgb(240, 240, 240);
   }
 `;
 
-export const MusicInfo = styled.div`
-  width: 100%;
-  position: relative;
+export const MusicInformationTextCotainer = styled.div`
   display: flex;
-  gap: 30px;
-  .artist {
+  flex-direction: column;
+  padding-top: 20px;
+  .music-title {
+    font-size: 30px;
+    font-weight: bold;
     color: ${COLOR.black};
-    font-size: 18px;
+    margin-bottom: 5px;
+  }
+  .artist-name {
+    color: ${COLOR.black};
+    font-size: 17px;
+    font-weight: bold;
     cursor: pointer;
     &:hover {
       opacity: 0.7;
     }
   }
-  .genreWrap {
+  .genre-mood-wrap {
     margin-top: 30px;
     appearance: none;
     display: flex;
     align-items: center;
+    margin-bottom: 5px;
     & div {
       color: ${COLOR.black};
-      font-size: 16px;
+      font-size: 15px;
     }
   }
-  .date {
+  .created-at {
     color: ${COLOR.text};
     font-size: 14px;
-  }
-`;
-
-export const InforContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding-top: 10px;
-  & h1 {
-    font-size: 30px;
-    font-weight: bold;
-    color: ${COLOR.black};
-  }
-  & span {
-    color: ${COLOR.text};
-    margin-top: 8px;
-    font-size: 15px;
-  }
-  & aside {
-    margin-top: 30px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    & span {
-      color: ${COLOR.black};
-      font-size: 16px;
-    }
+    margin-top: 5px;
   }
 `;
 
@@ -89,21 +65,15 @@ export const Line = styled.div`
 `;
 
 export const IconContainer = styled.div`
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  margin-top: 40px;
   display: flex;
-  gap: 20px;
+  display: flex;
+  gap: 5px;
   align-items: center;
   color: ${COLOR.black};
   font-size: 16px;
   & svg {
     cursor: pointer;
-  }
-  & div {
-    display: flex;
-    gap: 5px;
-    align-items: center;
   }
 `;
 
@@ -112,7 +82,7 @@ export const Description = styled.textarea`
   width: 100%;
   padding: 10px 20px;
   border-left: 4px solid ${COLOR.main};
-  color: ${COLOR.text};
+  color: ${COLOR.black};
   font-size: 16px;
   margin-top: 30px;
   font-weight: 500;
@@ -151,7 +121,7 @@ export const CommentContainer = styled.section`
       }
     }
   }
-  .commentWrapper {
+  .comment-wrapper {
     padding-top: 10px;
     display: flex;
     flex-direction: column;
@@ -161,7 +131,7 @@ export const CommentContainer = styled.section`
       margin-top: 10px;
     }
   }
-  .commentInfo {
+  .comment-info {
     display: flex;
     align-items: center;
     font-size: 17px;

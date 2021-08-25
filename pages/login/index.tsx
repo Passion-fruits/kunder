@@ -1,9 +1,9 @@
 import LoginPage from "../../components/login";
 
-export default function PageToLogin(){
-    return (
-        <>
-        <LoginPage/>
-        </>
-    )
+export default function PageToLogin() {
+  return (
+    <>
+      <LoginPage />
+    </>
+  );
 }

@@ -2,8 +2,8 @@ export default function CommentIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="21.601"
-      height="21.601"
+      width="20.601"
+      height="20.601"
       viewBox="0 0 21.601 21.601"
     >
       <path

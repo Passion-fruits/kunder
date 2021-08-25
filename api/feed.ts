@@ -1,10 +1,10 @@
 import request from "./axios";
 
 export default {
-  getFeedList() {
+  getFeedList(genre,page,sort) {
     return request({
       method: "get",
-      url: `/song/feed?genre=1&page=1&sort=1`,
+      url: `/song/feed?genre=${genre}&page=${page}&sort=${sort}`,
     });
   },
 };

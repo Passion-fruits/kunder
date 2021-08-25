@@ -2,25 +2,64 @@ import * as S from "../../styles/feedStyles";
 import FeedCard from "./feedCard";
 import { useEffect, useState } from "react";
 import feed from "../../api/feed";
+import { genreList } from "../../lib/export/genre";
+import { sortList } from "./../../lib/export/sort";
+import { CheckScroll } from "./../../lib/util/checkScroll";
 
 export default function FeedPage() {
   const [data, setData] = useState<any[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [genre, setGenre] = useState<number>(1);
+  const [sort, setSort] = useState<number>(1);
+  const getData = () => {
+    feed
+      .getFeedList(genre, page, sort)
+      .then((res) => {
+        setData(data.concat(res.data));
+      })
+      .catch((err) => {
+        return;
+      });
+  };
   useEffect(() => {
-    feed.getFeedList().then((res) => {
-      setData(res.data);
-    });
+    setData([]);
+    setPage(1);
+  }, [sort, genre]);
+  useEffect(() => {
+    getData();
+  }, [page]);
+  useEffect(() => {
+    window.onscroll = () => {
+      if (CheckScroll()) {
+        getData();
+      }
+    };
   }, []);
+  const chooseGenre = (event): void => {
+    setGenre(event.target.value);
+  };
+  const chooseSort = (event): void => {
+    setSort(event.target.value);
+  };
   return (
     <S.Wrapper>
       <S.Container>
         <S.LEFT_SIDE>
           <h1>Your Feed</h1>
           <span>음악 하이라이트를 제공합니다.</span>
-          <select>
-            <option value="">힙합</option>
+          <select onChange={chooseGenre}>
+            {genreList.map((genre, index) => (
+              <option value={index + 1} key={index}>
+                {genre}
+              </option>
+            ))}
           </select>
-          <select>
-            <option value="">최신순</option>
+          <select onChange={chooseSort}>
+            {sortList.map((sort, index) => (
+              <option value={index + 1} key={index}>
+                {sort}
+              </option>
+            ))}
           </select>
           <p>
             KUNDER | 무료 음악 스트리밍 | 개인정보 약관 <br />

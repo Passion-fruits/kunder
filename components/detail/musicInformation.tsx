@@ -2,8 +2,9 @@ import { getDate } from "./../../lib/util/getDate";
 import { COLOR } from "./../../styles/index";
 import { useRouter } from "next/dist/client/router";
 import * as S from "./styles";
-import React from "react";
+import React, { useEffect } from "react";
 import HeartIcon from "../../assets/heart";
+import PlayIcon from "./../../assets/play";
 
 export default function MusicInformation({
   cover_url,
@@ -15,33 +16,63 @@ export default function MusicInformation({
   like,
   user_id,
   description,
+  song_url,
 }) {
   const router = useRouter();
+  useEffect(() => {
+    var WaveSurfer = require("wavesurfer.js");
+    const wavesurfer = WaveSurfer.create({
+      container: "#waveform",
+      waveColor: "#E6E6E6",
+      progressColor: COLOR.main,
+      barWidth: "2",
+      cursorColor: "transparent",
+      barHeight: "0.7",
+    });
+    wavesurfer.load(song_url);
+  }, []);
+
   const routingToUserProfile = React.useCallback(() => {
     router.push(`/profile?id=${user_id}`);
   }, [user_id]);
+
   return (
     <>
-      <S.MusicInformationWrapper>
-        <img src={cover_url} className="music-cover-img" />
-        <S.MusicInformationTextCotainer>
-          <h1 className="music-title">{title}</h1>
-          <span className="artist-name" onClick={routingToUserProfile}>
-            {artist}
-          </span>
-          <div className="genre-mood-wrap">
-            <div>{genre}</div>
-            <S.Line />
-            <div>{mood}</div>
-          </div>
-          <span className="created-at">{getDate(created_at)}</span>
-          <S.IconContainer>
-            <HeartIcon size={20} callback={() => {}} color={COLOR.black} />
-            {like}
-          </S.IconContainer>
-        </S.MusicInformationTextCotainer>
-      </S.MusicInformationWrapper>
-      <S.Description id={user_id} defaultValue={description} readOnly />
+      <>
+        <S.MusicInformationWrapper>
+          <S.CoverImgWrap>
+            <img src={cover_url} />
+            <button>
+              <PlayIcon size={15} callback={() => {}} color="white" />
+            </button>
+          </S.CoverImgWrap>
+          <S.MusicInformationTextCotainer>
+            <time>{`최초공개 ${getDate(created_at)}`}</time>
+            <div onClick={routingToUserProfile} className="artist-name">
+              <span>{artist}</span>
+            </div>
+            <div className="music-title">
+              <span>{title}</span>
+            </div>
+            <div id="waveform" />
+          </S.MusicInformationTextCotainer>
+        </S.MusicInformationWrapper>
+      </>
+      <>
+        <S.MusicIconContainer>
+          <S.GenreWrap>
+            <button>#{genre}</button>
+            <button>#{mood}</button>
+          </S.GenreWrap>
+          <S.MusicLikeContainer>
+            <HeartIcon size={20} callback={() => {}} color={COLOR.main} />
+            <span>{like}</span>
+          </S.MusicLikeContainer>
+        </S.MusicIconContainer>
+      </>
+      <>
+        <S.MusicDescription>{description}</S.MusicDescription>
+      </>
     </>
   );
 }

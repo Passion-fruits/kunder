@@ -12,81 +12,67 @@ export const MusicInformationWrapper = styled.div`
   position: relative;
   display: flex;
   gap: 30px;
-  .music-cover-img {
-    width: 220px;
-    height: 220px;
-    border-radius: 5px;
+`;
+
+export const CoverImgWrap = styled.div`
+  width: 270px;
+  height: 270px;
+  position: relative;
+  & img {
+    width: 100%;
+    height: 100%;
     border: 1px solid rgb(240, 240, 240);
+  }
+  & button {
+    box-shadow: 0px 0px 5px rgb(0, 0, 0, 0.1);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 20px;
+    width: 44px;
+    height: 44px;
+    background-color: ${COLOR.main};
+    border-radius: 80%;
+    & svg {
+      margin-left: 4px;
+    }
   }
 `;
 
 export const MusicInformationTextCotainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-top: 25px;
-  .music-title {
-    font-size: 28px;
-    font-weight: bold;
-    color: ${COLOR.black};
-    margin-bottom: 10px;
+  position: relative;
+  width: calc(100% - 300px);
+  & time {
+    color: ${COLOR.text};
+    font-size: 16px;
+  }
+  & span {
+    padding: 6px 10px;
+    color: white;
+    background-color: ${COLOR.black};
   }
   .artist-name {
-    color: ${COLOR.text};
-    font-size: 15px;
-    font-family: Arial, Helvetica, sans-serif;
     cursor: pointer;
+    margin-top: 22px;
+    transition: 0.5s;
     &:hover {
-      opacity: 0.7;
+      opacity: 0.9;
     }
   }
-  .genre-mood-wrap {
-    margin-top: 40px;
-    appearance: none;
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-    & div {
-      color: ${COLOR.black};
-      font-size: 15px;
-    }
+  .music-title {
+    margin-top: 15px;
+    font-size: 30px;
+    font-weight: bold;
+    text-transform: uppercase;
   }
-  .created-at {
-    color: ${COLOR.text};
-    font-size: 14px;
-    margin-top: 5px;
+  #waveform {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    pointer-events: none;
   }
-`;
-
-export const Line = styled.div`
-  width: 1px;
-  height: 10px;
-  background-color: #d4d4d4;
-  margin: 0 13px;
-`;
-
-export const IconContainer = styled.div`
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  color: ${COLOR.black};
-  font-size: 16px;
-  & svg {
-    cursor: pointer;
-  }
-`;
-
-export const Description = styled.textarea`
-  border: none;
-  width: 100%;
-  padding: 10px 20px;
-  border-left: 4px solid ${COLOR.main};
-  color: ${COLOR.black};
-  font-size: 16px;
-  margin-top: 30px;
-  font-weight: 500;
 `;
 
 export const CommentFormInput = styled.input`
@@ -96,7 +82,7 @@ export const CommentFormInput = styled.input`
   font-size: 16px;
   color: ${COLOR.black};
   border-radius: 5px;
-  margin-top: 20px;
+  margin-top:20px;
   &::placeholder {
     color: ${COLOR.text};
   }
@@ -145,3 +131,45 @@ export const CommentContainer = styled.section`
     }
   }
 `;
+
+export const MusicIconContainer = styled.div`
+  width: 100%;
+  margin-top:30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const GenreWrap = styled.div`
+  display: flex;
+  gap: 10px;
+  & button {
+    border: 1px solid ${COLOR.main};
+    border-radius: 24px;
+    padding: 9px 22px;
+    color: ${COLOR.main};
+    font-size: 16px;
+  }
+`;
+
+export const MusicLikeContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  & span {
+    color: ${COLOR.main};
+    font-size: 16px;
+  }
+  & svg {
+    cursor: pointer;
+  }
+`;
+
+export const MusicDescription = styled.textarea`
+border:none;
+background:none;
+font-size:16px;
+width:100%;
+color:${COLOR.text};
+margin-top:20px;
+`

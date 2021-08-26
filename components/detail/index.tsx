@@ -25,6 +25,7 @@ export default function DetailPage() {
     cover_url: "",
     created_at: "",
     description: "",
+    song_url: "",
   });
   const {
     title,
@@ -36,6 +37,7 @@ export default function DetailPage() {
     cover_url,
     created_at,
     description,
+    song_url,
   } = profileData;
 
   const handleWriteComment = React.useCallback(
@@ -114,6 +116,7 @@ export default function DetailPage() {
             like={like}
             user_id={user_id}
             description={description}
+            song_url={song_url}
           />
           <S.CommentFormInput
             onChange={handleWriteComment}

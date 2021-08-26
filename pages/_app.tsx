@@ -25,6 +25,7 @@ function App({ Component, pageProps }: AppProps) {
           href="http://allfont.net/allfont.css?fonts=agency-fb-bold"
           rel="stylesheet"
         />
+        <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
         <link rel="icon" href="/logo.ico" />
       </Head>
       <Header />

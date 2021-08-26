@@ -10,12 +10,12 @@ import music from "../../api/music";
 import CardList from "../../components/cardList";
 
 export default function AllPage() {
-  const [nowGenre, setNowGenre] = React.useState<string>(genreList[0]);
-  const [nowSort, setNowSort] = React.useState<string>(sortList[0]);
-  const [data, setData] = React.useState<any[]>([]);
-  const [usepage, setUsePage] = React.useState<number>(1);
   const router = useRouter();
   const { genre, sort } = router.query;
+  const [nowGenre, setNowGenre] = React.useState<string>();
+  const [nowSort, setNowSort] = React.useState<string>();
+  const [data, setData] = React.useState<any[]>([]);
+  const [usepage, setUsePage] = React.useState<number>(1);
   const genreCheckStyle: React.CSSProperties = {
     borderBottom: `2px solid ${COLOR.main}`,
     color: COLOR.main,
@@ -23,6 +23,15 @@ export default function AllPage() {
   const sortCheckStyle: React.CSSProperties = {
     color: COLOR.main,
   };
+
+  React.useEffect(() => {
+    if (genre) {
+      const genreNum = parseInt(genre.toString()) - 1;
+      const sortNum = parseInt(sort.toString()) - 1;
+      setNowGenre(genreList[genreNum]);
+      setNowSort(sortList[sortNum]);
+    }
+  }, [router]);
 
   React.useEffect(() => {
     data.length = 0;
@@ -37,14 +46,6 @@ export default function AllPage() {
           return () => {};
         });
   }, [router]);
-
-  React.useEffect(() => {
-    router.push(
-      `/all?genre=${genreList.indexOf(nowGenre) + 1}&page=1&sort=${
-        sortList.indexOf(nowSort) + 1
-      }`
-    );
-  }, [nowGenre, nowSort]);
 
   React.useEffect(() => {
     window.onscroll = () => {
@@ -64,7 +65,17 @@ export default function AllPage() {
             return () => {};
           });
     };
-  }, []);
+  }, [genre, sort]);
+
+  React.useEffect(() => {
+    if (nowGenre) {
+      router.push(
+        `/all?genre=${genreList.indexOf(nowGenre) + 1}&page=1&sort=${
+          sortList.indexOf(nowSort) + 1
+        }`
+      );
+    }
+  }, [nowGenre, nowSort]);
 
   return (
     <S.Wrapper>

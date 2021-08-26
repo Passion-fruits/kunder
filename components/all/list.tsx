@@ -9,7 +9,7 @@ interface props {
 export default function List({ list, now, checkStyle, callback, name }: props) {
   return (
     <>
-      {list.map((res, index) => (
+      {list.map((res) => (
         <label key={res} style={res === now ? checkStyle : {}}>
           <input
             type="radio"

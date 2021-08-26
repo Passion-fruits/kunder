@@ -1,8 +1,9 @@
 import { getDate } from "./../../lib/util/getDate";
 import { COLOR } from "./../../styles/index";
 import { useRouter } from "next/dist/client/router";
+import { resizing } from "./../../lib/util/resizing";
 import * as S from "./styles";
-import React, { useEffect } from "react";
+import React from "react";
 import HeartIcon from "../../assets/heart";
 import PlayIcon from "./../../assets/play";
 
@@ -19,8 +20,8 @@ export default function MusicInformation({
   song_url,
 }) {
   const router = useRouter();
-  useEffect(() => {
-    var WaveSurfer = require("wavesurfer.js");
+  React.useEffect(() => {
+    const WaveSurfer = require("wavesurfer.js");
     const wavesurfer = WaveSurfer.create({
       container: "#waveform",
       waveColor: "#E6E6E6",
@@ -31,6 +32,10 @@ export default function MusicInformation({
     });
     wavesurfer.load(song_url);
   }, []);
+
+  React.useEffect(() => {
+    resizing(user_id);
+  }, [description]);
 
   const routingToUserProfile = React.useCallback(() => {
     router.push(`/profile?id=${user_id}`);
@@ -71,7 +76,7 @@ export default function MusicInformation({
         </S.MusicIconContainer>
       </>
       <>
-        <S.MusicDescription>{description}</S.MusicDescription>
+        <S.MusicDescription defaultValue={description} id={user_id} readOnly />
       </>
     </>
   );

@@ -5,7 +5,7 @@ import { useRouter } from "next/dist/client/router";
 import { CheckScroll } from "./../../lib/util/checkScroll";
 import * as S from "./styles";
 import React from "react";
-import List from "./list";
+import List from "./chooseList/list";
 import music from "../../api/music";
 import CardList from "../../components/cardList";
 
@@ -15,7 +15,7 @@ export default function AllPage() {
   const [nowGenre, setNowGenre] = React.useState<string>();
   const [nowSort, setNowSort] = React.useState<string>();
   const [data, setData] = React.useState<any[]>([]);
-  const [usepage, setUsePage] = React.useState<number>(1);
+  const [usePage, setUsePage] = React.useState<number>(1);
   const genreCheckStyle: React.CSSProperties = {
     borderBottom: `2px solid ${COLOR.main}`,
     color: COLOR.main,
@@ -49,23 +49,24 @@ export default function AllPage() {
 
   React.useEffect(() => {
     window.onscroll = () => {
-      CheckScroll() &&
+      if (CheckScroll()) {
         genre &&
-        music
-          .getStreaming({
-            genre: genre,
-            page: usepage + 1,
-            sort: sort,
-          })
-          .then((res) => {
-            setData(data.concat(res.data));
-            setUsePage(usepage + 1);
-          })
-          .catch(() => {
-            return () => {};
-          });
+          music
+            .getStreaming({
+              genre: genre,
+              page: usePage + 1,
+              sort: sort,
+            })
+            .then((res) => {
+              setData(data.concat(res.data));
+              setUsePage(usePage + 1);
+            })
+            .catch(() => {
+              return () => {};
+            });
+      }
     };
-  }, [genre, sort]);
+  });
 
   React.useEffect(() => {
     if (nowGenre) {

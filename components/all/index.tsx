@@ -1,34 +1,35 @@
 import { genreList } from "../../lib/export/genre";
-import * as S from "./allStyles";
-import { useEffect, useState } from "react";
 import { COLOR } from "./../../styles/index";
 import { sortList } from "./../../lib/export/sort";
+import { useRouter } from "next/dist/client/router";
+import { CheckScroll } from "./../../lib/util/checkScroll";
+import * as S from "./styles";
+import React from "react";
 import List from "./list";
 import music from "../../api/music";
 import CardList from "../../components/cardList";
-import { useRouter } from "next/dist/client/router";
-import { CheckScroll } from "./../../lib/util/checkScroll";
 
 export default function AllPage() {
+  const [nowGenre, setNowGenre] = React.useState<string>(genreList[0]);
+  const [nowSort, setNowSort] = React.useState<string>(sortList[0]);
+  const [data, setData] = React.useState<any[]>([]);
+  const [usepage, setUsePage] = React.useState<number>(1);
   const router = useRouter();
-  const [nowGenre, setNowGenre] = useState<string>(genreList[0]);
-  const [nowSort, setNowSort] = useState<string>(sortList[0]);
-  const [data, setData] = useState<any[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const genreCheckStyle = {
+  const { genre, sort } = router.query;
+  const genreCheckStyle: React.CSSProperties = {
     borderBottom: `2px solid ${COLOR.main}`,
     color: COLOR.main,
   };
-  const sortCheckStyle = {
+  const sortCheckStyle: React.CSSProperties = {
     color: COLOR.main,
   };
-  useEffect(() => {
-    setData([]);
-    const query = router.query;
-    setPage(1);
-    query.genre &&
+
+  React.useEffect(() => {
+    data.length = 0;
+    setUsePage(1);
+    genre &&
       music
-        .getStreaming({ genre: query.genre, page: 1, sort: query.sort })
+        .getStreaming({ genre: genre, page: 1, sort: sort })
         .then((res) => {
           setData(res.data);
         })
@@ -36,62 +37,57 @@ export default function AllPage() {
           return () => {};
         });
   }, [router]);
-  useEffect(() => {
+
+  React.useEffect(() => {
     router.push(
       `/all?genre=${genreList.indexOf(nowGenre) + 1}&page=1&sort=${
         sortList.indexOf(nowSort) + 1
       }`
     );
   }, [nowGenre, nowSort]);
-  useEffect(() => {
+
+  React.useEffect(() => {
     window.onscroll = () => {
-      if (CheckScroll()) {
-        const query = router.query;
-        query.genre &&
-          music
-            .getStreaming({
-              genre: query.genre,
-              page: page + 1,
-              sort: query.sort,
-            })
-            .then((res) => {
-              setData(data.concat(res.data));
-              setPage(page + 1);
-            })
-            .catch(() => {
-              return () => {};
-            });
-      }
+      CheckScroll() &&
+        genre &&
+        music
+          .getStreaming({
+            genre: genre,
+            page: usepage + 1,
+            sort: sort,
+          })
+          .then((res) => {
+            setData(data.concat(res.data));
+            setUsePage(usepage + 1);
+          })
+          .catch(() => {
+            return () => {};
+          });
     };
-  });
+  }, []);
+
   return (
     <S.Wrapper>
       <S.Container>
-        <>
-          <S.GerneList>
-            <List
-              list={genreList}
-              checkStyle={genreCheckStyle}
-              name="genre"
-              now={nowGenre}
-              callback={setNowGenre}
-            />
-          </S.GerneList>
-        </>
-        <>
-          <S.SortList>
-            <List
-              list={sortList}
-              checkStyle={sortCheckStyle}
-              name="sort"
-              now={nowSort}
-              callback={setNowSort}
-            />
-          </S.SortList>
-        </>
-        <>
-          <CardList data={data} />
-        </>
+        <S.GerneList>
+          <List
+            list={genreList}
+            checkStyle={genreCheckStyle}
+            name="genre"
+            now={nowGenre}
+            callback={setNowGenre}
+          />
+        </S.GerneList>
+        <S.SortList>
+          <List
+            list={sortList}
+            checkStyle={sortCheckStyle}
+            name="sort"
+            now={nowSort}
+            callback={setNowSort}
+          />
+        </S.SortList>
+        <CardList data={data} />
       </S.Container>
     </S.Wrapper>
   );

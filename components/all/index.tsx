@@ -47,8 +47,8 @@ export default function AllPage() {
   }, [router]);
 
   React.useEffect(() => {
-    setLoading(true);
-    genre &&
+    if (genre) {
+      setLoading(true);
       music
         .getStreaming({ genre: genre, page: page, sort: sort })
         .then((res) => {
@@ -60,6 +60,7 @@ export default function AllPage() {
           toast.error("에러가 발생하였습니다.");
           router.push("/");
         });
+    }
   }, [router]);
 
   React.useEffect(() => {

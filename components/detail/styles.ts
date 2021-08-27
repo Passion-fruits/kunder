@@ -82,7 +82,7 @@ export const CommentFormInput = styled.input`
   font-size: 16px;
   color: ${COLOR.black};
   border-radius: 5px;
-  margin-top:20px;
+  margin-top: 20px;
   &::placeholder {
     color: ${COLOR.text};
   }
@@ -134,7 +134,7 @@ export const CommentContainer = styled.section`
 
 export const MusicIconContainer = styled.div`
   width: 100%;
-  margin-top:30px;
+  margin-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -166,10 +166,10 @@ export const MusicLikeContainer = styled.div`
 `;
 
 export const MusicDescription = styled.textarea`
-border:none;
-background:none;
-font-size:16px;
-width:100%;
-color:${COLOR.text};
-margin-top:20px;
-`
+  border: none;
+  background: none;
+  font-size: 16px;
+  width: 100%;
+  color: ${COLOR.text};
+  margin-top: 20px;
+`;

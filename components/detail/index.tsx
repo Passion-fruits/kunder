@@ -48,7 +48,7 @@ export default function DetailPage() {
   );
 
   const getCommentArray = React.useCallback(() => {
-    id &&
+    if (id) {
       music
         .getMusicComment(id)
         .then((res) => {
@@ -57,6 +57,7 @@ export default function DetailPage() {
         .catch(() => {
           return;
         });
+    }
   }, [id]);
 
   const sendComment = React.useCallback(
@@ -86,11 +87,12 @@ export default function DetailPage() {
   );
 
   React.useEffect(() => {
-    id &&
+    if (id) {
       music.getMusicDetail(id).then((res) => {
         setLoading(false);
         setProfileData(res.data);
       });
+    }
   }, [router]);
 
   React.useEffect(() => {

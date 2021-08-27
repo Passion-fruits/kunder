@@ -1,4 +1,4 @@
-import * as S from "../profileStyles";
+import * as S from "../styles";
 
 export default function Menu({ contents, cnt, nowMenu, menu, callback }) {
   return (

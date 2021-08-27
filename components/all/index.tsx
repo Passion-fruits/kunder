@@ -2,6 +2,7 @@ import { genreList } from "../../lib/export/genre";
 import { COLOR } from "./../../styles/index";
 import { sortList } from "./../../lib/export/sort";
 import { useRouter } from "next/dist/client/router";
+import { toast } from "react-toastify";
 import * as S from "./styles";
 import React from "react";
 import List from "./chooseList/list";
@@ -35,7 +36,7 @@ export default function AllPage() {
   );
 
   React.useEffect(() => {
-    if (genre) {
+    if (genre && page && sort) {
       const genreNum = parseInt(genre.toString()) - 1;
       const sortNum = parseInt(sort.toString()) - 1;
       const pageNum = parseInt(page.toString());
@@ -56,7 +57,8 @@ export default function AllPage() {
         })
         .catch(() => {
           setLoading(false);
-          return () => {};
+          toast.error("에러가 발생하였습니다.");
+          router.push("/");
         });
   }, [router]);
 
@@ -89,11 +91,11 @@ export default function AllPage() {
       const div = document.createElement("div");
       div.id = "pageIndex";
       div.innerHTML = i.toString();
-      div.onclick = changePage;
       if (div.innerHTML === page) {
         div.style.background = "black";
         div.style.color = "white";
       }
+      div.onclick = changePage;
       pageBar.insertBefore(div, null);
     }
   }, [genre, sort, page]);

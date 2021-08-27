@@ -41,10 +41,10 @@ export const PageBarWrap = styled.div`
 `;
 
 export const PageSmallWrap = styled.div`
-  width: 550px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap:30px;
   & svg {
     cursor: pointer;
   }
@@ -65,5 +65,5 @@ export const pageBar = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 450px;
+  gap:15px;
 `;

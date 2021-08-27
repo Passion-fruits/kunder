@@ -2,20 +2,20 @@ import { genreList } from "../../lib/export/genre";
 import { COLOR } from "./../../styles/index";
 import { sortList } from "./../../lib/export/sort";
 import { useRouter } from "next/dist/client/router";
-import { CheckScroll } from "./../../lib/util/checkScroll";
 import * as S from "./styles";
 import React from "react";
 import List from "./chooseList/list";
 import music from "../../api/music";
 import CardList from "../../components/cardList";
+import Arrow from "../../assets/arrow";
 
 export default function AllPage() {
   const router = useRouter();
-  const { genre, sort } = router.query;
-  const [nowGenre, setNowGenre] = React.useState<string>();
-  const [nowSort, setNowSort] = React.useState<string>();
+  const { genre, sort, page } = router.query;
+  const [currentGenre, setCurrentGenre] = React.useState<string>();
+  const [currentSort, setCurrentSort] = React.useState<string>();
+  const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [data, setData] = React.useState<any[]>([]);
-  const [usePage, setUsePage] = React.useState<number>(1);
   const genreCheckStyle: React.CSSProperties = {
     borderBottom: `2px solid ${COLOR.main}`,
     color: COLOR.main,
@@ -23,22 +23,30 @@ export default function AllPage() {
   const sortCheckStyle: React.CSSProperties = {
     color: COLOR.main,
   };
+  const perPage = 10;
+
+  const changePage = React.useCallback(
+    (event) => {
+      setCurrentPage(event.target.innerHTML);
+    },
+    [currentPage]
+  );
 
   React.useEffect(() => {
     if (genre) {
       const genreNum = parseInt(genre.toString()) - 1;
       const sortNum = parseInt(sort.toString()) - 1;
-      setNowGenre(genreList[genreNum]);
-      setNowSort(sortList[sortNum]);
+      const pageNum = parseInt(page.toString());
+      setCurrentGenre(genreList[genreNum]);
+      setCurrentSort(sortList[sortNum]);
+      setCurrentPage(pageNum);
     }
   }, [router]);
 
   React.useEffect(() => {
-    data.length = 0;
-    setUsePage(1);
     genre &&
       music
-        .getStreaming({ genre: genre, page: 1, sort: sort })
+        .getStreaming({ genre: genre, page: page, sort: sort })
         .then((res) => {
           setData(res.data);
         })
@@ -48,35 +56,32 @@ export default function AllPage() {
   }, [router]);
 
   React.useEffect(() => {
-    window.onscroll = () => {
-      if (CheckScroll()) {
-        genre &&
-          music
-            .getStreaming({
-              genre: genre,
-              page: usePage + 1,
-              sort: sort,
-            })
-            .then((res) => {
-              setData(data.concat(res.data));
-              setUsePage(usePage + 1);
-            })
-            .catch(() => {
-              return () => {};
-            });
-      }
-    };
-  });
-
-  React.useEffect(() => {
-    if (nowGenre) {
+    if (currentGenre) {
       router.push(
-        `/all?genre=${genreList.indexOf(nowGenre) + 1}&page=1&sort=${
-          sortList.indexOf(nowSort) + 1
-        }`
+        `/all?genre=${
+          genreList.indexOf(currentGenre) + 1
+        }&page=${currentPage}&sort=${sortList.indexOf(currentSort) + 1}`
       );
     }
-  }, [nowGenre, nowSort]);
+  }, [currentGenre, currentSort, currentPage]);
+
+  React.useEffect(() => {
+    const pageBar = document.getElementById("pageBar");
+    while (pageBar.firstChild) {
+      pageBar.removeChild(pageBar.firstChild);
+    }
+    for (let i = 1; i < perPage + 1; i++) {
+      const div = document.createElement("div");
+      div.id = "pageIndex";
+      div.innerHTML = i.toString();
+      div.onclick = changePage;
+      if (div.innerHTML === page) {
+        div.style.background = "black";
+        div.style.color = "white";
+      }
+      pageBar.insertBefore(div, null);
+    }
+  }, [genre, sort, page]);
 
   return (
     <S.Wrapper>
@@ -86,8 +91,8 @@ export default function AllPage() {
             list={genreList}
             checkStyle={genreCheckStyle}
             name="genre"
-            now={nowGenre}
-            callback={setNowGenre}
+            now={currentGenre}
+            callback={setCurrentGenre}
           />
         </S.GerneList>
         <S.SortList>
@@ -95,11 +100,18 @@ export default function AllPage() {
             list={sortList}
             checkStyle={sortCheckStyle}
             name="sort"
-            now={nowSort}
-            callback={setNowSort}
+            now={currentSort}
+            callback={setCurrentSort}
           />
         </S.SortList>
         <CardList data={data} />
+        <S.PageBarWrap>
+          <S.PageSmallWrap>
+            <Arrow callback={() => {}} isNext={false} />
+            <S.pageBar id="pageBar" />
+            <Arrow callback={() => {}} isNext={true} />
+          </S.PageSmallWrap>
+        </S.PageBarWrap>
       </S.Container>
     </S.Wrapper>
   );

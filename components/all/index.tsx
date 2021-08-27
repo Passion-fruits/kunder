@@ -8,6 +8,7 @@ import List from "./chooseList/list";
 import music from "../../api/music";
 import CardList from "../../components/cardList";
 import Arrow from "../../assets/arrow";
+import LoadingPage from "../loading";
 
 export default function AllPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function AllPage() {
   const [currentGenre, setCurrentGenre] = React.useState<string>();
   const [currentSort, setCurrentSort] = React.useState<string>();
   const [currentPage, setCurrentPage] = React.useState<number>(1);
+  const [loading, setLoading] = React.useState<boolean>(true);
   const [data, setData] = React.useState<any[]>([]);
   const genreCheckStyle: React.CSSProperties = {
     borderBottom: `2px solid ${COLOR.main}`,
@@ -44,13 +46,16 @@ export default function AllPage() {
   }, [router]);
 
   React.useEffect(() => {
+    setLoading(true);
     genre &&
       music
         .getStreaming({ genre: genre, page: page, sort: sort })
         .then((res) => {
+          setLoading(false);
           setData(res.data);
         })
         .catch(() => {
+          setLoading(false);
           return () => {};
         });
   }, [router]);
@@ -63,7 +68,17 @@ export default function AllPage() {
         }&page=${currentPage}&sort=${sortList.indexOf(currentSort) + 1}`
       );
     }
-  }, [currentGenre, currentSort, currentPage]);
+  }, [currentPage]);
+
+  React.useEffect(() => {
+    if (currentGenre) {
+      router.push(
+        `/all?genre=${genreList.indexOf(currentGenre) + 1}&page=1&sort=${
+          sortList.indexOf(currentSort) + 1
+        }`
+      );
+    }
+  }, [currentSort, currentGenre]);
 
   React.useEffect(() => {
     const pageBar = document.getElementById("pageBar");
@@ -85,6 +100,7 @@ export default function AllPage() {
 
   return (
     <S.Wrapper>
+      {loading && <LoadingPage />}
       <S.Container>
         <S.GerneList>
           <List

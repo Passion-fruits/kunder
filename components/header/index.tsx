@@ -3,7 +3,11 @@ import SearchIcon from "../../assets/sarch";
 import * as S from "./styled";
 import { useState } from "react";
 import { useEffect } from "react";
-import { ACCESS_TOKEN, REFRESH_TOKEN, USER_ID } from "./../../lib/export/localstorage";
+import {
+  ACCESS_TOKEN,
+  REFRESH_TOKEN,
+  USER_ID,
+} from "./../../lib/export/localstorage";
 import { toast } from "react-toastify";
 
 export default function Header() {
@@ -22,10 +26,10 @@ export default function Header() {
   const logout = (): void => {
     localStorage.setItem(ACCESS_TOKEN, "");
     localStorage.setItem(REFRESH_TOKEN, "");
-    localStorage.setItem(USER_ID,""); 
+    localStorage.setItem(USER_ID, "");
     setIsLogin(false);
     toast.success("로그아웃 되었습니다.");
-    router.push('/');
+    router.push("/");
   };
   return (
     <S.Wrapper>
@@ -33,8 +37,10 @@ export default function Header() {
         <>
           <S.LEFT_SIDE>
             <h1 onClick={() => routing("")}>KUNDER</h1>
-       {/*      <span onClick={() => routing("")}>메인</span> */}
-            <span onClick={() => routing("all?genre=1&sort=1")}>전체보기</span>
+            {/*      <span onClick={() => routing("")}>메인</span> */}
+            <span onClick={() => routing("all?genre=1&sort=1&page=1")}>
+              전체보기
+            </span>
             <span onClick={() => routing("feed")}>피드</span>
             <span onClick={() => routing("upload")}>음악업로드</span>
           </S.LEFT_SIDE>
@@ -48,7 +54,13 @@ export default function Header() {
             {isLogin ? (
               <>
                 <button onClick={logout}>로그아웃</button>
-                <button onClick={() => routing(`profile?id=${localStorage.getItem(USER_ID)}`)}>마이페이지</button>
+                <button
+                  onClick={() =>
+                    routing(`profile?id=${localStorage.getItem(USER_ID)}`)
+                  }
+                >
+                  마이페이지
+                </button>
               </>
             ) : (
               <button

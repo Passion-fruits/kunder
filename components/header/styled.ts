@@ -4,7 +4,7 @@ import { COLOR, CONTAINER, HEADER_HEIGHT, WRAPPER } from "./../../styles/index";
 export const Wrapper = styled(WRAPPER)`
   height: ${`${HEADER_HEIGHT}px`};
   position: fixed;
-  z-index:3;
+  z-index:10;
 `;
 
 export const Cotainer = styled(CONTAINER)`

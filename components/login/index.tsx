@@ -20,8 +20,8 @@ export default function LoginPage() {
   const [googleName, setGoogleName] = useState<string>("");
   const [img, setImg] = useState<string>("");
   const googleAuth = (event): void => {
-    setImg(event.Ts.hJ);
-    setGoogleName(event.Ts.Me);
+    setImg(event.profileObj.imageUrl);
+    setGoogleName(event.profileObj.name);
     const token = event.tokenId;
     auth
       .googleLogin(token)

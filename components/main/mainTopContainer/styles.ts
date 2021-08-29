@@ -83,7 +83,7 @@ export const RecommendMusicWrapper = styled.div`
 interface genreWrapProps {
   backgroundColor: string;
   height: string;
-  imgSize : string;
+  imgSize: string;
 }
 
 export const RecommendGenreWrapper = styled.div<genreWrapProps>`
@@ -98,18 +98,18 @@ export const RecommendGenreWrapper = styled.div<genreWrapProps>`
   }
   & h3 {
     font-size: 15px;
-    margin-top:5px;
-    font-weight:500;
+    margin-top: 5px;
+    font-weight: 500;
   }
-  & img{
-      width:${(res)=>res.imgSize};
-      height:${(res)=>res.imgSize};
-      transform:rotate(20deg);
-      position:absolute;
-      right:0;
-      bottom:0;
-      margin:35px;
-      box-shadow:0px 3px 8px rgb(0,0,0,0.2);
-      z-index:3;
+  & img {
+    width: ${(res) => res.imgSize};
+    height: ${(res) => res.imgSize};
+    transform: rotate(20deg);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 35px;
+    box-shadow: 0px 3px 8px rgb(0, 0, 0, 0.2);
+    z-index: 3;
   }
 `;

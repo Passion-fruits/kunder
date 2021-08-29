@@ -21,17 +21,19 @@ export default function MusicInformation({
 }) {
   const router = useRouter();
   React.useEffect(() => {
-    const WaveSurfer = require("wavesurfer.js");
-    const wavesurfer = WaveSurfer.create({
-      container: "#waveform",
-      waveColor: "#E6E6E6",
-      progressColor: COLOR.main,
-      barWidth: "2",
-      cursorColor: "transparent",
-      barHeight: "0.7",
-    });
-    wavesurfer.load(song_url);
-  }, []);
+    if(song_url){
+      const WaveSurfer = require("wavesurfer.js");
+      const wavesurfer = WaveSurfer.create({
+        container: "#waveform",
+        waveColor: "#E6E6E6",
+        progressColor: COLOR.main,
+        barWidth: "2",
+        cursorColor: "transparent",
+        barHeight: "0.7",
+      });
+      wavesurfer.load(song_url);
+    }
+  }, [song_url]);
 
   React.useEffect(() => {
     resizing(user_id);

@@ -9,7 +9,7 @@ export const Wrapper = styled(WRAPPER)`
   bottom: 0;
   box-shadow: 0px -3px 10px rgb(0, 0, 0, 0.1);
   position: fixed;
-  z-index: 3;
+  z-index: 10;
 `;
 
 export const Container = styled(CONTAINER)`
@@ -21,9 +21,13 @@ export const Container = styled(CONTAINER)`
 
 export const Info = styled.div`
   display: flex;
+  align-items: center;
   gap: 17px;
+  & img {
+    width: 70px;
+    height: 70px;
+  }
   & div {
-    padding-top: 20px;
     display: flex;
     flex-direction: column;
     & h3 {
@@ -88,16 +92,12 @@ export const RangeContainer = styled.div<props>`
   :hover {
     height: 5px;
   }
-  ::-webkit-slider-thumb {
-    opacity: 0;
-  }
-  ::-moz-range-thumb {
-    -webkit-appearance: none;
-    width: 10px;
-    height: 10px;
-    background: #fff;
-    border: 1px solid ${COLOR.main};
-    border-radius: 50%;
-    cursor: pointer;
+  & input[type="range"] {
+    ::-webkit-slider-thumb {
+      opacity: 0;
+    }
+    ::-moz-range-thumb {
+      opacity: 0;
+    }
   }
 `;

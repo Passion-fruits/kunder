@@ -6,6 +6,7 @@ import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 import { HEADER_HEIGHT } from "./../styles/index";
 import { ToastContainer } from "react-toastify";
+import { SampleProvider } from "./../lib/context/index";
 
 function App({ Component, pageProps }: AppProps) {
   return (
@@ -28,12 +29,14 @@ function App({ Component, pageProps }: AppProps) {
         <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
         <link rel="icon" href="/logo.ico" />
       </Head>
-      <Header />
-      <PlayBar />
-      <div style={{ paddingTop: `${HEADER_HEIGHT}px` }} />
-      <ToastContainer position="top-right" autoClose={2000} />
-      <Component {...pageProps} />
-      <div style={{ paddingBottom: "200px" }}></div>
+      <SampleProvider>
+        <Header />
+        <PlayBar />
+        <div style={{ paddingTop: `${HEADER_HEIGHT}px` }} />
+        <ToastContainer position="top-right" autoClose={2000} />
+        <Component {...pageProps} />
+        <div style={{ paddingBottom: "200px" }}></div>
+      </SampleProvider>
     </>
   );
 }

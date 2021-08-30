@@ -3,7 +3,7 @@ import { getDate } from "../../../lib/util/getDate";
 import { resizing } from "../../../lib/util/resizing";
 import { CommentIcon, HeartIcon, PlayIcon } from "../../../assets";
 import { setValue } from "./../../../lib/context/index";
-import * as S from "../feedStyles";
+import * as S from "../styles";
 import React from "react";
 
 export default function FeedCard({

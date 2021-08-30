@@ -1,18 +1,20 @@
-import * as S from "./feedStyles";
+import * as S from "./styles";
 import FeedCard from "./feedCard/feedCard";
-import { useEffect, useState } from "react";
-import feed from "../../api/feed";
+import React from "react";
 import { genreList } from "../../lib/export/genre";
 import { sortList } from "./../../lib/export/sort";
 import { CheckScroll } from "./../../lib/util/checkScroll";
+import feed from "../../api/feed";
 import LoadingPage from "../../components/loading";
+import FeedSelect from "./select";
 
 export default function FeedPage() {
-  const [data, setData] = useState<any[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [genre, setGenre] = useState<number>(1);
-  const [sort, setSort] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [data, setData] = React.useState<any[]>([]);
+  const [page, setPage] = React.useState<number>(1);
+  const [genre, setGenre] = React.useState<number>(1);
+  const [sort, setSort] = React.useState<number>(1);
+  const [loading, setLoading] = React.useState<boolean>(false);
+
   const getData = () => {
     feed
       .getFeedList(genre, page, sort)
@@ -25,34 +27,46 @@ export default function FeedPage() {
         return;
       });
   };
-  const changeState = async () => {
+
+  const clearData = React.useCallback(() => {
     data.length = 0;
+  }, []);
+
+  const changeState = React.useCallback(async () => {
+    await clearData();
     await setPage(1);
-    page === 1 && data.length === 0 && getData();
-  };
-  useEffect(() => {
+    getData();
+  }, []);
+
+  const chooseGenre = React.useCallback(({ target }) => {
+    setGenre(target.value);
+  }, []);
+
+  const chooseSort = React.useCallback(({ target }) => {
+    setSort(target.value);
+  }, []);
+
+  React.useEffect(() => {
     setLoading(true);
     changeState();
   }, [sort, genre]);
-  useEffect(() => {
+
+  React.useEffect(() => {
     getData();
   }, [page]);
-  useEffect(() => {
+
+  React.useEffect(() => {
     window.onscroll = () => {
       if (CheckScroll()) {
         setPage((page) => page + 1);
       }
     };
   }, []);
-  useEffect(() => {
+
+  React.useEffect(() => {
     page === 1 && setLoading(true);
   }, [page]);
-  const chooseGenre = (event): void => {
-    setGenre(event.target.value);
-  };
-  const chooseSort = (event): void => {
-    setSort(event.target.value);
-  };
+
   return (
     <S.Wrapper>
       {loading && <LoadingPage />}
@@ -60,20 +74,8 @@ export default function FeedPage() {
         <S.LEFT_SIDE>
           <h1>Your Feed</h1>
           <span>음악 하이라이트를 제공합니다.</span>
-          <select onChange={chooseGenre}>
-            {genreList.map((genre, index) => (
-              <option value={index + 1} key={index}>
-                {genre}
-              </option>
-            ))}
-          </select>
-          <select onChange={chooseSort}>
-            {sortList.map((sort, index) => (
-              <option value={index + 1} key={index}>
-                {sort}
-              </option>
-            ))}
-          </select>
+          <FeedSelect callback={chooseGenre} list={genreList} />
+          <FeedSelect callback={chooseSort} list={sortList} />
           <p>
             KUNDER | 무료 음악 스트리밍 | 개인정보 약관 <br />
             마이페이지 | 전체보기

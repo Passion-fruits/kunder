@@ -43,7 +43,7 @@ export const PlayBtn = styled.button`
   z-index: 3;
   margin: 25px;
   & svg {
-    margin-left: 3px;
+    margin-left: 5px;
   }
 `;
 

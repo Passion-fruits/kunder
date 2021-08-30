@@ -43,7 +43,7 @@ export default function MusicInformation({
   React.useEffect(() => {
     if (song_url) {
       const WaveSurfer = require("wavesurfer.js");
-      const wavesurfer = WaveSurfer.create({
+      const wavesurfer = WaveSurfer.create && WaveSurfer.create({
         container: "#waveform",
         waveColor: "#E6E6E6",
         progressColor: COLOR.main,

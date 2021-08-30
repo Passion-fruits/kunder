@@ -12,74 +12,47 @@ import MusicInfo from "./musicInfo";
 
 export default function PlayBar() {
   const musicObj = getValue().musicInformation;
-  const [musicIndex, setMusicIndex] = React.useState<HTMLAudioElement>();
-  const [musicDuration, setMusicDuration] = React.useState<number | null>();
-  const [musicProgress, setMusicProgress] = React.useState<number>(0);
-  const [nowTime, setNowTime] = React.useState<number>(0);
   const [isPlay, setIsPlay] = React.useState<boolean>(false);
-  const isPlayRef = React.useRef(null);
-  isPlayRef.current = isPlay;
+  const [musicProgress, setMusicProgress] = React.useState<number>(0);
+  const audio = React.useRef(typeof Audio !== "undefined" && new Audio());
+
+  const musicStop = React.useCallback(() => {
+    audio.current.pause();
+    setIsPlay(false);
+  }, [audio]);
+
+  const musicStart = React.useCallback(() => {
+    audio.current.play();
+    setIsPlay(true);
+  }, [audio]);
 
   React.useEffect(() => {
-    setMusicIndex(null);
-    setMusicDuration(null);
-    setMusicProgress(0);
-    setNowTime(0);
-    setIsPlay(false);
-    if (musicIndex) {
-      musicIndex.currentTime = 0;
-    }
     if (musicObj.musicSrc) {
-      setMusicIndex(new Audio(musicObj.musicSrc));
+      audio.current.src = musicObj.musicSrc;
+      audio.current.play();
+      setIsPlay(true);
     }
   }, [musicObj]);
 
   React.useEffect(() => {
-    setIsPlay(false);
-    if (musicIndex) {
-      musicIndex.addEventListener(
-        "canplaythrough",
-        () => {
-          console.log(musicIndex);
-          setIsPlay(true);
-          setMusicDuration(musicIndex.duration);
-        },
-        false
+    setInterval(() => {
+      audio.current.currentTime && setMusicProgress(
+        (audio.current.currentTime / audio.current.duration) * 100
       );
-    }
-  }, [musicIndex]);
-
-  React.useEffect(() => {
-    if (musicDuration) {
-      setTimeout(() => {
-        if (isPlayRef.current) {
-          setNowTime(nowTime + 1);
-          setMusicProgress(Math.floor((nowTime / musicDuration) * 100 + 1));
-        }
-      }, 990);
-    }
-  }, [nowTime, isPlay, musicDuration]);
-
-  React.useEffect(() => {
-    if (musicDuration) {
-      if (isPlay) {
-        musicIndex.play();
-      } else {
-        musicIndex.pause();
-      }
-    }
-  }, [isPlay, musicDuration]);
+    }, 1000);
+  }, []);
 
   return (
     <S.Wrapper>
+      <audio id="audio" />
       <S.Container>
         <S.Center>
           <S.CenterControl>
             <PassIcon callback={() => {}} isNext={false} />
             {isPlay ? (
-              <PauseIcon size={17} callback={() => setIsPlay(false)} />
+              <PauseIcon size={17} callback={musicStop} />
             ) : (
-              <PlayIcon size={17} callback={() => setIsPlay(true)} />
+              <PlayIcon size={17} callback={musicStart} />
             )}
             <PassIcon callback={() => {}} isNext={true} />
           </S.CenterControl>

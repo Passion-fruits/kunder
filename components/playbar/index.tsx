@@ -33,6 +33,7 @@ export default function PlayBar() {
   }, []);
 
   React.useEffect(() => {
+    setMusicProgress(0);
     if (musicObj.musicSrc) {
       audio.current.src = musicObj.musicSrc;
       audio.current.play();

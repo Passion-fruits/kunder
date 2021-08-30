@@ -58,7 +58,7 @@ export default function MusicInformation({
           cursorColor: "transparent",
           barHeight: "0.7",
         });
-      wavesurfer.load && wavesurfer.load(song_url);
+      typeof wavesurfer.load !== "undefined" && wavesurfer.load(song_url);
     }
   }, [song_url]);
 

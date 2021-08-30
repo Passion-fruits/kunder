@@ -33,12 +33,8 @@ export const CoverImgWrap = styled.div`
     height: 44px;
     background-color: ${COLOR.main};
     border-radius: 80%;
-    transition:0.5s;
     & svg {
-      margin-left: 4px;
-    }
-    &:hover{
-      opacity:0.8;
+      margin-left: 5px;
     }
   }
 `;

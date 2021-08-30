@@ -2,11 +2,11 @@ import { genreList } from "../../lib/export/genre";
 import { sortList } from "./../../lib/export/sort";
 import { CheckScroll } from "./../../lib/util/checkScroll";
 import * as S from "./styles";
-import FeedCard from "./feedCard/feedCard";
 import React from "react";
-import feed from "../../api/feed";
 import LoadingPage from "../../components/loading";
+import FeedCard from "./feedCard/feedCard";
 import FeedSelect from "./select";
+import feed from "../../api/feed";
 
 export default function FeedPage() {
   const [data, setData] = React.useState<any[]>([]);

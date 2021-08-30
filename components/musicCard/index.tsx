@@ -35,6 +35,7 @@ export default function MusicCard({
         name: writerName,
         coverImg: imgSrc,
         musicSrc: musicSrc,
+        songId:id
       },
     });
   };

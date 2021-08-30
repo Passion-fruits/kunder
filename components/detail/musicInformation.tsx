@@ -2,6 +2,7 @@ import { getDate } from "./../../lib/util/getDate";
 import { COLOR } from "./../../styles/index";
 import { useRouter } from "next/dist/client/router";
 import { resizing } from "./../../lib/util/resizing";
+import { setValue } from "./../../lib/context/index";
 import * as S from "./styles";
 import React from "react";
 import HeartIcon from "../../assets/heart";
@@ -20,8 +21,27 @@ export default function MusicInformation({
   song_url,
 }) {
   const router = useRouter();
+  const dispatch = setValue();
+
+  const routingToUserProfile = React.useCallback(() => {
+    router.push(`/profile?id=${user_id}`);
+  }, [user_id]);
+
+  const changeMusic = React.useCallback(() => {
+    dispatch({
+      type: "MUSIC_CHANGE",
+      musicInformation: {
+        title: title,
+        name: artist,
+        songId: router.query.id.toString(),
+        musicSrc: song_url,
+        coverImg: cover_url,
+      },
+    });
+  }, []);
+
   React.useEffect(() => {
-    if(song_url){
+    if (song_url) {
       const WaveSurfer = require("wavesurfer.js");
       const wavesurfer = WaveSurfer.create({
         container: "#waveform",
@@ -39,18 +59,14 @@ export default function MusicInformation({
     resizing(user_id);
   }, [description]);
 
-  const routingToUserProfile = React.useCallback(() => {
-    router.push(`/profile?id=${user_id}`);
-  }, [user_id]);
-
   return (
     <>
       <>
         <S.MusicInformationWrapper>
           <S.CoverImgWrap>
             <img src={cover_url} />
-            <button>
-              <PlayIcon size={15} callback={() => {}} color="white" />
+            <button onClick={changeMusic}>
+              <PlayIcon size={15} callback={changeMusic} color="white" />
             </button>
           </S.CoverImgWrap>
           <S.MusicInformationTextCotainer>

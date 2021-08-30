@@ -1,27 +1,43 @@
 import { useRouter } from "next/dist/client/router";
-import CommentIcon from "../../assets/comment";
-import HeartIcon from "../../assets/heart";
-import PlayIcon from "../../assets/play";
-import * as S from "./feedStyles";
-import { getDate } from "./../../lib/util/getDate";
-import { useEffect } from "react";
-import { resizing } from "./../../lib/util/resizing";
+import { getDate } from "../../../lib/util/getDate";
+import { resizing } from "../../../lib/util/resizing";
+import { CommentIcon, HeartIcon, PlayIcon } from "../../../assets";
+import { setValue } from "./../../../lib/context/index";
+import * as S from "../feedStyles";
+import React from "react";
 
 export default function FeedCard({
   title,
   genre,
-  src,
+  coverSrc,
   like,
   name,
   date,
   id,
   description,
   comment,
+  musicSrc,
 }) {
   const router = useRouter();
-  useEffect(() => {
+  const dispatch = setValue();
+
+  const changeMusic = React.useCallback(() => {
+    dispatch({
+      type: "MUSIC_CHANGE",
+      musicInformation: {
+        title: title,
+        songId: id,
+        name: name,
+        musicSrc: musicSrc,
+        coverImg: coverSrc,
+      },
+    });
+  }, []);
+
+  React.useEffect(() => {
     resizing(id);
   }, [description, router]);
+
   return (
     <S.FeedCardWrapper>
       <S.ImgWrapper>
@@ -29,7 +45,7 @@ export default function FeedCard({
           <mark>{title}</mark>
           <mark>{genre}</mark>
         </S.MusicInfo>
-        <img src={src} onClick={() => router.push(`/detail?id=${id}`)} />
+        <img src={coverSrc} onClick={() => router.push(`/detail?id=${id}`)} />
       </S.ImgWrapper>
       <S.IconWrapper>
         <div>
@@ -39,7 +55,7 @@ export default function FeedCard({
           <span>{comment}</span>
         </div>
         <div></div>
-        <PlayIcon callback={() => {}} size={18} color={"black"} />
+        <PlayIcon callback={changeMusic} size={18} color={"black"} />
       </S.IconWrapper>
       <S.InfoContainer>
         <div>

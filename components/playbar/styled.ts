@@ -23,9 +23,20 @@ export const Info = styled.div`
   display: flex;
   align-items: center;
   gap: 17px;
+  z-index: 4;
   & img {
     width: 70px;
     height: 70px;
+    cursor: pointer;
+    transition: 0.4s;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  .none-img {
+    width: 70px;
+    height: 70px;
+    background-color: gray;
   }
   & div {
     display: flex;
@@ -34,6 +45,11 @@ export const Info = styled.div`
       color: white;
       font-size: 17px;
       font-weight: bold;
+      cursor: pointer;
+      transition: 0.4s;
+      &:hover {
+        opacity: 0.8;
+      }
     }
     & span {
       color: ${COLOR.text};
@@ -80,24 +96,24 @@ export const RangeContainer = styled.div<props>`
   margin-top: 30px;
   -webkit-appearance: none;
   width: 400px;
-  height: 5px;
+  height: 6px;
+  position: relative;
+  display: flex;
+  align-items: center;
   background: ${(e) =>
     `linear-gradient(to right, ${COLOR.main} 0%, ${COLOR.main} 
     ${e.progress}%, #3A3A3A ${e.progress}%, #3A3A3A 100%)`};
   cursor: pointer;
   transition: background 450ms ease-in;
-  border-radius: 2px;
+  border-radius: 24px;
   overflow: hidden;
   border: none;
-  :hover {
-    height: 5px;
+  &:hover {
+    height: 9px;
   }
   & input[type="range"] {
-    ::-webkit-slider-thumb {
-      opacity: 0;
-    }
-    ::-moz-range-thumb {
-      opacity: 0;
-    }
+    cursor: pointer;
+    width: 100%;
+    opacity: 0;
   }
 `;

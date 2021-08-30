@@ -26,6 +26,12 @@ export default function PlayBar() {
     setIsPlay(true);
   }, [audio]);
 
+  const moveMusic = React.useCallback(({ target }) => {
+    const value = target.value;
+    setMusicProgress(value);
+    audio.current.currentTime = (audio.current.duration * value) / 100;
+  }, []);
+
   React.useEffect(() => {
     if (musicObj.musicSrc) {
       audio.current.src = musicObj.musicSrc;
@@ -36,9 +42,10 @@ export default function PlayBar() {
 
   React.useEffect(() => {
     setInterval(() => {
-      audio.current.currentTime && setMusicProgress(
-        (audio.current.currentTime / audio.current.duration) * 100
-      );
+      audio.current.currentTime &&
+        setMusicProgress(
+          (audio.current.currentTime / audio.current.duration) * 100 + 1
+        );
     }, 1000);
   }, []);
 
@@ -57,13 +64,14 @@ export default function PlayBar() {
             <PassIcon callback={() => {}} isNext={true} />
           </S.CenterControl>
           <S.RangeContainer progress={musicProgress}>
-            <input type="range" name="" id="" />
+            <input type="range" onClick={moveMusic} />
           </S.RangeContainer>
         </S.Center>
         <MusicInfo
           title={musicObj.title}
           coverImg={musicObj.coverImg}
           name={musicObj.name}
+          songId={musicObj.songId}
         />
         <S.Control>
           <VolumeIcon callback={() => {}} />

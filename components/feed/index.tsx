@@ -1,5 +1,5 @@
 import * as S from "./feedStyles";
-import FeedCard from "./feedCard";
+import FeedCard from "./feedCard/feedCard";
 import { useEffect, useState } from "react";
 import feed from "../../api/feed";
 import { genreList } from "../../lib/export/genre";
@@ -86,11 +86,12 @@ export default function FeedPage() {
               title={obj.title}
               like={obj.like}
               date={obj.created_at}
-              src={obj.cover_url}
+              coverSrc={obj.cover_url}
               description={obj.description}
               id={obj.song_id}
               genre={obj.genre}
               comment={obj.comment}
+              musicSrc={obj.short_url}
               key={index}
             />
           ))}

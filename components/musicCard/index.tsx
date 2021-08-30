@@ -42,7 +42,7 @@ export default function MusicCard({
   return (
     <S.Wrapper>
       <S.Cover id="cover" onClick={routing}>
-        <button>
+        <button onClick={musicChange}>
           <PlayIcon callback={musicChange} size={20} />
         </button>
       </S.Cover>

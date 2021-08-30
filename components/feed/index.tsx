@@ -1,9 +1,9 @@
-import * as S from "./styles";
-import FeedCard from "./feedCard/feedCard";
-import React from "react";
 import { genreList } from "../../lib/export/genre";
 import { sortList } from "./../../lib/export/sort";
 import { CheckScroll } from "./../../lib/util/checkScroll";
+import * as S from "./styles";
+import FeedCard from "./feedCard/feedCard";
+import React from "react";
 import feed from "../../api/feed";
 import LoadingPage from "../../components/loading";
 import FeedSelect from "./select";
@@ -28,32 +28,31 @@ export default function FeedPage() {
       });
   };
 
-  const clearData = React.useCallback(() => {
-    data.length = 0;
-  }, []);
+  const chooseGenre = ({ target }) => {
+    setGenre(target.value);
+  };
 
-  const changeState = React.useCallback(async () => {
-    await clearData();
+  const chooseSort = ({ target }) => {
+    setSort(target.value);
+  };
+
+  const requestNewDate = async () => {
+    const clear = () => {
+      data.length = 0;
+    };
+    setLoading(true);
+    await clear();
     await setPage(1);
     getData();
-  }, []);
-
-  const chooseGenre = React.useCallback(({ target }) => {
-    setGenre(target.value);
-  }, []);
-
-  const chooseSort = React.useCallback(({ target }) => {
-    setSort(target.value);
-  }, []);
-
-  React.useEffect(() => {
-    setLoading(true);
-    changeState();
-  }, [sort, genre]);
+  };
 
   React.useEffect(() => {
     getData();
   }, [page]);
+
+  React.useEffect(() => {
+    requestNewDate();
+  }, [genre, sort]);
 
   React.useEffect(() => {
     window.onscroll = () => {

@@ -3,6 +3,7 @@ import { COLOR } from "./../../styles/index";
 import { useRouter } from "next/dist/client/router";
 import { resizing } from "./../../lib/util/resizing";
 import { setValue } from "./../../lib/context/index";
+import { genreList } from "../../lib/export/genre";
 import * as S from "./styles";
 import React from "react";
 import HeartIcon from "../../assets/heart";
@@ -40,18 +41,24 @@ export default function MusicInformation({
     });
   }, []);
 
+  const routingToGenre = React.useCallback(({ target }) => {
+    router.push(`/all?genre=${genreList.indexOf(target.id) + 1}&page=1&sort=1`);
+  }, []);
+
   React.useEffect(() => {
     if (song_url) {
       const WaveSurfer = require("wavesurfer.js");
-      const wavesurfer = WaveSurfer.create && WaveSurfer.create({
-        container: "#waveform",
-        waveColor: "#E6E6E6",
-        progressColor: COLOR.main,
-        barWidth: "2",
-        cursorColor: "transparent",
-        barHeight: "0.7",
-      });
-      wavesurfer.load(song_url);
+      const wavesurfer =
+        WaveSurfer.create &&
+        WaveSurfer.create({
+          container: "#waveform",
+          waveColor: "#E6E6E6",
+          progressColor: COLOR.main,
+          barWidth: "2",
+          cursorColor: "transparent",
+          barHeight: "0.7",
+        });
+      wavesurfer.load && wavesurfer.load(song_url);
     }
   }, [song_url]);
 
@@ -84,7 +91,9 @@ export default function MusicInformation({
       <>
         <S.MusicIconContainer>
           <S.GenreWrap>
-            <button>#{genre}</button>
+            <button id={genre} onClick={routingToGenre}>
+              #{genre}
+            </button>
             <button>#{mood}</button>
           </S.GenreWrap>
           <S.MusicLikeContainer>

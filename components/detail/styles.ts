@@ -5,6 +5,7 @@ export const Wrapper = styled(WRAPPER)``;
 
 export const Container = styled(CONTAINER)`
   padding-top: 25px;
+  padding-bottom:50px;
 `;
 
 export const MusicInformationWrapper = styled.div`

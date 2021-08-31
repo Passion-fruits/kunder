@@ -48,6 +48,7 @@ export default function FeedPage() {
   };
 
   React.useEffect(() => {
+    console.log(genre);
     genre && getData(1);
   }, [router]);
 
@@ -58,7 +59,7 @@ export default function FeedPage() {
         setPage((page) => page + 1);
       }
     };
-  }, []);
+  }, [data]);
 
   React.useEffect(() => {
     page === 1 && setLoading(true);

@@ -14,9 +14,6 @@ import LoadingPage from "../loading";
 export default function AllPage() {
   const router = useRouter();
   const { genre, sort, page } = router.query;
-  const [currentGenre, setCurrentGenre] = React.useState<string>();
-  const [currentSort, setCurrentSort] = React.useState<string>();
-  const [currentPage, setCurrentPage] = React.useState<number>(1);
   const [loading, setLoading] = React.useState<boolean>(true);
   const [data, setData] = React.useState<any[]>([]);
   const genreCheckStyle: React.CSSProperties = {
@@ -29,22 +26,25 @@ export default function AllPage() {
   const perPage = 10;
 
   const changePage = React.useCallback(
-    (event) => {
-      setCurrentPage(event.target.innerHTML);
+    ({ target }) => {
+      router.push(`/all?page=${target.innerHTML}&sort=${sort}&genre=${genre}`);
     },
-    [currentPage]
+    [page, sort, genre]
   );
 
-  React.useEffect(() => {
-    if (genre && page && sort) {
-      const genreNum = parseInt(genre.toString()) - 1;
-      const sortNum = parseInt(sort.toString()) - 1;
-      const pageNum = parseInt(page.toString());
-      setCurrentGenre(genreList[genreNum]);
-      setCurrentSort(sortList[sortNum]);
-      setCurrentPage(pageNum);
-    }
-  }, [router]);
+  const changeGenre = React.useCallback(
+    ({ target }) => {
+      router.push(`/all?page=${page}&sort=${sort}&genre=${target.value}`);
+    },
+    [page, sort, genre]
+  );
+
+  const changeSort = React.useCallback(
+    ({ target }) => {
+      router.push(`/all?page=${page}&sort=${target.value}&genre=${genre}`);
+    },
+    [page, sort, genre]
+  );
 
   React.useEffect(() => {
     if (genre) {
@@ -62,26 +62,6 @@ export default function AllPage() {
         });
     }
   }, [router]);
-
-  React.useEffect(() => {
-    if (currentGenre) {
-      router.push(
-        `/all?genre=${
-          genreList.indexOf(currentGenre) + 1
-        }&page=${currentPage}&sort=${sortList.indexOf(currentSort) + 1}`
-      );
-    }
-  }, [currentPage]);
-
-  React.useEffect(() => {
-    if (currentGenre) {
-      router.push(
-        `/all?genre=${genreList.indexOf(currentGenre) + 1}&page=1&sort=${
-          sortList.indexOf(currentSort) + 1
-        }`
-      );
-    }
-  }, [currentSort, currentGenre]);
 
   React.useEffect(() => {
     const pageBar = document.getElementById("pageBar");
@@ -110,8 +90,8 @@ export default function AllPage() {
             list={genreList}
             checkStyle={genreCheckStyle}
             name="genre"
-            now={currentGenre}
-            callback={setCurrentGenre}
+            now={genre}
+            callback={changeGenre}
           />
         </S.GerneList>
         <S.SortList>
@@ -119,8 +99,8 @@ export default function AllPage() {
             list={sortList}
             checkStyle={sortCheckStyle}
             name="sort"
-            now={currentSort}
-            callback={setCurrentSort}
+            now={sort}
+            callback={changeSort}
           />
         </S.SortList>
         <CardList data={data} />

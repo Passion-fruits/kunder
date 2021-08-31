@@ -1,6 +1,6 @@
 interface props {
   list: any[];
-  now: string;
+  now: string | string[];
   checkStyle: any;
   callback(e): void;
   name: string;
@@ -9,17 +9,22 @@ interface props {
 export default function List({ list, now, checkStyle, callback, name }: props) {
   return (
     <>
-      {list.map((res) => (
-        <label key={res} style={res === now ? checkStyle : {}}>
-          <input
-            type="radio"
-            name={name}
-            value={res}
-            onClick={() => callback(res)}
-          />
-          {res}
-        </label>
-      ))}
+      {list.map((res, index) => {
+        return (
+          <label
+            key={index}
+            style={(index + 1).toString() === now ? checkStyle : {}}
+          >
+            <input
+              type="radio"
+              name={name}
+              value={index + 1}
+              onClick={callback}
+            />
+            {res}
+          </label>
+        );
+      })}
     </>
   );
 }

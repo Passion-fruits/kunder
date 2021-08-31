@@ -18,9 +18,9 @@ export default function MuteIcon({ callback, size }) {
           d="M16.5,7.5,9,13.5H3v9H9l7.5,6Z"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <path
           id="패스_32"
@@ -29,9 +29,9 @@ export default function MuteIcon({ callback, size }) {
           transform="translate(-4.5)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
         <path
           id="패스_33"
@@ -40,9 +40,9 @@ export default function MuteIcon({ callback, size }) {
           transform="translate(-4.5)"
           fill="none"
           stroke="#fff"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
         />
       </g>
     </svg>

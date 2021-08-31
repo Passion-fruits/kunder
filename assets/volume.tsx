@@ -1,11 +1,11 @@
-export default function VolumeIcon({callback}) {
+export default function VolumeIcon({ callback, size }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="24.271"
-      height="22.514"
       viewBox="0 0 24.271 22.514"
       onClick={callback}
+      width={(size * 24) / 22}
+      height={size}
     >
       <g
         id="Icon_feather-volume-1"

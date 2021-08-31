@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
   & img {
     width: ${`${IMG_SIZE}px`};
     height: ${`${IMG_SIZE}px`};
-    border:1px solid rgb(240,240,240);
+    border: 1px solid rgb(240, 240, 240);
     border-radius: 5px;
   }
   & h3 {
@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
     color: ${COLOR.black};
     margin-bottom: 5px;
   }
-  & span {
+  .artist-name {
     font-size: 14px;
     color: ${COLOR.text};
   }
@@ -54,5 +54,17 @@ export const Cover = styled.div`
     & svg {
       margin-left: 5px;
     }
+  }
+`;
+
+export const HeartWrap = styled.div`
+  margin-top: 6px;
+  gap: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  & span {
+    font-size: 13px;
+    color: ${COLOR.main};
   }
 `;

@@ -14,7 +14,7 @@ export default function CardList({ data }: props) {
           writerName={obj.artist}
           imgSrc={obj.cover_url}
           musicSrc={obj.song_url}
-          genre={obj.genre}
+          like={obj.like}
           id={obj.song_id}
           title={obj.title}
         />

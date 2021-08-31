@@ -64,8 +64,36 @@ export const Control = styled.div`
   display: flex;
   align-items: center;
   gap: 30px;
+  z-index: 3;
   & svg {
     cursor: pointer;
+  }
+`;
+
+interface rangeProps {
+  progress: number;
+}
+
+export const VolumeControlWrap = styled.div<rangeProps>`
+  width: 100px;
+  height: 3px;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 24px;
+  background: ${({ progress }) =>
+    `linear-gradient(to right, #0079D5 0%, #0079D5
+    ${progress}%, #3A3A3A ${progress}%, #3A3A3A 100%)`};
+  &:hover {
+    height: 5px;
+  }
+  & input[type="range"] {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    cursor: pointer;
+    opacity: 0;
   }
 `;
 
@@ -88,11 +116,7 @@ export const CenterControl = styled.div`
   }
 `;
 
-interface props {
-  progress: number;
-}
-
-export const RangeContainer = styled.div<props>`
+export const RangeContainer = styled.div<rangeProps>`
   margin-top: 30px;
   -webkit-appearance: none;
   width: 400px;

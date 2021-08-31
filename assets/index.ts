@@ -12,3 +12,4 @@ export { default as SoundCloudIcon } from "./soundCloud";
 export { default as VolumeIcon } from "./volume";
 export { default as YoutubeIcon } from "./youtube";
 export { default as PauseIcon } from "./pause";
+export { default as MuteIcon } from "./mute";

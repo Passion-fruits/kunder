@@ -1,7 +1,8 @@
 import { useRouter } from "next/dist/client/router";
-import PlayIcon from "../../assets/play";
 import * as S from "./styled";
 import { setValue } from "./../../lib/context/index";
+import { CommentIcon, HeartIcon, PlayIcon } from "./../../assets";
+import { COLOR } from "./../../styles/index";
 
 interface props {
   id: string;
@@ -9,7 +10,7 @@ interface props {
   musicSrc;
   title: string;
   writerName: string;
-  genre: string;
+  like: string | number;
 }
 
 export default function MusicCard({
@@ -18,7 +19,7 @@ export default function MusicCard({
   musicSrc,
   title,
   writerName,
-  genre,
+  like,
 }: props) {
   const router = useRouter();
   const dispathch = setValue();
@@ -35,7 +36,7 @@ export default function MusicCard({
         name: writerName,
         coverImg: imgSrc,
         musicSrc: musicSrc,
-        songId:id
+        songId: id,
       },
     });
   };
@@ -49,8 +50,11 @@ export default function MusicCard({
       </S.Cover>
       <img src={imgSrc} />
       <h3>{title}</h3>
-      <span>{writerName}</span>
-      <h5>{genre}</h5>
+      <span className="artist-name">{writerName}</span>
+      <S.HeartWrap>
+        <HeartIcon size={14} callback={() => {}} color={COLOR.main} />
+        <span>{like}</span>
+      </S.HeartWrap>
     </S.Wrapper>
   );
 }

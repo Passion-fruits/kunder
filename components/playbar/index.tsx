@@ -2,8 +2,8 @@ import {
   PassIcon,
   PlayIcon,
   VolumeIcon,
-  HeartIcon,
   PauseIcon,
+  MuteIcon,
 } from "../../assets/index";
 import { getValue } from "../../lib/context";
 import React from "react";
@@ -14,6 +14,7 @@ export default function PlayBar() {
   const musicObj = getValue().musicInformation;
   const [isPlay, setIsPlay] = React.useState<boolean>(false);
   const [musicProgress, setMusicProgress] = React.useState<number>(0);
+  const [volume, setVolume] = React.useState(50);
   const audio = React.useRef(typeof Audio !== "undefined" && new Audio());
 
   const musicStop = React.useCallback(() => {
@@ -32,6 +33,18 @@ export default function PlayBar() {
     audio.current.currentTime = (audio.current.duration * value) / 100;
   }, []);
 
+  const controleMusicVolume = React.useCallback(({ target }) => {
+    setVolume(target.value);
+  }, []);
+
+  const volumeIconEvent = React.useCallback(() => {
+    if (volume === 0) {
+      setVolume(50);
+    } else {
+      setVolume(0);
+    }
+  }, [volume]);
+
   React.useEffect(() => {
     setMusicProgress(0);
     if (musicObj.musicSrc) {
@@ -49,6 +62,10 @@ export default function PlayBar() {
         );
     }, 1000);
   }, []);
+
+  React.useEffect(() => {
+    audio.current.volume = volume / 100;
+  }, [volume]);
 
   return (
     <S.Wrapper>
@@ -75,8 +92,14 @@ export default function PlayBar() {
           songId={musicObj.songId}
         />
         <S.Control>
-          <VolumeIcon callback={() => {}} />
-          <HeartIcon size={26} callback={() => {}} />
+          {volume == 0 ? (
+            <MuteIcon size={22} callback={volumeIconEvent} />
+          ) : (
+            <VolumeIcon size={22} callback={volumeIconEvent} />
+          )}
+          <S.VolumeControlWrap progress={volume}>
+            <input type="range" onClick={controleMusicVolume} />
+          </S.VolumeControlWrap>
         </S.Control>
       </S.Container>
     </S.Wrapper>

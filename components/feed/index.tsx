@@ -27,6 +27,7 @@ export default function FeedPage() {
   };
 
   React.useEffect(() => {
+    setLoading(true);
     data.length = 0;
     setData(() => []);
     page = 1;
@@ -49,6 +50,7 @@ export default function FeedPage() {
     if (genre) {
       window.onscroll = () => {
         if (CheckScroll()) {
+          setLoading(true);
           feed
             .getFeedList(genre, page, sort)
             .then((res) => {

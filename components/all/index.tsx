@@ -25,27 +25,45 @@ export default function AllPage() {
     color: COLOR.main,
   };
   const showCardCnt = 12;
+  const perPage = 3;
+  const pageToNum = page && parseInt(page.toString());
+
+  const routing = (page, sort, genre) => {
+    router.push(`/all?page=${page}&sort=${sort}&genre=${genre}`);
+  };
 
   const changePage = React.useCallback(
     ({ target }) => {
-      router.push(`/all?page=${target.innerHTML}&sort=${sort}&genre=${genre}`);
+      routing(target.innerHTML, sort, genre);
     },
     [page, sort, genre]
   );
 
   const changeGenre = React.useCallback(
     ({ target }) => {
-      router.push(`/all?page=1&sort=${sort}&genre=${target.value}`);
+      routing(1, sort, target.value);
     },
     [page, sort, genre]
   );
 
   const changeSort = React.useCallback(
     ({ target }) => {
-      router.push(`/all?page=1&sort=${target.value}&genre=${genre}`);
+      routing(1, target.value, genre);
     },
     [page, sort, genre]
   );
+
+  const nextPerPage = React.useCallback(() => {
+    const tmp = Math.floor((pageToNum - 1) / perPage) * perPage + perPage + 1;
+    const nextPage = maxPage >= tmp ? tmp : maxPage;
+    routing(nextPage, sort, genre);
+  }, [page, maxPage]);
+
+  const beforePerPage = React.useCallback(() => {
+    const tmp = Math.floor((pageToNum - 1) / perPage) * perPage;
+    const beforePage = tmp < 1 ? 1 : tmp;
+    routing(beforePage, sort, genre);
+  }, [page, maxPage]);
 
   React.useEffect(() => {
     if (genre) {
@@ -55,7 +73,7 @@ export default function AllPage() {
         .then((res) => {
           setLoading(false);
           setData(res.data.songs);
-          setMaxPage(res.data.max_song / showCardCnt + 1);
+          setMaxPage(Math.ceil(res.data.max_song / showCardCnt));
         })
         .catch((err) => {
           setLoading(false);
@@ -71,12 +89,10 @@ export default function AllPage() {
 
   React.useEffect(() => {
     if (page) {
-      const perPage = 10;
       const pageBar = document.getElementById("pageBar");
-      const pageToNum = parseInt(page.toString());
-      const startPage = Math.floor(pageToNum / 10) * 10 + 1;
+      const startPage = (Math.ceil(pageToNum / perPage) - 1) * perPage + 1;
       const lastPage =
-        maxPage >= startPage + perPage ? startPage + perPage : maxPage;
+        startPage + perPage <= maxPage ? startPage + perPage : maxPage + 1;
       while (pageBar.firstChild) {
         pageBar.removeChild(pageBar.firstChild);
       }
@@ -119,9 +135,9 @@ export default function AllPage() {
         <CardList data={data} />
         <S.PageBarWrap>
           <S.PageSmallWrap>
-            <Arrow callback={() => {}} isNext={false} />
+            <Arrow callback={beforePerPage} isNext={false} />
             <S.pageBar id="pageBar" />
-            <Arrow callback={() => {}} isNext={true} />
+            <Arrow callback={nextPerPage} isNext={true} />
           </S.PageSmallWrap>
         </S.PageBarWrap>
       </S.Container>

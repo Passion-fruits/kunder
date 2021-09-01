@@ -34,14 +34,14 @@ export default function AllPage() {
 
   const changeGenre = React.useCallback(
     ({ target }) => {
-      router.push(`/all?page=${page}&sort=${sort}&genre=${target.value}`);
+      router.push(`/all?page=1&sort=${sort}&genre=${target.value}`);
     },
     [page, sort, genre]
   );
 
   const changeSort = React.useCallback(
     ({ target }) => {
-      router.push(`/all?page=${page}&sort=${target.value}&genre=${genre}`);
+      router.push(`/all?page=1&sort=${target.value}&genre=${genre}`);
     },
     [page, sort, genre]
   );
@@ -55,8 +55,12 @@ export default function AllPage() {
           setLoading(false);
           setData(res.data);
         })
-        .catch(() => {
+        .catch((err) => {
           setLoading(false);
+          if (err.response.status === 404) {
+            setData(() => []);
+            return;
+          }
           toast.error("에러가 발생하였습니다.");
           router.push("/");
         });

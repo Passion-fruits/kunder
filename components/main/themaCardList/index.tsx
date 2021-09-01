@@ -8,7 +8,7 @@ export default function ThemaCardList() {
   const [data, setData] = useState([]);
   useEffect(() => {
     music.getStreaming({ genre: 1, page: 1, sort: 2 }).then((res) => {
-      setData(res.data);
+      setData(res.data.songs);
     });
   }, []);
   return (

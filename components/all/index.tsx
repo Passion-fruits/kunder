@@ -16,6 +16,7 @@ export default function AllPage() {
   const { genre, sort, page } = router.query;
   const [loading, setLoading] = React.useState<boolean>(true);
   const [data, setData] = React.useState<any[]>([]);
+  const [maxPage, setMaxPage] = React.useState(0);
   const genreCheckStyle: React.CSSProperties = {
     borderBottom: `2px solid ${COLOR.main}`,
     color: COLOR.main,
@@ -23,7 +24,7 @@ export default function AllPage() {
   const sortCheckStyle: React.CSSProperties = {
     color: COLOR.main,
   };
-  const perPage = 10;
+  const showCardCnt = 12;
 
   const changePage = React.useCallback(
     ({ target }) => {
@@ -53,7 +54,8 @@ export default function AllPage() {
         .getStreaming({ genre: genre, page: page, sort: sort })
         .then((res) => {
           setLoading(false);
-          setData(res.data);
+          setData(res.data.songs);
+          setMaxPage(res.data.max_song / showCardCnt + 1);
         })
         .catch((err) => {
           setLoading(false);
@@ -68,22 +70,29 @@ export default function AllPage() {
   }, [router]);
 
   React.useEffect(() => {
-    const pageBar = document.getElementById("pageBar");
-    while (pageBar.firstChild) {
-      pageBar.removeChild(pageBar.firstChild);
-    }
-    for (let i = 1; i < perPage + 1; i++) {
-      const div = document.createElement("div");
-      div.id = "pageIndex";
-      div.innerHTML = i.toString();
-      if (div.innerHTML === page) {
-        div.style.background = "black";
-        div.style.color = "white";
+    if (page) {
+      const perPage = 10;
+      const pageBar = document.getElementById("pageBar");
+      const pageToNum = parseInt(page.toString());
+      const startPage = Math.floor(pageToNum / 10) * 10 + 1;
+      const lastPage =
+        maxPage >= startPage + perPage ? startPage + perPage : maxPage;
+      while (pageBar.firstChild) {
+        pageBar.removeChild(pageBar.firstChild);
       }
-      div.onclick = changePage;
-      pageBar.insertBefore(div, null);
+      for (let i = startPage; i < lastPage; i++) {
+        const div = document.createElement("div");
+        div.id = "pageIndex";
+        div.innerHTML = i.toString();
+        if (div.innerHTML === page) {
+          div.style.background = "black";
+          div.style.color = "white";
+        }
+        div.onclick = changePage;
+        pageBar.insertBefore(div, null);
+      }
     }
-  }, [genre, sort, page]);
+  }, [genre, sort, page, maxPage]);
 
   return (
     <S.Wrapper>

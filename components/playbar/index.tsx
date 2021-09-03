@@ -5,16 +5,20 @@ import {
   PauseIcon,
   MuteIcon,
 } from "../../assets/index";
-import { getValue } from "../../lib/context";
+import { getValue, setValue } from "../../lib/context";
+import { toast } from "react-toastify";
 import React from "react";
 import * as S from "./styled";
 import MusicInfo from "./musicInfo";
 
 export default function PlayBar() {
+  const dispatch = setValue();
   const musicObj = getValue().musicInformation;
+  const musicList = getValue().list;
   const [isPlay, setIsPlay] = React.useState<boolean>(false);
   const [musicProgress, setMusicProgress] = React.useState<number>(0);
   const [volume, setVolume] = React.useState(50);
+  const [musicListNowIndex, setMusicListNowIndex] = React.useState<number>(0);
   const audio = React.useRef(typeof Audio !== "undefined" && new Audio());
 
   const musicStop = React.useCallback(() => {
@@ -31,6 +35,7 @@ export default function PlayBar() {
     const value = target.value;
     setMusicProgress(value);
     audio.current.currentTime = (audio.current.duration * value) / 100;
+    musicStart();
   }, []);
 
   const controleMusicVolume = React.useCallback(({ target }) => {
@@ -45,6 +50,56 @@ export default function PlayBar() {
     }
   }, [volume]);
 
+  const moveBeforeMusic = React.useCallback(() => {
+    if (musicListNowIndex - 1 >= 0 && musicList.length > 0) {
+      const nextMusicObj: any = musicList[musicListNowIndex - 1];
+      dispatch({
+        type: "MUSIC_CHANGE",
+        musicInformation: {
+          title: nextMusicObj.title,
+          coverImg: nextMusicObj.cover_url,
+          name: nextMusicObj.artist,
+          songId: nextMusicObj.song_id,
+          musicSrc: nextMusicObj.song_url,
+        },
+      });
+      setMusicListNowIndex((value) => value - 1);
+    } else {
+      toast.info("이전 곡이 없습니다.");
+    }
+  }, [musicList, musicListNowIndex]);
+
+  const moveNextMusic = React.useCallback(() => {
+    if (musicListNowIndex + 1 < musicList.length && musicList.length > 0) {
+      const nextMusicObj: any = musicList[musicListNowIndex + 1];
+      dispatch({
+        type: "MUSIC_CHANGE",
+        musicInformation: {
+          title: nextMusicObj.title,
+          coverImg: nextMusicObj.cover_url,
+          name: nextMusicObj.artist,
+          songId: nextMusicObj.song_id,
+          musicSrc: nextMusicObj.song_url,
+        },
+      });
+      setMusicListNowIndex((value) => value + 1);
+    } else {
+      toast.info("다음 곡이 없습니다.");
+    }
+  }, [musicList, musicListNowIndex]);
+
+  React.useEffect(() => {
+    setMusicListNowIndex(-1);
+  }, [musicList]);
+
+  React.useEffect(() => {
+    musicList.forEach((obj, index) => {
+      if (musicObj.songId === obj.song_id) {
+        setMusicListNowIndex(index);
+      }
+    });
+  }, [musicObj]);
+
   React.useEffect(() => {
     setMusicProgress(0);
     if (musicObj.musicSrc) {
@@ -56,12 +111,22 @@ export default function PlayBar() {
 
   React.useEffect(() => {
     setInterval(() => {
-      audio.current.currentTime &&
-        setMusicProgress(
-          (audio.current.currentTime / audio.current.duration) * 100 + 1
-        );
+      const progress =
+        (audio.current.currentTime / audio.current.duration) * 100 + 1;
+      audio.current.currentTime && progress <= 100;
+      setMusicProgress(progress);
     }, 1000);
   }, []);
+
+  React.useEffect(() => {
+    if (musicProgress >= 100) {
+      if (musicListNowIndex + 1 === musicList.length) {
+        musicStop();
+        return;
+      }
+      moveNextMusic();
+    }
+  }, [musicProgress]);
 
   React.useEffect(() => {
     audio.current.volume = volume / 100;
@@ -73,13 +138,13 @@ export default function PlayBar() {
       <S.Container>
         <S.Center>
           <S.CenterControl>
-            <PassIcon callback={() => {}} isNext={false} />
+            <PassIcon callback={moveBeforeMusic} isNext={false} />
             {isPlay ? (
               <PauseIcon size={17} callback={musicStop} />
             ) : (
               <PlayIcon size={17} callback={musicStart} />
             )}
-            <PassIcon callback={() => {}} isNext={true} />
+            <PassIcon callback={moveNextMusic} isNext={true} />
           </S.CenterControl>
           <S.RangeContainer progress={musicProgress}>
             <input type="range" onClick={moveMusic} />

@@ -1,11 +1,22 @@
 import MusicCard from "../musicCard";
 import * as S from "./styles";
+import { setValue } from "./../../lib/context/index";
+import React from "react";
 
 interface props {
   data: any[];
 }
 
 export default function CardList({ data }: props) {
+  const dispatch = setValue();
+
+  React.useEffect(() => {
+    dispatch({
+      type: "SET_MUSIC_LIST",
+      list: data,
+    });
+  }, [data]);
+  
   return (
     <S.Wrapper>
       {data.map((obj, index) => (

@@ -5,7 +5,7 @@ import { useRouter } from "next/dist/client/router";
 import { toast } from "react-toastify";
 import * as S from "./styles";
 import React from "react";
-import List from "./chooseList/list";
+import List from "./genre-sort-selector/selector";
 import music from "../../api/music";
 import CardList from "../../components/cardList";
 import Arrow from "../../assets/arrow";

@@ -124,6 +124,7 @@ export const RangeContainer = styled.div<rangeProps>`
   position: relative;
   display: flex;
   align-items: center;
+/*   background:#3A3A3A; */
   background: ${(e) =>
     `linear-gradient(to right, ${COLOR.main} 0%, ${COLOR.main} 
     ${e.progress}%, #3A3A3A ${e.progress}%, #3A3A3A 100%)`};

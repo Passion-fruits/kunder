@@ -113,8 +113,7 @@ export default function PlayBar() {
     setInterval(() => {
       const progress =
         (audio.current.currentTime / audio.current.duration) * 100 + 1;
-      audio.current.currentTime && progress <= 100;
-      setMusicProgress(progress);
+      if (!isNaN(progress)) setMusicProgress(progress);
     }, 1000);
   }, []);
 

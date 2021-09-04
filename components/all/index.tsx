@@ -24,8 +24,8 @@ export default function AllPage() {
   const sortCheckStyle: React.CSSProperties = {
     color: COLOR.main,
   };
-  const showCardCnt = 12;
-  const perPage = 3;
+  const showCardCnt = 20;
+  const perPage = 5;
   const pageToNum = page && parseInt(page.toString());
 
   const routing = (page, sort, genre) => {
@@ -69,7 +69,12 @@ export default function AllPage() {
     if (genre) {
       setLoading(true);
       music
-        .getStreaming({ genre: genre, page: page, sort: sort })
+        .getStreaming({
+          genre: genre,
+          page: page,
+          sort: sort,
+          size: showCardCnt,
+        })
         .then((res) => {
           setLoading(false);
           setData(res.data.songs);

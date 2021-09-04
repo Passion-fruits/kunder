@@ -2,9 +2,9 @@ import request from "./axios";
 import { ACCESS_TOKEN } from "./../lib/export/localstorage";
 
 export default {
-  getStreaming({ genre, page, sort }) {
+  getStreaming({ genre, page, sort, size }) {
     return request({
-      url: `/song/stream?genre=${genre}&page=${page}&sort=${sort}`,
+      url: `/song/stream?genre=${genre}&page=${page}&sort=${sort}&size=${size}`,
       method: "get",
       headers: {
         "Content-type": "application/json",
@@ -59,7 +59,7 @@ export default {
         "Content-type": "multipart/form-data",
         Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
       },
-      data:fd
+      data: fd,
     });
   },
 };

@@ -1,4 +1,3 @@
-import ThemaCardList from "../themaCardList";
 import RecommendGenre from "./contents/recommendGenre";
 import RecommendMusic from "./contents/recommendMusic";
 import * as S from "./styles";
@@ -37,9 +36,6 @@ export default function MainTopContainer() {
           imgSize="190px"
         />
       </S.ContentsFlexWrap>
-      <ThemaCardList/>
-      <ThemaCardList/>
-      <ThemaCardList/>
     </S.MainTopWrapper>
   );
 }

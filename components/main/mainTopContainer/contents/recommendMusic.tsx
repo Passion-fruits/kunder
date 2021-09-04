@@ -1,20 +1,46 @@
 import * as S from "../styles";
 import PlayBtn from "../playBtn";
+import music from "../../../../api/music";
+import React from "react";
+import { setValue } from "./../../../../lib/context/index";
 
 export default function RecommendMusic() {
+  const [data, setData] = React.useState<any>();
+  const dispatch = setValue();
+
+  React.useEffect(() => {
+    music.getStreaming({ size: 1, page: 1, sort: 2, genre: 1 }).then((res) => {
+      setData(res.data.songs[0]);
+    });
+  }, []);
+
+  const playMusic = React.useCallback(() => {
+    dispatch({
+      type: "MUSIC_CHANGE",
+      musicInformation: {
+        title: data.title,
+        name: data.artist,
+        coverImg: data.cover_url,
+        songId: data.song_id,
+        musicSrc: data.song_url,
+      },
+    });
+  }, [data]);
+
   return (
     <S.RecommendMusicWrapper>
-      <div className="img-cover content-box">
-        <div className="cover-music-info">
-          <h1>안녕 그대</h1>
-          <h3>김현철</h3>
-          <PlayBtn direction="right" />
-        </div>
-      </div>
-      <img
-        src="https://public-files.gumroad.com/variants/ta15js69flf0awf7qgtpvuqjb0s7/3298c3eb001bbed90f1d616da66708480096a0a1b6e81bd4f8a2d6e9b831d301"
-        alt=""
-      />
+      {data && (
+        <>
+          <div className="img-cover content-box">
+            <div className="cover-music-info">
+              <h1>{data.title}</h1>
+              <h3>{data.artist}</h3>
+              <PlayBtn direction="right" callback={playMusic} />
+            </div>
+          </div>
+          <img src={data.cover_url} />
+        </>
+      )}
     </S.RecommendMusicWrapper>
   );
 }

@@ -1,4 +1,3 @@
-import PlayBtn from "../playBtn";
 import * as S from "../styles";
 
 export default function RecommendGenre({
@@ -18,7 +17,6 @@ export default function RecommendGenre({
     >
         <h1>{title}</h1>
         <h3>{subTitle}</h3>
-        <PlayBtn direction="left"/>
         <img src={imgUrl} alt="" />
     </S.RecommendGenreWrapper>
   );

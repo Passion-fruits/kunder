@@ -21,6 +21,7 @@ export const Wrapper = styled.div`
 export const MusicInformatino = styled.div`
   width: 550px;
   .index-number {
+    width:30px;
     font-size: 15px;
     color: ${COLOR.text};
   }

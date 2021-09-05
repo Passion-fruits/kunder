@@ -42,8 +42,8 @@ export default function RecommendMusic() {
         <>
           <div className="img-cover content-box">
             <div className="cover-music-info">
-              <h1>{data.title}</h1>
-              <h3>{data.artist}</h3>
+              <div className="music-title">{data.title.slice(0, 17)}</div>
+              <div className="artist-name">{data.artist}</div>
               <PlayBtn direction="right" callback={playMusic} />
             </div>
           </div>

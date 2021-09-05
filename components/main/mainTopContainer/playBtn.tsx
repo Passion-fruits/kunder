@@ -13,7 +13,7 @@ export default function PlayBtn({ direction, callback }: props) {
       style={direction === "right" ? { right: 0 } : { left: 0 }}
       onClick={callback}
     >
-      <PlayIcon size={13} color="white" callback={() => {}} />
+      <PlayIcon size={15} color="white" callback={() => {}} />
     </S.PlayBtn>
   );
 }

@@ -34,8 +34,8 @@ export const ContentsFlexWrap = styled.div`
 `;
 
 export const PlayBtn = styled.button`
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   border-radius: 80%;
   background-color: ${COLOR.main};
   position: absolute;
@@ -52,7 +52,7 @@ export const RecommendMusicWrapper = styled.div`
   height: 350px;
   border: 1px solid rgb(240, 240, 240);
   position: relative;
-  cursor:pointer;
+  cursor: pointer;
   & img {
     width: 100%;
     height: 100%;
@@ -67,15 +67,22 @@ export const RecommendMusicWrapper = styled.div`
     .cover-music-info {
       display: flex;
       flex-direction: column;
-      padding-top: 190px;
-      & h1 {
-        font-size: 25px;
+      .music-title {
+        padding: 5px 15px;
+        font-size: 22px;
+        font-weight: 600;
+        color: white;
+        position: absolute;
+        background-color: black;
       }
-      & h3 {
-        font-size: 18px;
-        font-weight: 500;
-        margin-top: 5px;
-        opacity: 0.8;
+      .artist-name {
+        padding: 5px 15px;
+        font-size: 16px;
+        font-weight: 600;
+        color: white;
+        position: absolute;
+        background-color: black;
+        margin-top: 40px;
       }
     }
   }
@@ -94,7 +101,7 @@ export const RecommendGenreWrapper = styled.div<genreWrapProps>`
   background-color: ${(res) => res.backgroundColor};
   border-radius: 8px;
   color: white;
-  cursor:pointer;
+  cursor: pointer;
   & h1 {
     font-size: 18px;
   }

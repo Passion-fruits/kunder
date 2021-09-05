@@ -1,10 +1,10 @@
 import { HeartIcon, PlayIcon } from "../../assets";
 import { COLOR } from "../../styles";
-import * as S from "./styles";
-import { useRouter } from "next/dist/client/router";
-import React from "react";
 import { getDate } from "./../../lib/util/getDate";
 import { setValue } from "./../../lib/context/index";
+import { useRouter } from "next/dist/client/router";
+import * as S from "./styles";
+import React from "react";
 
 export default function MusicListCard({
   indexNumber,

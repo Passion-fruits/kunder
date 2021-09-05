@@ -8,7 +8,7 @@ export const MainTopWrapper = styled.div`
   .kunder-naming-intro {
     font-size: 23px;
     color: ${COLOR.black};
-    font-family: "Agency FB Bold", arial;
+    font-family: "Agency FB";
   }
   .sub-intro {
     margin-top: 10px;

@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
     width: ${`${IMG_SIZE}px`};
     height: ${`${IMG_SIZE}px`};
     border: 1px solid rgb(240, 240, 240);
-    border-radius: 5px;
   }
   & h3 {
     font-size: 18px;

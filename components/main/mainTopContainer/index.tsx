@@ -11,29 +11,29 @@ export default function MainTopContainer() {
         <RecommendMusic />
         <div className="column-wrap">
           <RecommendGenre
-            backgroundColor="#4D94FF"
+            backgroundColor="#01E388"
             title="힙합음악"
             subTitle="오늘을 힙하게"
             height="150px"
-            imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRaO29jas9tn4lelZsreznXFWI0iBA7qYvTgA&usqp=CAU"
-            imgSize="65px"
+            imgUrl="/hiphop-intro.png"
+            imgSize="130px"
           />
           <RecommendGenre
-            backgroundColor="#FF4D9A"
-            title="새벽 감성 바이브"
-            subTitle="새벽 드라이브 가실래요?"
+            backgroundColor="#FF3939"
+            title="레게 음악"
+            subTitle="소울 충만한 느낌"
             height="190px"
-            imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJhy6y4FBIV8TUptXXbpKxHjy52u3zZInCkQ&usqp=CAU"
-            imgSize="65px"
+            imgUrl="/reggae-intro.png"
+            imgSize="150px"
           />
         </div>
         <RecommendGenre
-          backgroundColor="#00EC86"
-          title="재즈음악"
-          subTitle="잔잔한 밤에 재즈음악"
+          backgroundColor="#0090FF"
+          title="팝 음악"
+          subTitle="팝과 함께 하루 즐기기"
           height="350px"
-          imgUrl="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/e4ed5459643717.5a298fd055fc3.png"
-          imgSize="190px"
+          imgUrl="/jazz-intro.png"
+          imgSize="250px"
         />
       </S.ContentsFlexWrap>
     </S.MainTopWrapper>

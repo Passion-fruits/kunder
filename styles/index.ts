@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
 
-export const IMG_SIZE = 200;
+export const IMG_SIZE = 210;
 
-export const HEADER_HEIGHT = 90;
+export const HEADER_HEIGHT = 80;
 
 export const TABLET_WIDTH = "768px";
 

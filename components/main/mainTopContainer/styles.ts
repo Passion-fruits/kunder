@@ -91,7 +91,7 @@ export const RecommendGenreWrapper = styled.div<genreWrapProps>`
   width: 380px;
   height: ${(res) => res.height};
   background-color: ${(res) => res.backgroundColor};
-  border-radius: 10px;
+  border-radius: 8px;
   color: white;
   & h1 {
     font-size: 18px;
@@ -102,14 +102,10 @@ export const RecommendGenreWrapper = styled.div<genreWrapProps>`
     font-weight: 500;
   }
   & img {
-    width: ${(res) => res.imgSize};
     height: ${(res) => res.imgSize};
-    transform: rotate(20deg);
     position: absolute;
     right: 0;
     bottom: 0;
-    margin: 35px;
-    box-shadow: 0px 3px 8px rgb(0, 0, 0, 0.2);
     z-index: 3;
   }
 `;

@@ -16,6 +16,12 @@ export const WRAPPER = styled.div`
 
 export const CONTAINER = styled.div`
   width: ${MAIN_WIDTH};
+  @media screen and (max-width: ${MAIN_WIDTH}) {
+    width: 100%;
+  }
+  @media screen and (max-width: ${TABLET_WIDTH}) {
+    display: none;
+  }
 `;
 
 export const COLOR = {

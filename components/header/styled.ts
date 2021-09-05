@@ -19,12 +19,6 @@ export const Cotainer = styled(CONTAINER)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  @media screen and (max-width: ${MAIN_WIDTH}) {
-    width: 100%;
-  }
-  @media screen and (max-width: ${TABLET_WIDTH}) {
-    display: none;
-  }
 `;
 
 export const LEFT_SIDE = styled.div`
@@ -35,21 +29,21 @@ export const LEFT_SIDE = styled.div`
     gap: 20px;
   }
   & img {
+    height: 25px;
+    cursor: pointer;
     @media screen and (max-width: ${MAIN_WIDTH}) {
       height: 20px;
     }
-    height: 25px;
-    cursor: pointer;
   }
   & span {
-    @media screen and (max-width: ${MAIN_WIDTH}) {
-      font-size: 16px;
-    }
     color: ${COLOR.black};
     font-size: 18px;
     cursor: pointer;
     &:last-of-type {
       color: ${COLOR.red};
+    }
+    @media screen and (max-width: ${MAIN_WIDTH}) {
+      font-size: 16px;
     }
   }
 `;
@@ -74,27 +68,27 @@ export const RIGHT_SIDE = styled.div`
     }
   }
   & input {
-    @media screen and (max-width: ${MAIN_WIDTH}) {
-      font-size: 14px;
-    }
     color: ${COLOR.black};
     font-size: 16px;
+    margin-left: 16px;
+    background: none;
     &::placeholder {
       color: ${COLOR.text};
     }
-    margin-left: 16px;
-    background: none;
-  }
-  & button {
     @media screen and (max-width: ${MAIN_WIDTH}) {
       font-size: 14px;
-      padding: 6px 12px;
     }
+  }
+  & button {
     font-size: 16px;
     padding: 8px 15px;
     color: ${COLOR.text};
     &:first-of-type {
       margin-left: 10px;
+    }
+    @media screen and (max-width: ${MAIN_WIDTH}) {
+      font-size: 14px;
+      padding: 6px 12px;
     }
   }
 `;

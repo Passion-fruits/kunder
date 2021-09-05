@@ -38,7 +38,7 @@ export default function Header() {
     <S.Wrapper>
       <S.Cotainer>
         <S.LEFT_SIDE>
-          <h1 onClick={() => routing("")}>KUNDER</h1>
+          <img onClick={() => routing("")} src="/kunder-logo.png" />
           <span onClick={() => routing("all?genre=1&sort=1&page=1")}>
             전체보기
           </span>

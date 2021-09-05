@@ -4,7 +4,7 @@ import { COLOR, CONTAINER, HEADER_HEIGHT, WRAPPER } from "./../../styles/index";
 export const Wrapper = styled(WRAPPER)`
   height: ${`${HEADER_HEIGHT}px`};
   position: fixed;
-  z-index:10;
+  z-index: 10;
 `;
 
 export const Cotainer = styled(CONTAINER)`
@@ -18,12 +18,8 @@ export const LEFT_SIDE = styled.div`
   display: flex;
   gap: 40px;
   align-items: center;
-  & h1 {
-    font-size: 30px;
-    color: ${COLOR.main};
-    font-weight: bold;
-    font-family: "Agency FB Bold", arial;
-    cursor: pointer;
+  & img {
+    height: 25px;
   }
   & span {
     color: ${COLOR.black};
@@ -63,8 +59,8 @@ export const RIGHT_SIDE = styled.div`
     font-size: 16px;
     padding: 8px 15px;
     color: ${COLOR.text};
-    &:first-of-type{
-      margin-left:10px;
+    &:first-of-type {
+      margin-left: 10px;
     }
   }
 `;

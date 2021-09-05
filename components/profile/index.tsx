@@ -34,8 +34,9 @@ export default function ProfilePage() {
     soundcloud: "",
     youtube: "",
   });
-  const [menu, setMenu] =
-    React.useState<"song" | "playlist" | "follower" | "following">("song");
+  const [menu, setMenu] = React.useState<
+    "song" | "playlist" | "follower" | "following"
+  >("song");
 
   const changeMenu = (menu) => {
     setMenu(menu);
@@ -45,7 +46,15 @@ export default function ProfilePage() {
     profile
       .getUserProfile(id)
       .then((res) => {
-        setUserData(res.data);
+        const data = res.data;
+        setUserData({
+          name: data.name,
+          bio: data.bio ? data.bio : "",
+          insta: data.insta ? data.insta : "",
+          facebook: data.facebook ? data.facebook : "",
+          soundcloud: data.soundcloud ? data.soundcloud : "",
+          youtube: data.youtube ? data.youtube : "",
+        });
         setIsMyPage(res.data.is_mine);
         setData(res.data);
         setLoading(false);
@@ -67,6 +76,7 @@ export default function ProfilePage() {
   React.useEffect(() => {
     id && getData();
   }, [router]);
+
   const getDetailData = () => {
     if (menu === "song") {
       profile
@@ -144,26 +154,23 @@ export default function ProfilePage() {
         <S.Container>
           <>
             <S.Info>
-                <S.ProfileImgWrapper>
-                  {update && <button onClick={fileUpload}>+</button>}
-                  <img src={data.profile} alt="" />
-                </S.ProfileImgWrapper>
-                <section>
-                  <h1>{data.name}</h1>
-                  <span>{data.email}</span>
-                  <article>
-                    <CircleFacebookIcon
-                      callback={snsRouting}
-                      url={data.facebook}
-                    />
-                    <InstaIcon callback={snsRouting} url={data.insta} />
-                    <SoundCloudIcon
-                      callback={snsRouting}
-                      url={data.soundcloud}
-                    />
-                    <YoutubeIcon callback={snsRouting} url={data.youtube} />
-                  </article>
-                </section>
+              <S.ProfileImgWrapper>
+                {update && <button onClick={fileUpload}>+</button>}
+                <img src={data.profile} alt="" />
+              </S.ProfileImgWrapper>
+              <section>
+                <h1>{data.name}</h1>
+                <span>{data.email}</span>
+                <article>
+                  <CircleFacebookIcon
+                    callback={snsRouting}
+                    url={data.facebook}
+                  />
+                  <InstaIcon callback={snsRouting} url={data.insta} />
+                  <SoundCloudIcon callback={snsRouting} url={data.soundcloud} />
+                  <YoutubeIcon callback={snsRouting} url={data.youtube} />
+                </article>
+              </section>
               <>
                 {update ? (
                   <S.UpdateContainer>

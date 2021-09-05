@@ -8,9 +8,11 @@ export interface dispatchMusicObject {
 
 export interface musicObject extends dispatchMusicObject {
   like: number | string;
-  created_at: Date; 
+  mood: string;
+  created_at: Date;
   description: string;
   genre: string;
   comment: string;
-  short_url: string;
+  short_url?: string;
+  user_id : string | number;
 }

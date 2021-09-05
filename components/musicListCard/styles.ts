@@ -40,6 +40,11 @@ export const MusicInformatino = styled.div`
     height: 75px;
     border: 1px solid rgb(240, 240, 240);
     margin-left: 40px;
+    cursor:pointer;
+    transition:0.5s;
+    &:hover{
+        opacity:0.8;
+    }
   }
   .music-title-writter {
     display: flex;
@@ -54,6 +59,10 @@ export const MusicInformatino = styled.div`
       font-size: 16px;
       font-weight: 500;
       color: ${COLOR.text};
+      cursor:pointer;
+      &:hover{
+          opacity:0.7;
+      }
     }
   }
 `;

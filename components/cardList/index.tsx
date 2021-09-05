@@ -1,6 +1,6 @@
 import MusicCard from "../musicCard";
 import * as S from "./styles";
-import { setValue } from "./../../lib/context/index";
+import { setValue } from "../../lib/context/index";
 import React from "react";
 
 interface props {

@@ -8,11 +8,12 @@ import LoadingPage from "../../components/loading";
 import FeedCard from "./feedCard/feedCard";
 import FeedSelect from "./select";
 import feed from "../../api/feed";
+import { musicObject } from './../../lib/interfaces/music';
 
 export default function FeedPage() {
   const router = useRouter();
   const { genre, sort } = router.query;
-  const [data, setData] = React.useState<any[]>([]);
+  const [data, setData] = React.useState<musicObject[]>([]);
   const [loading, setLoading] = React.useState<boolean>(false);
   const dataRef = React.useRef(null);
   dataRef.current = data;

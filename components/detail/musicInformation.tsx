@@ -33,10 +33,10 @@ export default function MusicInformation({
       type: "MUSIC_CHANGE",
       musicInformation: {
         title: title,
-        name: artist,
-        songId: router.query.id.toString(),
-        musicSrc: song_url,
-        coverImg: cover_url,
+        artist: artist,
+        song_id: router.query.id.toString(),
+        song_url: song_url,
+        cover_url: cover_url,
       },
     });
   }, []);

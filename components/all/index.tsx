@@ -7,7 +7,7 @@ import * as S from "./styles";
 import React from "react";
 import List from "./genre-sort-selector/selector";
 import music from "../../api/music";
-import CardList from "../../components/cardList";
+import CardList from "../cardList";
 import Arrow from "../../assets/arrow";
 import LoadingPage from "../loading";
 

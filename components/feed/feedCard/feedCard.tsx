@@ -26,10 +26,10 @@ export default function FeedCard({
       type: "MUSIC_CHANGE",
       musicInformation: {
         title: title,
-        songId: id,
-        name: name,
-        musicSrc: musicSrc,
-        coverImg: coverSrc,
+        song_id: id,
+        artist: name,
+        song_url: musicSrc,
+        cover_url: coverSrc,
       },
     });
   }, []);

@@ -7,6 +7,7 @@ import {
 } from "../../assets/index";
 import { getValue, setValue } from "../../lib/context";
 import { toast } from "react-toastify";
+import { dispatchMusicObject } from "./../../lib/interfaces/music";
 import React from "react";
 import * as S from "./styled";
 import MusicInfo from "./musicInfo";
@@ -57,10 +58,10 @@ export default function PlayBar() {
         type: "MUSIC_CHANGE",
         musicInformation: {
           title: nextMusicObj.title,
-          coverImg: nextMusicObj.cover_url,
-          name: nextMusicObj.artist,
-          songId: nextMusicObj.song_id,
-          musicSrc: nextMusicObj.song_url,
+          cover_url: nextMusicObj.cover_url,
+          artist: nextMusicObj.artist,
+          song_id: nextMusicObj.song_id,
+          song_url: nextMusicObj.song_url,
         },
       });
       setMusicListNowIndex((value) => value - 1);
@@ -71,15 +72,16 @@ export default function PlayBar() {
 
   const moveNextMusic = React.useCallback(() => {
     if (musicListNowIndex + 1 < musicList.length && musicList.length > 0) {
-      const nextMusicObj: any = musicList[musicListNowIndex + 1];
+      const nextMusicObj: dispatchMusicObject =
+        musicList[musicListNowIndex + 1];
       dispatch({
         type: "MUSIC_CHANGE",
         musicInformation: {
           title: nextMusicObj.title,
-          coverImg: nextMusicObj.cover_url,
-          name: nextMusicObj.artist,
-          songId: nextMusicObj.song_id,
-          musicSrc: nextMusicObj.song_url,
+          cover_url: nextMusicObj.cover_url,
+          artist: nextMusicObj.artist,
+          song_id: nextMusicObj.song_id,
+          song_url: nextMusicObj.song_url,
         },
       });
       setMusicListNowIndex((value) => value + 1);
@@ -94,7 +96,7 @@ export default function PlayBar() {
 
   React.useEffect(() => {
     musicList.forEach((obj, index) => {
-      if (musicObj.songId === obj.song_id) {
+      if (musicObj.song_id === obj.song_id) {
         setMusicListNowIndex(index);
       }
     });
@@ -102,8 +104,8 @@ export default function PlayBar() {
 
   React.useEffect(() => {
     setMusicProgress(0);
-    if (musicObj.musicSrc) {
-      audio.current.src = musicObj.musicSrc;
+    if (musicObj.song_url) {
+      audio.current.src = musicObj.song_url;
       audio.current.play();
       setIsPlay(true);
     }
@@ -151,9 +153,9 @@ export default function PlayBar() {
         </S.Center>
         <MusicInfo
           title={musicObj.title}
-          coverImg={musicObj.coverImg}
-          name={musicObj.name}
-          songId={musicObj.songId}
+          coverImg={musicObj.cover_url}
+          name={musicObj.artist}
+          songId={musicObj.song_id}
         />
         <S.Control>
           {volume == 0 ? (

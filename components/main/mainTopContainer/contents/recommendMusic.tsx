@@ -3,9 +3,10 @@ import PlayBtn from "../playBtn";
 import music from "../../../../api/music";
 import React from "react";
 import { setValue } from "./../../../../lib/context/index";
+import { musicObject } from './../../../../lib/interfaces/music';
 
 export default function RecommendMusic() {
-  const [data, setData] = React.useState<any>();
+  const [data, setData] = React.useState<musicObject>();
   const dispatch = setValue();
 
   React.useEffect(() => {
@@ -19,10 +20,10 @@ export default function RecommendMusic() {
       type: "MUSIC_CHANGE",
       musicInformation: {
         title: data.title,
-        name: data.artist,
-        coverImg: data.cover_url,
-        songId: data.song_id,
-        musicSrc: data.song_url,
+        artist: data.artist,
+        cover_url: data.cover_url,
+        song_id: data.song_id,
+        song_url: data.song_url,
       },
     });
   }, [data]);

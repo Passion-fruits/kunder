@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { IMG_SIZE, WRAPPER } from "./../../styles/index";
+import { IMG_SIZE, WRAPPER } from "../../styles/index";
 
 export const Wrapper = styled(WRAPPER)`
   display: grid;

@@ -12,7 +12,7 @@ import * as S from "./styles";
 import React from "react";
 import MenuList from "./menu/menuList";
 import profile from "../../api/profile";
-import CardList from "../../components/cardList";
+import CardList from "../cardList";
 import FileInput from "./input/fileinput";
 import InforInput from "./input/inforInfo";
 import LoadingPage from "../../components/loading";

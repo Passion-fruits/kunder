@@ -1,7 +1,7 @@
 import { useRouter } from "next/dist/client/router";
 import * as S from "./styled";
 import { setValue } from "./../../lib/context/index";
-import { CommentIcon, HeartIcon, PlayIcon } from "./../../assets";
+import { HeartIcon, PlayIcon } from "./../../assets";
 import { COLOR } from "./../../styles/index";
 
 interface props {
@@ -33,10 +33,10 @@ export default function MusicCard({
       type: "MUSIC_CHANGE",
       musicInformation: {
         title: title,
-        name: writerName,
-        coverImg: imgSrc,
-        musicSrc: musicSrc,
-        songId: id,
+        artist: writerName,
+        cover_url: imgSrc,
+        song_url: musicSrc,
+        song_id: id,
       },
     });
   };

@@ -1,29 +1,14 @@
 import React, { useReducer, useContext, createContext, Dispatch } from "react";
-
-interface musicObj {
-  coverImg: string;
-  title: string;
-  name: string;
-  musicSrc: string;
-  songId: string;
-}
-
-interface listObj {
-  cover_url : string;
-  song_url : string;
-  title : string;
-  artist : string;
-  song_id : string | number;
-}
+import { dispatchMusicObject } from "./../interfaces/music";
 
 type State = {
-  musicInformation: musicObj;
-  list: any[];
+  musicInformation: dispatchMusicObject;
+  list: dispatchMusicObject[] | [];
 };
 
 type Action =
-  | { type: "MUSIC_CHANGE"; musicInformation: musicObj }
-  | { type: "SET_MUSIC_LIST"; list: musicObj[] };
+  | { type: "MUSIC_CHANGE"; musicInformation: dispatchMusicObject }
+  | { type: "SET_MUSIC_LIST"; list: dispatchMusicObject[] };
 
 type SampleDispatch = Dispatch<Action>;
 
@@ -50,11 +35,11 @@ function reducer(state: State, action: Action): State {
 export function SampleProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, {
     musicInformation: {
-      coverImg: "",
+      cover_url: "",
       title: "곡이 없습니다",
-      name: "---",
-      musicSrc: "",
-      songId: "",
+      artist: "---",
+      song_url: "",
+      song_id: "",
     },
     list: [],
   });

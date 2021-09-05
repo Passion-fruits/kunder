@@ -7,7 +7,7 @@ import { useEffect } from "react";
 export default function ThemaCardList() {
   const [data, setData] = useState([]);
   useEffect(() => {
-    music.getStreaming({ genre: 1, page: 1, sort: 2 }).then((res) => {
+    music.getStreaming({ genre: 1, page: 1, sort: 2, size : 5 }).then((res) => {
       setData(res.data.songs);
     });
   }, []);

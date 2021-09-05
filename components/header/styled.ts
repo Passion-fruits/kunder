@@ -22,7 +22,7 @@ export const LEFT_SIDE = styled.div`
     font-size: 30px;
     color: ${COLOR.main};
     font-weight: bold;
-    font-family: "Agency FB";
+    font-family: "Agency FB Bold", arial;
     cursor: pointer;
   }
   & span {

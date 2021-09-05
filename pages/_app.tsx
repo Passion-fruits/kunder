@@ -23,8 +23,9 @@ function App({ Component, pageProps }: AppProps) {
           href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"
         />
         <link
-          href="http://allfont.net/allfont.css?fonts=agency-fb-bold"
+          href="https://allfont.net/allfont.css?fonts=agency-fb-bold"
           rel="stylesheet"
+          type="text/css"
         />
         <script src="//cdnjs.cloudflare.com/ajax/libs/wavesurfer.js/1.4.0/wavesurfer.min.js"></script>
         <link rel="icon" href="/logo.ico" />

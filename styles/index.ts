@@ -1,15 +1,21 @@
 import styled from "@emotion/styled";
 
+export const IMG_SIZE = 200;
+
+export const HEADER_HEIGHT = 90;
+
+export const TABLET_WIDTH = "768px";
+
+export const MAIN_WIDTH = "1150PX";
+
 export const WRAPPER = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
-  min-width:1150px;
 `;
 
 export const CONTAINER = styled.div`
-  width: 1150px;
-  min-width:1150px;
+  width: ${MAIN_WIDTH};
 `;
 
 export const COLOR = {
@@ -20,7 +26,3 @@ export const COLOR = {
   background: "#F3F3F3",
   iconNone: "#CFCFCF",
 };
-
-export const IMG_SIZE = 200;
-
-export const HEADER_HEIGHT = 90;

@@ -48,7 +48,7 @@ export default function MusicCard({
           <PlayIcon callback={musicChange} size={20} />
         </button>
       </S.Cover>
-      <img src={imgSrc} />
+      <img src={imgSrc} loading="lazy" />
       <h3>{title}</h3>
       <span className="artist-name">{writerName}</span>
       <S.HeartWrap>

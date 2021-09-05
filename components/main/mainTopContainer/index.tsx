@@ -12,7 +12,8 @@ export default function MainTopContainer() {
         <div className="column-wrap">
           <RecommendGenre
             backgroundColor="#01E388"
-            title="힙합음악"
+            title="힙합 음악"
+            genre="힙합"
             subTitle="오늘을 힙하게"
             height="150px"
             imgUrl="/hiphop-intro.png"
@@ -21,6 +22,7 @@ export default function MainTopContainer() {
           <RecommendGenre
             backgroundColor="#FF3939"
             title="레게 음악"
+            genre="레게"
             subTitle="소울 충만한 느낌"
             height="190px"
             imgUrl="/reggae-intro.png"
@@ -30,6 +32,7 @@ export default function MainTopContainer() {
         <RecommendGenre
           backgroundColor="#0090FF"
           title="팝 음악"
+          genre="팝"
           subTitle="팝과 함께 하루 즐기기"
           height="350px"
           imgUrl="/jazz-intro.png"

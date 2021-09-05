@@ -17,7 +17,7 @@ export const MainTopWrapper = styled.div`
     color: ${COLOR.text};
   }
   .content-box {
-    padding: 25px;
+    padding: 30px;
   }
 `;
 
@@ -93,6 +93,7 @@ export const RecommendGenreWrapper = styled.div<genreWrapProps>`
   background-color: ${(res) => res.backgroundColor};
   border-radius: 8px;
   color: white;
+  cursor:pointer;
   & h1 {
     font-size: 18px;
   }

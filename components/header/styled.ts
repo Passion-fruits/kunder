@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import {
   COLOR,
-  CONTAINER,
+  FIXED_CONTAINER,
   HEADER_HEIGHT,
   MAIN_WIDTH,
   TABLET_WIDTH,
@@ -12,13 +12,18 @@ export const Wrapper = styled(WRAPPER)`
   height: ${`${HEADER_HEIGHT}px`};
   position: fixed;
   z-index: 10;
+  min-width:${TABLET_WIDTH};
+  @media screen and (max-width: ${MAIN_WIDTH}) {
+    width: 100%;
+  }
 `;
 
-export const Cotainer = styled(CONTAINER)`
+export const Cotainer = styled(FIXED_CONTAINER)`
   background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width:none;
 `;
 
 export const LEFT_SIDE = styled.div`

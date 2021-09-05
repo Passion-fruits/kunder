@@ -12,15 +12,18 @@ export const WRAPPER = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  min-width: ${MAIN_WIDTH};
 `;
 
 export const CONTAINER = styled.div`
   width: ${MAIN_WIDTH};
+  min-width: ${MAIN_WIDTH};
+`;
+
+export const FIXED_CONTAINER = styled.div`
+  width: ${MAIN_WIDTH};
   @media screen and (max-width: ${MAIN_WIDTH}) {
     width: 100%;
-  }
-  @media screen and (max-width: ${TABLET_WIDTH}) {
-    display: none;
   }
 `;
 

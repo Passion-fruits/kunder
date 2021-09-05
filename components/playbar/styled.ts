@@ -1,5 +1,11 @@
 import styled from "@emotion/styled";
-import { COLOR, CONTAINER, WRAPPER } from "./../../styles/index";
+import {
+  COLOR,
+  FIXED_CONTAINER,
+  MAIN_WIDTH,
+  TABLET_WIDTH,
+  WRAPPER,
+} from "./../../styles/index";
 
 export const Wrapper = styled(WRAPPER)`
   background-color: black;
@@ -10,9 +16,13 @@ export const Wrapper = styled(WRAPPER)`
   box-shadow: 0px -3px 10px rgb(0, 0, 0, 0.1);
   position: fixed;
   z-index: 10;
+  min-width: ${TABLET_WIDTH};
+  @media screen and (max-width: ${MAIN_WIDTH}) {
+    width: 100%;
+  }
 `;
 
-export const Container = styled(CONTAINER)`
+export const Container = styled(FIXED_CONTAINER)`
   height: 80px;
   display: flex;
   justify-content: space-between;

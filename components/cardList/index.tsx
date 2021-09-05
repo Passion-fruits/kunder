@@ -1,6 +1,6 @@
+import { setValue } from "../../lib/context/index";
 import MusicCard from "../musicCard";
 import * as S from "./styles";
-import { setValue } from "../../lib/context/index";
 import React from "react";
 
 interface props {
@@ -16,7 +16,7 @@ export default function CardList({ data }: props) {
       list: data,
     });
   }, [data]);
-  
+
   return (
     <S.Wrapper>
       {data.map((obj, index) => (

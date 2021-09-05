@@ -61,7 +61,9 @@ export default function PlayBar() {
           cover_url: nextMusicObj.cover_url,
           artist: nextMusicObj.artist,
           song_id: nextMusicObj.song_id,
-          song_url: nextMusicObj.song_url,
+          song_url: nextMusicObj.song_url
+            ? nextMusicObj.song_url
+            : nextMusicObj.short_url,
         },
       });
       setMusicListNowIndex((value) => value - 1);
@@ -81,7 +83,9 @@ export default function PlayBar() {
           cover_url: nextMusicObj.cover_url,
           artist: nextMusicObj.artist,
           song_id: nextMusicObj.song_id,
-          song_url: nextMusicObj.song_url,
+          song_url: nextMusicObj.song_url
+            ? nextMusicObj.song_url
+            : nextMusicObj.short_url,
         },
       });
       setMusicListNowIndex((value) => value + 1);

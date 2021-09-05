@@ -3,7 +3,8 @@ export interface dispatchMusicObject {
   artist: string;
   cover_url: string;
   song_id: string;
-  song_url: string;
+  song_url?: string;
+  short_url?: string;
 }
 
 export interface musicObject extends dispatchMusicObject {
@@ -13,6 +14,5 @@ export interface musicObject extends dispatchMusicObject {
   description: string;
   genre: string;
   comment: string;
-  short_url?: string;
-  user_id : string | number;
+  user_id: string | number;
 }

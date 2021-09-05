@@ -1,19 +1,15 @@
+import { setValue } from "./../../../../lib/context/index";
+import { musicObject } from "./../../../../lib/interfaces/music";
+import { useRouter } from "next/dist/client/router";
 import * as S from "../styles";
 import PlayBtn from "../playBtn";
 import music from "../../../../api/music";
 import React from "react";
-import { setValue } from "./../../../../lib/context/index";
-import { musicObject } from './../../../../lib/interfaces/music';
 
 export default function RecommendMusic() {
   const [data, setData] = React.useState<musicObject>();
   const dispatch = setValue();
-
-  React.useEffect(() => {
-    music.getStreaming({ size: 1, page: 1, sort: 2, genre: 1 }).then((res) => {
-      setData(res.data.songs[0]);
-    });
-  }, []);
+  const router = useRouter();
 
   const playMusic = React.useCallback(() => {
     dispatch({
@@ -28,8 +24,20 @@ export default function RecommendMusic() {
     });
   }, [data]);
 
+  const routingToMusicDetail = ({ target }) => {
+    if (target.id !== "play-button") {
+      router.push(`/detail?id=${data.song_id}`);
+    }
+  };
+
+  React.useEffect(() => {
+    music.getStreaming({ size: 1, page: 1, sort: 2, genre: 1 }).then((res) => {
+      setData(res.data.songs[0]);
+    });
+  }, []);
+
   return (
-    <S.RecommendMusicWrapper>
+    <S.RecommendMusicWrapper onClick={routingToMusicDetail}>
       {data && (
         <>
           <div className="img-cover content-box">

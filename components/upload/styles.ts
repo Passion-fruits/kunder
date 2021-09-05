@@ -10,6 +10,7 @@ export const Wrapper = styled(WRAPPER)`
 export const Container = styled(CONTAINER)`
   padding-top: 30px;
   width: 800px;
+  min-width:800px;
 `;
 
 export const TipForMusicUpload = styled.div`

@@ -9,6 +9,7 @@ interface props {
 export default function PlayBtn({ direction, callback }: props) {
   return (
     <S.PlayBtn
+      id="play-button"
       style={direction === "right" ? { right: 0 } : { left: 0 }}
       onClick={callback}
     >

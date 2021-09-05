@@ -55,8 +55,8 @@ export default function ProfilePage() {
           soundcloud: data.soundcloud ? data.soundcloud : "",
           youtube: data.youtube ? data.youtube : "",
         });
-        setIsMyPage(res.data.is_mine);
-        setData(res.data);
+        setIsMyPage(data.is_mine);
+        setData(data);
         setLoading(false);
       })
       .catch(() => {

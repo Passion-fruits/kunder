@@ -52,6 +52,7 @@ export const RecommendMusicWrapper = styled.div`
   height: 350px;
   border: 1px solid rgb(240, 240, 240);
   position: relative;
+  cursor:pointer;
   & img {
     width: 100%;
     height: 100%;

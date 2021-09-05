@@ -4,10 +4,12 @@ export const WRAPPER = styled.div`
   width: 100%;
   display: flex;
   justify-content: center;
+  min-width:1150px;
 `;
 
 export const CONTAINER = styled.div`
   width: 1150px;
+  min-width:1150px;
 `;
 
 export const COLOR = {

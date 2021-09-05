@@ -1,20 +1,30 @@
 import CardList from "../../cardList";
 import * as S from "./styles";
-import { useState } from "react";
+import React from "react";
 import music from "../../../api/music";
-import { useEffect } from "react";
+import { genreList } from "./../../../lib/export/genre";
+import { musicObject } from "../../../lib/interfaces/music";
 
-export default function ThemaCardList() {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    music.getStreaming({ genre: 1, page: 1, sort: 2, size : 5 }).then((res) => {
-      setData(res.data.songs);
-    });
+export default function ThemaCardList({ title, genre }) {
+  const [data, setData] = React.useState<musicObject[]>([]);
+
+  React.useEffect(() => {
+    music
+      .getStreaming({
+        genre: genreList.indexOf(genre) + 1,
+        page: 1,
+        sort: 2,
+        size: 5,
+      })
+      .then((res) => {
+        setData(res.data.songs);
+      });
   }, []);
+
   return (
     <S.Wrapper>
-      <h1>오늘 나온 음악을 들어보세요</h1>
-      <CardList data={data.slice(0, 5)} />
+      <h1>{title}</h1>
+      <CardList data={data} />
     </S.Wrapper>
   );
 }

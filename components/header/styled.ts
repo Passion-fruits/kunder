@@ -20,6 +20,7 @@ export const LEFT_SIDE = styled.div`
   align-items: center;
   & img {
     height: 25px;
+    cursor: pointer;
   }
   & span {
     color: ${COLOR.black};

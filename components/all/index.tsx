@@ -82,12 +82,8 @@ export default function AllPage() {
         })
         .catch((err) => {
           setLoading(false);
-          if (err.response.status === 404) {
-            setData(() => []);
-            return;
-          }
-          toast.error("에러가 발생하였습니다.");
-          router.push("/");
+          setData(() => []);
+          return;
         });
     }
   }, [router]);

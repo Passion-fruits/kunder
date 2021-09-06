@@ -31,9 +31,14 @@ export default function RecommendMusic() {
   };
 
   React.useEffect(() => {
-    music.getStreaming({ size: 1, page: 1, sort: 1, genre: 1 }).then((res) => {
-      setData(res.data.songs[0]);
-    });
+    music
+      .getStreaming({ size: 1, page: 1, sort: 1, genre: 1 })
+      .then((res) => {
+        setData(res.data.songs[0]);
+      })
+      .catch(() => {
+        return;
+      });
   }, []);
 
   return (

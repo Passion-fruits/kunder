@@ -18,6 +18,9 @@ export default function ThemaCardList({ title, genre }) {
       })
       .then((res) => {
         setData(res.data.songs);
+      })
+      .catch(() => {
+        return;
       });
   }, []);
 

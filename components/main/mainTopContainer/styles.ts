@@ -68,20 +68,20 @@ export const RecommendMusicWrapper = styled.div`
       display: flex;
       flex-direction: column;
       .music-title {
-        padding: 5px 15px;
-        font-size: 22px;
-        font-weight: 600;
+        padding: 5px 16px;
+        font-size: 20px;
+        font-weight: 500;
         color: white;
         position: absolute;
-        background-color: black;
+        background-color: ${COLOR.black};
       }
       .artist-name {
         padding: 5px 15px;
         font-size: 16px;
-        font-weight: 600;
+        font-weight: 500;
         color: white;
         position: absolute;
-        background-color: black;
+        background-color: ${COLOR.black};
         margin-top: 40px;
       }
     }

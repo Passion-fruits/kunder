@@ -73,10 +73,6 @@ export default function ProfilePage() {
     });
   };
 
-  React.useEffect(() => {
-    id && getData();
-  }, [router]);
-
   const getDetailData = () => {
     if (menu === "song") {
       profile
@@ -145,6 +141,17 @@ export default function ProfilePage() {
       }
     };
   }, []);
+
+  React.useEffect(() => {
+    if(id){
+      getData();
+      profile.checkFollow(id).then((res)=>{
+        console.log(res.data)
+      }).catch((err)=>{
+        console.log(err)
+      })
+    }
+  }, [router]);
 
   return (
     <S.Wrapper>

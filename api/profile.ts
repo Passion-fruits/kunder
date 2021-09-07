@@ -49,4 +49,17 @@ export default {
       data: fd,
     });
   },
+  checkFollow(id) {
+    return request({
+      url: `/follow`,
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+      data: {
+        users: [id],
+      },
+    });
+  },
 };

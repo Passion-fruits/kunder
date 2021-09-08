@@ -62,4 +62,34 @@ export default {
       data: fd,
     });
   },
+  checkIsLike(id) {
+    return request({
+      url: `/like?song_id=${id}`,
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+    });
+  },
+  pushLike(id) {
+    return request({
+      url: `/like/${id}`,
+      method: "post",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+    });
+  },
+  deleteLike(id) {
+    return request({
+      url: `/like/${id}`,
+      method: "delete",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+    });
+  },
 };

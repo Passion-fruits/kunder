@@ -4,10 +4,12 @@ import { useRouter } from "next/dist/client/router";
 import { resizing } from "./../../lib/util/resizing";
 import { setValue } from "./../../lib/context/index";
 import { genreList } from "../../lib/export/genre";
+import { toast } from "react-toastify";
 import * as S from "./styles";
 import React from "react";
 import HeartIcon from "../../assets/heart";
 import PlayIcon from "./../../assets/play";
+import music from "../../api/music";
 
 export default function MusicInformation({
   cover_url,
@@ -22,7 +24,10 @@ export default function MusicInformation({
   song_url,
 }) {
   const router = useRouter();
+  const { id } = router.query;
   const dispatch = setValue();
+  const [isLike, setIsLike] = React.useState<boolean>(false);
+  const [likeCnt, setLikeCnt] = React.useState<number>(parseInt(like));
 
   const routingToUserProfile = React.useCallback(() => {
     router.push(`/profile?id=${user_id}`);
@@ -45,6 +50,47 @@ export default function MusicInformation({
     router.push(`/all?genre=${genreList.indexOf(target.id) + 1}&page=1&sort=1`);
   }, []);
 
+  const pushLike = React.useCallback(() => {
+    music
+      .pushLike(id)
+      .then((res) => {
+        if (res.data.message === "success") {
+          toast.success("좋아요를 표시하였습니다.");
+          setIsLike(true);
+          setLikeCnt(likeCnt + 1);
+        }
+        like += 1;
+      })
+      .catch((err) => {
+        const status = err.response.status;
+        if (status === 401) {
+          toast.info("로그인 후 이용해주세요.");
+          return;
+        }
+        toast.error("에러가 발생하였습니다.");
+      });
+  }, [likeCnt]);
+
+  const deleteLike = React.useCallback(() => {
+    music
+      .deleteLike(id)
+      .then((res) => {
+        if (res.data.message === "success") {
+          toast.success("좋아요를 취소하였습니다.");
+          setIsLike(false);
+          setLikeCnt(likeCnt - 1);
+        }
+      })
+      .catch((err) => {
+        const status = err.response.status;
+        if (status === 401) {
+          toast.info("로그인 후 이용해주세요.");
+          return;
+        }
+        toast.error("에러가 발생하였습니다.");
+      });
+  }, [likeCnt]);
+
   React.useEffect(() => {
     if (song_url) {
       const WaveSurfer = require("wavesurfer.js");
@@ -65,6 +111,19 @@ export default function MusicInformation({
   React.useEffect(() => {
     resizing(user_id);
   }, [description]);
+
+  React.useEffect(() => {
+    if (id) {
+      music
+        .checkIsLike(id)
+        .then((res) => {
+          res.data.is_like ? setIsLike(true) : setIsLike(false);
+        })
+        .catch((err) => {
+          return;
+        });
+    }
+  }, [router]);
 
   return (
     <>
@@ -97,8 +156,13 @@ export default function MusicInformation({
             <button>#{mood}</button>
           </S.GenreWrap>
           <S.MusicLikeContainer>
-            <HeartIcon size={20} callback={() => {}} color={COLOR.main} />
-            <span>{like}</span>
+            <HeartIcon
+              isLike={isLike}
+              size={20}
+              callback={isLike ? deleteLike : pushLike}
+              color={COLOR.main}
+            />
+            <span>{likeCnt}</span>
           </S.MusicLikeContainer>
         </S.MusicIconContainer>
       </>

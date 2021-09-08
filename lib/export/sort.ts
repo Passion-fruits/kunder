@@ -1,1 +1,1 @@
-export const sortList = ["좋아요순", "최신순", "과거순", "AI추천"];
+export const sortList = ["최신순", "과거순", "좋아요순", "AI추천"];

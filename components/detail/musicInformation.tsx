@@ -51,43 +51,46 @@ export default function MusicInformation({
   }, []);
 
   const pushLike = React.useCallback(() => {
+    setIsLike(true);
+    setLikeCnt(likeCnt + 1);
     music
       .pushLike(id)
       .then((res) => {
         if (res.data.message === "success") {
           toast.success("좋아요를 표시하였습니다.");
-          setIsLike(true);
-          setLikeCnt(likeCnt + 1);
         }
-        like += 1;
       })
       .catch((err) => {
         const status = err.response.status;
         if (status === 401) {
           toast.info("로그인 후 이용해주세요.");
-          return;
+        } else {
+          toast.error("에러가 발생하였습니다.");
         }
-        toast.error("에러가 발생하였습니다.");
+        setIsLike(false);
+        setLikeCnt(likeCnt);
       });
   }, [likeCnt]);
 
   const deleteLike = React.useCallback(() => {
+    setIsLike(false);
+    setLikeCnt(likeCnt - 1);
     music
       .deleteLike(id)
       .then((res) => {
         if (res.data.message === "success") {
           toast.success("좋아요를 취소하였습니다.");
-          setIsLike(false);
-          setLikeCnt(likeCnt - 1);
         }
       })
       .catch((err) => {
         const status = err.response.status;
         if (status === 401) {
           toast.info("로그인 후 이용해주세요.");
-          return;
+        } else {
+          toast.error("에러가 발생하였습니다.");
         }
-        toast.error("에러가 발생하였습니다.");
+        setIsLike(true);
+        setLikeCnt(likeCnt);
       });
   }, [likeCnt]);
 
@@ -119,7 +122,7 @@ export default function MusicInformation({
         .then((res) => {
           res.data.is_like ? setIsLike(true) : setIsLike(false);
         })
-        .catch((err) => {
+        .catch(() => {
           return;
         });
     }

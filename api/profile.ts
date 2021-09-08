@@ -51,14 +51,31 @@ export default {
   },
   checkFollow(id) {
     return request({
-      url: `/follow`,
+      url: `/follow?user_id=${id}`,
+      method: "get",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
+      },
+    });
+  },
+  follow(id) {
+    return request({
+      url: `/follow/${id}`,
       method: "post",
       headers: {
         "Content-type": "application/json",
         Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
       },
-      data: {
-        users: [id],
+    });
+  },
+  unFollow(id) {
+    return request({
+      url: `/follow/${id}`,
+      method: "delete",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem(ACCESS_TOKEN)}`,
       },
     });
   },

@@ -26,6 +26,7 @@ export default function ProfilePage() {
   const [isMyPage, setIsMyPage] = React.useState<boolean>(false);
   const [update, setUpdate] = React.useState<boolean>(false);
   const [loading, setLoading] = React.useState<boolean>(true);
+  const [isFollow, setIsFollow] = React.useState<boolean>(false);
   const [userData, setUserData] = React.useState<any>({
     name: "",
     bio: "",
@@ -120,6 +121,37 @@ export default function ProfilePage() {
     setUpdate(false);
   };
 
+  const follow = React.useCallback(() => {
+    setIsFollow(true);
+    profile
+      .follow(id)
+      .then(() => {
+        toast.success("팔로우 되었습니다.");
+      })
+      .catch((err) => {
+        if (err.response.status === 401) {
+          toast.info("로그인 후 이용해주세요.");
+        } else {
+          toast.error("에러가 발생하였습니다.");
+          return;
+        }
+        setIsFollow(false);
+      });
+  }, [id, isFollow]);
+
+  const unFollow = React.useCallback(() => {
+    setIsFollow(false);
+    profile
+      .unFollow(id)
+      .then(() => {
+        toast.success("언팔로우 되었습니다.");
+      })
+      .catch(() => {
+        toast.error("에러가 발생하였습니다.");
+        setIsFollow(true);
+      });
+  }, [id, isFollow]);
+
   React.useEffect(() => {
     setPage(1);
     musicList.length = 0;
@@ -143,13 +175,18 @@ export default function ProfilePage() {
   }, []);
 
   React.useEffect(() => {
-    if(id){
+    if (id) {
       getData();
-      profile.checkFollow(id).then((res)=>{
-        console.log(res.data)
-      }).catch((err)=>{
-        console.log(err)
-      })
+      profile
+        .checkFollow(id)
+        .then((res) => {
+          if (res.data.is_follow) {
+            setIsFollow(true);
+          }
+        })
+        .catch(() => {
+          return;
+        });
     }
   }, [router]);
 
@@ -200,7 +237,15 @@ export default function ProfilePage() {
                         정보수정
                       </S.CallbackBtn>
                     ) : (
-                      <S.CallbackBtn>팔로우</S.CallbackBtn>
+                      <>
+                        {isFollow ? (
+                          <S.CallbackBtn onClick={unFollow}>
+                            언팔로우
+                          </S.CallbackBtn>
+                        ) : (
+                          <S.CallbackBtn onClick={follow}>팔로우</S.CallbackBtn>
+                        )}
+                      </>
                     )}
                   </>
                 )}

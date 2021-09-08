@@ -7,8 +7,9 @@ export const MainTopWrapper = styled.div`
   flex-direction: column;
   .kunder-naming-intro {
     font-size: 23px;
+    font-weight:800;
     color: ${COLOR.black};
-    font-family: "Agency FB";
+    letter-spacing:-1px;
   }
   .sub-intro {
     margin-top: 10px;

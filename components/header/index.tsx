@@ -8,6 +8,7 @@ import {
 } from "./../../lib/export/localstorage";
 import * as S from "./styled";
 import React from "react";
+import profile from "../../api/profile";
 
 export default function Header() {
   const router = useRouter();
@@ -33,6 +34,18 @@ export default function Header() {
       setIsLogin(false);
     }
   }, [router]);
+
+  React.useEffect(() => {
+    profile
+      .checkFollow(1000)
+      .then(() => {
+        setIsLogin(true);
+      })
+      .catch(() => {
+        setIsLogin(false);
+        return;
+      });
+  }, []);
 
   return (
     <S.Wrapper>

@@ -176,10 +176,10 @@ export default function ProfilePage() {
 
   React.useEffect(() => {
     if (id) {
-      getData();
       profile
         .checkFollow(id)
         .then((res) => {
+          getData();
           if (res.data.is_follow) {
             setIsFollow(true);
           }

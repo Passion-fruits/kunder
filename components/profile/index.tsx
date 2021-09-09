@@ -175,6 +175,7 @@ export default function ProfilePage() {
   }, []);
 
   React.useEffect(() => {
+    getData();
     if (id) {
       profile
         .checkFollow(id)

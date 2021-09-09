@@ -13,7 +13,7 @@ export default function ThemaCardList({ title, genre }) {
       .getStreaming({
         genre: genreList.indexOf(genre) + 1,
         page: 1,
-        sort: 2,
+        sort: 3,
         size: 5,
       })
       .then((res) => {

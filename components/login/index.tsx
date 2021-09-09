@@ -40,7 +40,8 @@ export default function LoginPage() {
         toast.success(`환영합니다 ${email.split("@", 1)}님`);
       })
       .catch((err) => {
-        console.log(err);
+        toast.error("에러가 발생하였습니다.");
+        router.push("/");
       });
   };
   const handleInput = (event): void => {

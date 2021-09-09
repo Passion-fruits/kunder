@@ -175,7 +175,6 @@ export default function ProfilePage() {
   }, []);
 
   React.useEffect(() => {
-    getData();
     if (id) {
       profile
         .checkFollow(id)
@@ -186,8 +185,11 @@ export default function ProfilePage() {
           }
         })
         .catch(() => {
+          getData();
           return;
         });
+    } else {
+      getData();
     }
   }, [router]);
 

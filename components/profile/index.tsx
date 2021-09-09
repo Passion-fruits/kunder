@@ -188,8 +188,6 @@ export default function ProfilePage() {
           getData();
           return;
         });
-    } else {
-      getData();
     }
   }, [router]);
 

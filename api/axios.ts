@@ -53,7 +53,6 @@ instance.interceptors.response.use(
             const accessToken = data.access_token;
             // 새로운 토큰 저장
             localStorage.setItem(ACCESS_TOKEN, accessToken);
-            localStorage.setItem(REFRESH_TOKEN, "");
             isTokenRefreshing = false;
             axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
             // 새로운 토큰으로 지연되었던 요청 진행

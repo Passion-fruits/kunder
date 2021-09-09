@@ -16,6 +16,10 @@ export const Wrapper = styled.div`
     margin-top: 14px;
     color: ${COLOR.black};
     margin-bottom: 5px;
+    transition:0.5s;
+    &:hover{
+      opacity:0.6;
+    }
   }
   .artist-name {
     font-size: 14px;

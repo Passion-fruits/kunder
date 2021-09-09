@@ -24,7 +24,7 @@ export default function MusicCard({
   const router = useRouter();
   const dispathch = setValue();
 
-  const routing = (event): void => {
+  const routingToDetail = (event): void => {
     event.target.id === "cover" && router.push(`/detail?id=${id}`);
   };
 
@@ -43,13 +43,15 @@ export default function MusicCard({
 
   return (
     <S.Wrapper>
-      <S.Cover id="cover" onClick={routing}>
+      <S.Cover id="cover" onClick={routingToDetail}>
         <button onClick={musicChange}>
           <PlayIcon callback={musicChange} size={20} />
         </button>
       </S.Cover>
       <img src={imgSrc} loading="lazy" />
-      <h3>{title}</h3>
+      <h3 id="cover" onClick={routingToDetail}>
+        {title}
+      </h3>
       <span className="artist-name">{writerName}</span>
       <S.HeartWrap>
         <HeartIcon size={14} callback={() => {}} color={COLOR.main} />

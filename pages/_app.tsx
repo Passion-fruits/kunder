@@ -7,8 +7,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { HEADER_HEIGHT } from "./../styles/index";
 import { ToastContainer } from "react-toastify";
 import { SampleProvider } from "./../lib/context/index";
+import React from "react";
+import profile from "../api/profile";
 
 function App({ Component, pageProps }: AppProps) {
+  React.useEffect(() => {
+    profile.checkFollow(1000).catch(() => {
+      return;
+    });
+  }, []);
   return (
     <>
       <Head>

@@ -25,7 +25,7 @@ export default function RecommendMusic() {
   }, [data]);
 
   const routingToMusicDetail = ({ target }) => {
-    if (target.id !== "play-button") {
+    if (target.id.indexOf("play-button") < 0) {
       router.push(`/detail?id=${data.song_id}`);
     }
   };

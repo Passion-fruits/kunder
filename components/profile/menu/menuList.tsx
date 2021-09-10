@@ -1,26 +1,32 @@
 import * as S from "../styles";
 import Menu from "./menu";
 
-export default function MenuList({ menu, callback, follower,following }) {
+export default function MenuList({
+  menu,
+  callback,
+  songCnt,
+  followerCnt,
+  followingCnt,
+}) {
   return (
     <S.Menu>
       <Menu
         contents="노래"
-        cnt="0"
+        cnt={songCnt}
         nowMenu={menu}
         menu="song"
         callback={callback}
       />
       <Menu
         contents="팔로워"
-        cnt={follower}
+        cnt={followerCnt}
         nowMenu={menu}
         menu="follower"
         callback={callback}
       />
       <Menu
         contents="팔로잉"
-        cnt={following}
+        cnt={followingCnt}
         nowMenu={menu}
         menu="following"
         callback={callback}

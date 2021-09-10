@@ -56,7 +56,7 @@ export default function MusicListCard({
           src={cover_url}
         />
         <div className="music-title-writter">
-          <h3>{title}</h3>
+          <h3 onClick={routingToMusicDetail}>{title}</h3>
           <h5 onClick={routingToUserProfile}>{artist}</h5>
         </div>
       </S.MusicInformatino>
@@ -65,7 +65,7 @@ export default function MusicListCard({
           <span>{genre}음악</span>
         </div>
         <div>
-          <span>아침에</span>
+          <span>{mood}</span>
         </div>
         <div>
           <span>{getDate(created_at)}</span>

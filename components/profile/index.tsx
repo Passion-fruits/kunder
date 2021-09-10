@@ -22,6 +22,7 @@ export default function ProfilePage() {
   const { id } = router.query;
   const [data, setData] = React.useState<any>();
   const [musicList, setMusicList] = React.useState<any[]>([]);
+  const [musicCnt, setMusicCnt] = React.useState<number>(0);
   const [page, setPage] = React.useState<number>(1);
   const [isMyPage, setIsMyPage] = React.useState<boolean>(false);
   const [update, setUpdate] = React.useState<boolean>(false);
@@ -80,6 +81,7 @@ export default function ProfilePage() {
         .getUserMusic(id, page)
         .then((res) => {
           setMusicList(musicList.concat(res.data.songs));
+          setMusicCnt(res.data.song_count);
         })
         .catch(() => {
           return;
@@ -255,8 +257,9 @@ export default function ProfilePage() {
           </>
           <>
             <MenuList
-              follower={data.follower}
-              following={data.following}
+              followerCnt={data.follower}
+              followingCnt={data.following}
+              songCnt={musicCnt}
               menu={menu}
               callback={changeMenu}
             />

@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
 export const MusicInformatino = styled.div`
   width: 550px;
   .index-number {
-    width:30px;
+    width: 30px;
     font-size: 15px;
     color: ${COLOR.text};
   }
@@ -41,10 +41,10 @@ export const MusicInformatino = styled.div`
     height: 75px;
     border: 1px solid rgb(240, 240, 240);
     margin-left: 40px;
-    cursor:pointer;
-    transition:0.5s;
-    &:hover{
-        opacity:0.8;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover {
+      opacity: 0.8;
     }
   }
   .music-title-writter {
@@ -55,14 +55,19 @@ export const MusicInformatino = styled.div`
     & h3 {
       color: ${COLOR.black};
       font-size: 20px;
+      cursor: pointer;
+      transition: 0.5s;
+      &:hover {
+        opacity: 0.7;
+      }
     }
     & h5 {
       font-size: 16px;
       font-weight: 500;
       color: ${COLOR.text};
-      cursor:pointer;
-      &:hover{
-          opacity:0.7;
+      cursor: pointer;
+      &:hover {
+        opacity: 0.7;
       }
     }
   }
